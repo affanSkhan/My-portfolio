@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Spline from "@splinetool/react-spline";
+
 
 // Lazy-load Spline to prevent hydration issues
-const Spline = dynamic(() => import("@splinetool/react-spline"), { ssr: false });
 
 const roles = ["AI Enthusiast", "Flutter Developer","Tech Visionary"];
 
