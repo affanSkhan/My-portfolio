@@ -22,47 +22,77 @@ export default function Contact() {
         </motion.h2>
 
         <Card className="p-8 shadow-xl border border-zinc-300 dark:border-zinc-800">
-          <form className="flex flex-col gap-6">
-            {/* Name */}
+          <form
+            className="flex flex-col gap-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              // Add logic to handle form submission
+              alert("Form submitted!");
+            }}
+            aria-label="Contact Form"
+          >
+            {/* Name Field */}
             <div className="relative">
-              <input
-                type="text"
-                required
-                className="w-full peer p-3 pt-5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <label className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all">
+              <label
+                htmlFor="name"
+                className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all"
+              >
                 Your Name
               </label>
-            </div>
-
-            {/* Email */}
-            <div className="relative">
               <input
-                type="email"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your Name"
                 required
+                title="Enter your full name"
                 className="w-full peer p-3 pt-5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
-              <label className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all">
+            </div>
+
+            {/* Email Field */}
+            <div className="relative">
+              <label
+                htmlFor="email"
+                className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all"
+              >
                 Email Address
               </label>
-            </div>
-
-            {/* Message */}
-            <div className="relative">
-              <textarea
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
                 required
-                rows={5}
+                title="Enter a valid email address"
                 className="w-full peer p-3 pt-5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
-              <label className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all">
+            </div>
+
+            {/* Message Field */}
+            <div className="relative">
+              <label
+                htmlFor="message"
+                className="absolute left-3 top-2 text-sm text-zinc-500 peer-focus:text-indigo-500 transition-all"
+              >
                 Message
               </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                placeholder="Your message..."
+                required
+                title="Write your message"
+                className="w-full peer p-3 pt-5 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
             </div>
 
             {/* Submit Button */}
             <motion.button
               whileTap={{ scale: 0.95 }}
               type="submit"
+              aria-label="Send Message"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md transition"
             >
               Send Message
@@ -71,21 +101,23 @@ export default function Contact() {
         </Card>
 
         {/* Divider */}
-        <div className="my-8 text-center text-zinc-500 dark:text-zinc-400">— or reach me through —</div>
+        <div className="my-8 text-center text-zinc-500 dark:text-zinc-400">
+          — or reach me through —
+        </div>
 
-        {/* Social Links */}
+        {/* Social Icons */}
         <div className="flex justify-center gap-6 text-indigo-600 dark:text-indigo-400 text-xl">
           <a
             href="mailto:your-email@example.com"
             className="hover:text-indigo-800 transition"
-            aria-label="Email"
+            aria-label="Send an email"
           >
             <Mail />
           </a>
           <a
             href="tel:+919999999999"
             className="hover:text-indigo-800 transition"
-            aria-label="Phone"
+            aria-label="Call phone number"
           >
             <Phone />
           </a>
@@ -94,7 +126,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-indigo-800 transition"
-            aria-label="LinkedIn"
+            aria-label="Visit LinkedIn profile"
           >
             <Linkedin />
           </a>
@@ -103,7 +135,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-indigo-800 transition"
-            aria-label="GitHub"
+            aria-label="Visit GitHub profile"
           >
             <Github />
           </a>

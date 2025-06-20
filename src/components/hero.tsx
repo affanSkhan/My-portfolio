@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Spline from "@splinetool/react-spline";
 
