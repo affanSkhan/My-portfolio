@@ -1,0 +1,15 @@
+/* .orbsContainer {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 320px;
+  height: 200px;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.orbLabel {
+  pointer-events: none;
+  font-size: 32px;
+  text-align: center;
+}  */

@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function Navbar() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#hero");
 
   useEffect(() => {
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -28,6 +29,24 @@ export default function Navbar() {
     }
   }, [isDarkMode]);
 
+  // Scrollspy effect for active section highlight
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["#hero", "#about", "#skills", "#projects", "#resume", "#contact"];
+      let found = "#hero";
+      for (const id of sections) {
+        const el = document.querySelector(id);
+        if (el && window.scrollY + 80 >= (el as HTMLElement).offsetTop) {
+          found = id;
+        }
+      }
+      setActiveSection(found);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navLinks = [
     { href: "#hero", label: "Home" },
     { href: "#about", label: "About" },
@@ -43,9 +62,10 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="#hero"
-          className="text-2xl font-extrabold text-zinc-800 dark:text-white tracking-tight"
+          className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-500 via-fuchsia-500 to-emerald-400 bg-clip-text text-transparent animate-shimmer-logo focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-lg"
+          aria-label="Go to Home"
         >
-          <span className="text-blue-600 drop-shadow">Affan</span>.dev
+          <span className="drop-shadow"></span>Affan.dev
         </Link>
 
         {/* Desktop Navigation */}
@@ -54,9 +74,20 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-zinc-700 dark:text-zinc-300 hover:text-blue-500 dark:hover:text-blue-400 transition font-medium"
+              className={`relative font-semibold px-3 py-1 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400/60 dark:focus:ring-fuchsia-400/60
+                ${activeSection === link.href ? 'text-blue-600 dark:text-fuchsia-400 scale-105' : 'text-zinc-700 dark:text-zinc-300'}
+                hover:text-blue-500 dark:hover:text-blue-400
+              `}
+              aria-current={activeSection === link.href ? 'page' : undefined}
+              tabIndex={0}
             >
-              {link.label}
+              <span className="inline-block relative">
+                {link.label}
+                <span
+                  className="absolute left-0 -bottom-1 h-0.5 w-full rounded-full bg-gradient-to-r from-blue-400 via-fuchsia-400 to-emerald-400"
+                  style={{ opacity: activeSection === link.href ? 1 : 0, transition: 'opacity 0.2s' }}
+                />
+              </span>
             </Link>
           ))}
           <Button
@@ -125,6 +156,18 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Shimmer animation for logo */}
+      <style jsx>{`
+        .animate-shimmer-logo {
+          background-size: 200% 100%;
+          animation: shimmer 2.5s linear infinite;
+        }
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
     </header>
   );
 }

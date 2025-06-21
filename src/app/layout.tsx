@@ -1,6 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
+import ClientRoot from "@/components/ClientRoot";
 
 export const metadata: Metadata = {
   title: "My Portfolio",
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased font-sans">
-        {children}
+        <ClientRoot>{children}</ClientRoot>
       </body>
     </html>
   );

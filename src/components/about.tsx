@@ -1,159 +1,194 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, Heart, Brain, Globe, Star } from "lucide-react";
 import Image from "next/image";
 
+function useTypewriter(text: string, speed = 40) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    setDisplayed("");
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+  return displayed;
+}
+
+// FloatingParticles component to avoid hydration mismatch
+function FloatingParticles({ count = 12 }) {
+  const [positions, setPositions] = useState<{top:number;left:number;}[]>([]);
+  useEffect(() => {
+    setPositions(
+      Array.from({ length: count }, () => ({
+        top: Math.random() * 90,
+        left: Math.random() * 90,
+      }))
+    );
+  }, [count]);
+  if (positions.length === 0) return null;
+  return positions.map((pos, i) => (
+    <motion.span
+      key={i}
+      className="absolute w-2 h-2 rounded-full bg-gradient-to-br from-indigo-400 via-fuchsia-400 to-emerald-400 opacity-30"
+      style={{
+        top: `${pos.top}%`,
+        left: `${pos.left}%`,
+      }}
+      animate={{
+        y: [0, -10, 0],
+        opacity: [0.3, 0.6, 0.3],
+      }}
+      transition={{
+        duration: 3 + Math.random() * 2,
+        repeat: Infinity,
+        delay: i * 0.2,
+      }}
+    />
+  ));
+}
+
 export default function About() {
   const [view, setView] = useState<"student" | "entrepreneur">("student");
+  const intro = "I'm not just coding my future — I'm engineering a journey from Dharni to global impact.";
+  const typewriterIntro = useTypewriter(intro, 30);
 
-  const getViewContent = () => {
-    if (view === "student") {
-      return (
-        <div className="space-y-4">
-          <p className="text-pink-600 font-semibold">🎓 Computer Engineering Student @ VIIT Pune</p>
-          <p className="text-zinc-800 dark:text-zinc-200">
-            I’m mastering AI, ML, and full-stack development — not just through books, but by building real-world applications like the CIE Exam Reminder App and a Student Services Companion.
-          </p>
-        </div>
-      );
-    }
-    return (
-      <div className="space-y-4">
-        <p className="text-green-600 font-semibold">🚀 Aspiring Entrepreneur from Dharni</p>
-        <p className="text-zinc-800 dark:text-zinc-200">
-          My vision is clear — build a rural startup that empowers people in Dharni through tech-driven platforms like “One Area, One App,” crafted with Pune’s resources and grassroots understanding.
+  const getViewContent = () =>
+    view === "student" ? (
+      <div className="space-y-3">
+        <p className="text-indigo-500 font-semibold">🎓 Computer Engineering Student @ VIIT Pune</p>
+        <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed">
+          Exploring AI, ML, and full-stack development by crafting real-world tools like the CIE Exam Reminder App and a Student Companion App.
+        </p>
+      </div>
+    ) : (
+      <div className="space-y-3">
+        <p className="text-green-500 font-semibold">🚀 Rural Tech Entrepreneur in the Making</p>
+        <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed">
+          Building tech-first ventures like &quot;One Area, One App&quot; from Dharni, combining local understanding with Pune&apos;s innovation power.
         </p>
       </div>
     );
-  };
 
   return (
     <section
       id="about"
-      className="py-20 px-4 sm:px-8 md:px-16 bg-gradient-to-b from-white to-blue-50 dark:from-zinc-900 dark:to-zinc-800"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900 py-24 px-4 sm:px-8"
     >
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Profile Image */}
+      {/* Animated Gradient/Blob Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="hidden md:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/30 via-fuchsia-400/20 to-emerald-400/20 blur-3xl opacity-60 animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-gradient-to-tr from-pink-400/20 via-blue-400/20 to-indigo-400/20 blur-2xl opacity-50 animate-pulse" />
+        <FloatingParticles count={12} />
+      </div>
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-16">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="mb-6"
+          initial={{ x: -40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="flex-1 bg-white/70 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-xl backdrop-blur-lg"
         >
-          <Image
-            src="/affan-profile.png"
-            alt="Affan's Profile"
-            width={120}
-            height={120}
-            className="mx-auto rounded-full border-4 border-indigo-500 shadow-lg"
-          />
-        </motion.div>
+          <div className="flex justify-center mb-6 relative">
+            <Image
+              src="/affan-profile.png"
+              alt="Affan"
+              width={120}
+              height={120}
+              className="rounded-full border-4 border-white dark:border-zinc-800 shadow-md"
+            />
+            <span className="absolute inset-0 rounded-full animate-pulse ring-2 ring-indigo-400/30" />
+          </div>
 
-        {/* Section Title */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          ✨ Who is Affan?
-        </motion.h2>
-
-        {/* Section Intro */}
-        <motion.p
-          className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 mb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          I&apos;m not just coding my future — I&apos;m engineering a journey from Dharni to global impact.
-        </motion.p>
-
-        {/* Toggle Buttons */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => setView("student")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-              view === "student"
-                ? "bg-indigo-600 text-white"
-                : "bg-zinc-200 dark:bg-zinc-700 dark:text-white"
-            }`}
-          >
-            🎓 Student
-          </button>
-          <button
-            onClick={() => setView("entrepreneur")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-              view === "entrepreneur"
-                ? "bg-green-600 text-white"
-                : "bg-zinc-200 dark:bg-zinc-700 dark:text-white"
-            }`}
-          >
-            🚀 Entrepreneur
-          </button>
-        </div>
-
-        {/* View Content */}
-        <motion.div
-          className="text-left rounded-xl bg-white dark:bg-zinc-900 p-6 shadow-xl border border-zinc-200 dark:border-zinc-700"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-        >
-          {getViewContent()}
-
-          <ul className="mt-6 space-y-3 text-zinc-700 dark:text-zinc-300">
-            <li className="flex items-center gap-2">
-              <Sparkles className="text-yellow-500" size={18} /> Innovative Thinker
-            </li>
-            <li className="flex items-center gap-2">
-              <Heart className="text-red-500" size={18} /> Passionate Learner
-            </li>
-            <li className="flex items-center gap-2">
-              <Brain className="text-purple-500" size={18} /> AI & ML Enthusiast
-            </li>
-            <li className="flex items-center gap-2">
-              <Globe className="text-blue-500" size={18} /> Global Vision, Local Roots
-            </li>
-            <li className="flex items-center gap-2">
-              <Star className="text-pink-500" size={18} /> Driven by Purpose
-            </li>
+          <ul className="flex flex-wrap gap-3 justify-center mb-6 text-sm font-semibold">
+            <Badge icon={<Sparkles size={16} />} text="Innovative Thinker" color="indigo" />
+            <Badge icon={<Heart size={16} />} text="Passionate Learner" color="pink" />
+            <Badge icon={<Brain size={16} />} text="AI/ML Enthusiast" color="purple" />
+            <Badge icon={<Globe size={16} />} text="Global Vision" color="blue" />
+            <Badge icon={<Star size={16} />} text="Driven by Purpose" color="emerald" />
           </ul>
-        </motion.div>
 
-        {/* Career Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center"
-        >
-          <div>
-            <p className="text-2xl font-bold text-indigo-600">98.94%</p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300">MHT-CET Percentile</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-green-600">8+ Projects</p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300">Built & Shipped</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-pink-600">3 Awards</p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300">Chess, Art, Code</p>
+          <div className="grid grid-cols-3 text-center">
+            <Stat value="98.94%" label="MHT-CET" color="indigo" />
+            <Stat value="8+" label="Projects Built" color="green" />
+            <Stat value="3" label="Awards Won" color="pink" />
           </div>
         </motion.div>
 
-        {/* Quote */}
         <motion.div
-          className="mt-12 bg-zinc-100 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 italic px-6 py-4 rounded-lg shadow-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          initial={{ x: 40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="flex-1 max-w-xl"
         >
-          “Engineering my path from Dharni to Destiny — with code, heart, and a mission.”
+          <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mb-6 text-center lg:text-left">
+            Who is Affan?
+          </h2>
+
+          <p className="text-lg text-zinc-700 dark:text-zinc-300 mb-6 min-h-[2.5rem]">
+            {typewriterIntro}
+            <span className="inline-block w-1 h-5 bg-zinc-400 ml-1 animate-blink" />
+          </p>
+
+          <div className="flex gap-4 mb-6 justify-center lg:justify-start">
+            <TabButton label="Student" isActive={view === "student"} onClick={() => setView("student")} />
+            <TabButton label="Entrepreneur" isActive={view === "entrepreneur"} onClick={() => setView("entrepreneur")} />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow"
+          >
+            {getViewContent()}
+          </motion.div>
+
+          <div className="mt-10 text-sm text-center italic text-zinc-600 dark:text-zinc-400">
+            &quot;Engineering my path from Dharni to Destiny — with code, heart, and a mission.&quot;
+          </div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function Badge({ icon, text, color }: { icon: React.ReactNode; text: string; color: string }) {
+  return (
+    <li
+      className={`flex items-center gap-2 px-3 py-1 rounded-full bg-${color}-100 dark:bg-${color}-900/30 text-${color}-700 dark:text-${color}-200 transition hover:scale-105`}
+    >
+      {icon}
+      {text}
+    </li>
+  );
+}
+
+function Stat({ value, label, color }: { value: string; label: string; color: string }) {
+  return (
+    <div>
+      <p className={`text-2xl font-bold text-${color}-600`}>{value}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-300">{label}</p>
+    </div>
+  );
+}
+
+function TabButton({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-md text-sm font-medium transition shadow-sm focus:outline-none ${
+        isActive
+          ? "bg-indigo-600 text-white shadow-md scale-105"
+          : "bg-zinc-200 dark:bg-zinc-800 dark:text-white hover:scale-105"
+      }`}
+    >
+      {label === "Student" ? "🎓 " : "🚀 "}
+      {label}
+    </button>
   );
 }

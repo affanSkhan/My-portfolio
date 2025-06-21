@@ -2,8 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ✅ Reset browser default margin/padding that causes top white ribbon */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Smooth scrolling and theme transitions */
 html {
   transition: background 0.3s, color 0.3s;
   scroll-behavior: smooth;
+}
 
+/* Hide default cursor for custom cursor styling */
+body {
+  cursor: none;
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.7); /* indigo-500 */
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor--active {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: rgba(236, 72, 153, 0.7); /* pink-500 */
 }

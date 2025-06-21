@@ -1,6 +1,8 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { motion, type HTMLMotionProps } from "framer-motion"
+import MagneticButton from "./MagneticButton"
 
 import { cn } from "@/lib/utils"
 
@@ -35,14 +37,36 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+    if (asChild) {
+      // Render Slot without Framer Motion props
+      return (
+        <Slot
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref as React.Ref<HTMLButtonElement>}
+          {...(props as React.ComponentPropsWithoutRef<typeof Slot>)}
+        />
+      );
+    }
+    // Use MagneticButton for default variant
+    if (variant === "default") {
+      return (
+        <MagneticButton
+          ref={ref}
+          className={cn(buttonVariants({ variant, size, className }))}
+          {...props}
+        />
+      );
+    }
+    // Render motion.button with animation props for other variants
     return (
-      <Comp
+      <motion.button
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.96 }}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...props}
+        {...(props as HTMLMotionProps<'button'>)}
       />
-    )
+    );
   }
 )
 Button.displayName = "Button"
