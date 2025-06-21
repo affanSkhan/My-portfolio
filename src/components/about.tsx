@@ -95,7 +95,7 @@ export default function About() {
         >
           <div className="flex justify-center mb-6 relative">
             <Image
-              src="/affan-profile.png"
+              src="/affan-profile1.jpg"
               alt="Affan"
               width={120}
               height={120}
@@ -115,7 +115,7 @@ export default function About() {
           <div className="grid grid-cols-3 text-center">
             <Stat value="98.94%" label="MHT-CET" color="indigo" />
             <Stat value="8+" label="Projects Built" color="green" />
-            <Stat value="3" label="Awards Won" color="pink" />
+            <Stat value="3" label="Awards Won" color="blue" />
           </div>
         </motion.div>
 
@@ -126,7 +126,7 @@ export default function About() {
           className="flex-1 max-w-xl"
         >
           <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mb-6 text-center lg:text-left">
-            Who is Affan?
+            Who am I?
           </h2>
 
           <p className="text-lg text-zinc-700 dark:text-zinc-300 mb-6 min-h-[2.5rem]">

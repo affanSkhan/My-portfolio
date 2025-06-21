@@ -20,6 +20,16 @@ body {
   cursor: none;
 }
 
+/* Disable custom cursor for mobile/touch devices */
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
 /* Custom cursor styles */
 .custom-cursor {
   position: fixed;

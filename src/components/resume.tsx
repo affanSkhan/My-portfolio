@@ -67,7 +67,7 @@ const entrepreneurTimeline: TimelineItem[] = [
 
 // FloatingParticles component to avoid hydration mismatch
 function FloatingParticles({ count = 12 }) {
-  const [positions, setPositions] = useState<{top:number;left:number;}[]>([]);
+  const [positions, setPositions] = useState<{ top: number; left: number }[]>([]);
   useEffect(() => {
     setPositions(
       Array.from({ length: count }, () => ({
@@ -101,6 +101,8 @@ function FloatingParticles({ count = 12 }) {
 export function Resume() {
   const [view, setView] = useState<'student' | 'entrepreneur'>('student');
   const timeline = view === 'student' ? studentTimeline : entrepreneurTimeline;
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => { setIsClient(true); }, []);
 
   return (
     <motion.section
@@ -114,7 +116,7 @@ export function Resume() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="hidden md:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/30 via-fuchsia-400/20 to-emerald-400/20 blur-3xl opacity-60 animate-pulse" />
         <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-gradient-to-tr from-pink-400/20 via-blue-400/20 to-indigo-400/20 blur-2xl opacity-50 animate-pulse" />
-        <FloatingParticles count={12} />
+        {isClient && <FloatingParticles count={12} />}
       </div>
       <div className="relative z-10 max-w-7xl w-full mx-auto">
         {/* Glassy Lottie Header */}
@@ -134,12 +136,12 @@ export function Resume() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl font-bold text-center mb-0 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 relative animate-textShimmer"
+            className="text-4xl sm:text-3xl font-bold text-center mb-0 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 relative animate-textShimmer"
           >
             My Journey
             <span className="block h-1 w-16 mx-auto mt-2 bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400 rounded-full animate-pulse" />
           </motion.h2>
-          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-300 text-base max-w-xl mx-auto">
+          <p className="mt-2 text-center text-zinc-600 dark:text-zinc-300 text-base sm:text-sm max-w-xl mx-auto">
             A quick look at my academic and entrepreneurial milestones, achievements, and projects—each step shaping my journey in tech and innovation.
           </p>
         </motion.div>
@@ -178,13 +180,13 @@ export function Resume() {
           className="relative flex flex-col items-center"
         >
           {/* Timeline area with border/shadow for depth */}
-          <div className="relative w-full py-20 md:py-8 lg:py-12 xl:py-20">
+          <div className="relative w-full py-20 sm:py-16 md:py-8 lg:py-12 xl:py-20">
             {/* Timeline line: horizontal on md+, vertical on mobile */}
             <div
               className="absolute md:top-1/2 md:left-0 md:w-full md:h-2 top-0 left-1/2 w-2 h-full bg-gradient-to-r md:bg-gradient-to-r bg-gradient-to-b from-indigo-400 via-fuchsia-400 to-emerald-400 opacity-70 z-0 rounded-full shadow-lg"
-              style={{ transform: 'translateY(-50%)' }}
+              style={{ transform: 'md:translateY(-50%) translateX(-50%)' }}
             />
-            <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-20 md:gap-0">
+            <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0">
               {timeline.map((item, i) => {
                 const isAbove = i % 2 === 0;
                 const isFirst = i === 0;
@@ -192,13 +194,10 @@ export function Resume() {
                 return (
                   <div
                     key={i}
-                    className={`relative flex flex-col items-center md:w-1/4 z-10 group focus-within:ring-4 focus-within:ring-indigo-400/40 focus-within:rounded-2xl ${isFirst ? 'mt-0' : 'mt-8'} ${isLast ? 'mb-0' : 'mb-8'}`}
+                    className={`relative flex flex-col items-center md:w-1/4 z-10 group focus-within:ring-4 focus-within:ring-indigo-400/40 focus-within:rounded-2xl ${isFirst ? 'mt-0' : 'mt-12'} ${isLast ? 'mb-0' : 'mb-12'} md:mt-0 md:mb-0`}
                     tabIndex={0}
                     aria-label={item.title + ' - ' + item.year}
                   >
-                    {/* Timeline dot hidden as per user request */}
-                    {/* Timeline dot (hide for first and last) */}
-                    {/* Timeline dot (hide for first and last) */}
                     {/* Timeline card */}
                     <motion.div
                       initial={{ opacity: 0, y: isAbove ? -40 : 40 }}
@@ -209,11 +208,11 @@ export function Resume() {
                       whileTap={{ scale: 0.98 }}
                       tabIndex={0}
                       aria-label={item.title + ' - ' + item.year}
-                      className={`bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-lg border border-white/40 dark:border-zinc-700/70 px-8 py-8 rounded-2xl transition-all duration-300 group-hover:scale-105 w-72 md:w-64 xl:w-80 absolute md:static md:mb-0 md:mt-0 ${isAbove ? 'bottom-full mb-10' : 'top-full mt-10'} md:mb-0 md:mt-0 focus:outline-none focus:ring-4 focus:ring-indigo-400/40`}
+                      className={`bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-lg border border-white/40 dark:border-zinc-700/70 px-6 py-6 rounded-2xl transition-all duration-300 group-hover:scale-105 w-full sm:w-80 md:w-64 xl:w-80 md:${isAbove ? 'mb-10 bottom-full' : 'mt-10 top-full'} md:static focus:outline-none focus:ring-4 focus:ring-indigo-400/40`}
                     >
                       <div className="flex items-center gap-3 mb-2">
                         {item.icon}
-                        <h4 className="text-lg font-semibold text-zinc-800 dark:text-white">
+                        <h4 className="text-lg sm:text-base font-semibold text-zinc-800 dark:text-white">
                           {item.title}
                         </h4>
                       </div>

@@ -22,12 +22,54 @@ function useTypewriter(text: string, speed = 60) {
   return displayed;
 }
 
+// FloatingParticles component to avoid hydration mismatch (copied from about)
+function FloatingParticles({ count = 12 }) {
+  const [positions, setPositions] = useState<{top:number;left:number;}[]>([]);
+  useEffect(() => {
+    setPositions(
+      Array.from({ length: count }, () => ({
+        top: Math.random() * 90,
+        left: Math.random() * 90,
+      }))
+    );
+  }, [count]);
+  if (positions.length === 0) return null;
+  return positions.map((pos, i) => (
+    <motion.span
+      key={i}
+      className="absolute w-2 h-2 rounded-full bg-gradient-to-br from-indigo-400 via-fuchsia-400 to-emerald-400 opacity-30"
+      style={{
+        top: `${pos.top}%`,
+        left: `${pos.left}%`,
+      }}
+      animate={{
+        y: [0, -10, 0],
+        opacity: [0.3, 0.6, 0.3],
+      }}
+      transition={{
+        duration: 3 + Math.random() * 2,
+        repeat: Infinity,
+        delay: i * 0.2,
+      }}
+    />
+  ));
+}
+
 export default function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   const textParallax = { x: parallax.x * 0.3, y: parallax.y * 0.3 };
   const role = roles[currentRole];
   const typewriterRole = useTypewriter(role, 40);
+
+  // Add a check for mobile devices using state and effect to avoid hydration mismatch
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,29 +88,39 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-black to-zinc-800 scroll-snap-start"
+      className={`relative w-full h-screen flex items-center justify-center overflow-hidden scroll-snap-start ${isMobile ? 'bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900' : 'bg-gradient-to-br from-zinc-900 via-black to-zinc-800'}`}
       onMouseMove={handleMouseMove}
       style={{ WebkitOverflowScrolling: "touch", paddingTop: 0, marginTop: 0 }}
     >
-      {/* Gradient overlays */}
-      <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden" aria-hidden>
-        <div className="w-full h-full bg-gradient-to-tr from-blue-500/10 via-fuchsia-500/10 to-emerald-400/10 animate-gradient-move dark:hidden" />
-        <div className="hidden dark:block w-full h-full bg-gradient-to-tr from-indigo-950/40 via-purple-950/30 to-zinc-900/30 animate-gradient-move" />
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
-      </div>
+      {/* Background overlays: about-style for mobile, original for desktop */}
+      {isMobile ? (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="hidden md:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/30 via-fuchsia-400/20 to-emerald-400/20 blur-3xl opacity-60 animate-pulse" />
+          <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-gradient-to-tr from-pink-400/20 via-blue-400/20 to-indigo-400/20 blur-2xl opacity-50 animate-pulse" />
+          <FloatingParticles count={12} />
+        </div>
+      ) : (
+        <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden" aria-hidden>
+          <div className="w-full h-full bg-gradient-to-tr from-blue-500/10 via-fuchsia-500/10 to-emerald-400/10 animate-gradient-move dark:hidden" />
+          <div className="hidden dark:block w-full h-full bg-gradient-to-tr from-indigo-950/40 via-purple-950/30 to-zinc-900/30 animate-gradient-move" />
+          <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        </div>
+      )}
 
       {/* Fullscreen background spline */}
-      <div
-        className="absolute inset-0 z-0 w-full h-full overflow-hidden"
-        style={{
-          transform: `rotateY(${parallax.x}deg) rotateX(${-parallax.y}deg)`,
-          transition: "transform 0.2s",
-        }}
-      >
-        <div className="absolute inset-0 w-full h-full z-0">
-          <Spline scene={splineScene} />
+      {!isMobile ? (
+        <div
+          className="absolute inset-0 z-0 w-full h-full overflow-hidden"
+          style={{
+            transform: `rotateY(${parallax.x}deg) rotateX(${-parallax.y}deg)`,
+            transition: "transform 0.2s",
+          }}
+        >
+          <div className="absolute inset-0 w-full h-full z-0">
+            <Spline scene={splineScene} />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {/* Foreground content */}
       <motion.div
@@ -149,7 +201,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Overlay for contrast */}
-      <div className="absolute inset-0 bg-black/50 z-0" />
+      {!isMobile && <div className="absolute inset-0 bg-black/50 z-0" />}
 
       {/* Custom Animations */}
       <style jsx>{`
