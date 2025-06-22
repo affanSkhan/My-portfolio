@@ -16,8 +16,8 @@ const projects = [
     description:
       "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
     tech: [<SiReact key="react" />, <SiFirebase key="firebase" />, <SiTailwindcss key="tailwind" />],
-    github: "https://github.com/your-username/cie-reminder",
-    live: "https://cie-reminder.vercel.app",
+    github: "https://github.com/affanSkhan/cie-app",
+    live: "https://cie-exam-app.netlify.app/",
     lessons: ["Notification APIs", "User input validation", "Timely UX design"]
   },
   {

@@ -5,7 +5,19 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Spline from "@splinetool/react-spline";
 
-const roles = ["AI Enthusiast", "Flutter Developer", "Tech Visionary"];
+const roles = [
+  "AI Enthusiast",
+  "Flutter Developer",
+  "Full-Stack Explorer",
+  "Tech Visionary",
+  "ML Practitioner",
+  "Code Storyteller",
+  "Digital Problem Solver",
+  "Student Entrepreneur",
+  "Startup Dreamer",
+  "Creative Technologist",
+  "Purpose-Driven Engineer"
+];
 
 function useTypewriter(text: string, speed = 60) {
   const [displayed, setDisplayed] = useState("");

@@ -155,7 +155,7 @@ export default function Contact() {
           </motion.a>
           <motion.a
             whileHover={{ scale: 1.2, color: '#6366f1', boxShadow: '0 0 16px #6366f1cc' }}
-            href="https://linkedin.com/in/your-linkedin"
+            href="www.linkedin.com/in/affan-khan-55a83228b"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-indigo-800 transition"
@@ -165,7 +165,7 @@ export default function Contact() {
           </motion.a>
           <motion.a
             whileHover={{ scale: 1.2, color: '#6366f1', boxShadow: '0 0 16px #6366f1cc' }}
-            href="https://github.com/your-github"
+            href="https://github.com/affanSkhan"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-indigo-800 transition"

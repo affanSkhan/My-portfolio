@@ -186,47 +186,57 @@ export function Resume() {
               className="absolute md:top-1/2 md:left-0 md:w-full md:h-2 top-0 left-1/2 w-2 h-full bg-gradient-to-r md:bg-gradient-to-r bg-gradient-to-b from-indigo-400 via-fuchsia-400 to-emerald-400 opacity-70 z-0 rounded-full shadow-lg"
               style={{ transform: 'md:translateY(-50%) translateX(-50%)' }}
             />
-            <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0">
+            <motion.div
+              className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.25 } },
+                hidden: {},
+              }}
+            >
               {timeline.map((item, i) => {
                 const isAbove = i % 2 === 0;
                 const isFirst = i === 0;
                 const isLast = i === timeline.length - 1;
                 return (
-                  <div
+                  <motion.div
                     key={i}
                     className={`relative flex flex-col items-center md:w-1/4 z-10 group focus-within:ring-4 focus-within:ring-indigo-400/40 focus-within:rounded-2xl ${isFirst ? 'mt-0' : 'mt-12'} ${isLast ? 'mb-0' : 'mb-12'} md:mt-0 md:mb-0`}
                     tabIndex={0}
                     aria-label={item.title + ' - ' + item.year}
+                    variants={{
+                      visible: { opacity: 1, x: 0, y: 0 },
+                      hidden: { opacity: 0, x: -40, y: isAbove ? -40 : 40 },
+                    }}
+                    transition={{ duration: 0.7, type: "spring" }}
                   >
                     {/* Timeline card */}
                     <motion.div
-                      initial={{ opacity: 0, y: isAbove ? -40 : 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.5 }}
-                      transition={{ delay: 0.1 * i, duration: 0.6, type: "spring" }}
                       whileHover={{ scale: 1.045, boxShadow: "0 8px 32px 0 rgba(99,102,241,0.10), 0 1.5px 8px 0 rgba(99,102,241,0.08)" }}
                       whileTap={{ scale: 0.98 }}
                       tabIndex={0}
                       aria-label={item.title + ' - ' + item.year}
-                      className={`bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-lg border border-white/40 dark:border-zinc-700/70 px-6 py-6 rounded-2xl transition-all duration-300 group-hover:scale-105 w-full sm:w-80 md:w-64 xl:w-80 md:${isAbove ? 'mb-10 bottom-full' : 'mt-10 top-full'} md:static focus:outline-none focus:ring-4 focus:ring-indigo-400/40`}
+                      className={`bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl shadow-lg border border-white/40 dark:border-zinc-700/70 px-4 py-4 rounded-xl transition-all duration-300 group-hover:scale-105 w-full sm:w-64 md:w-48 xl:w-64 md:${isAbove ? 'mb-10 bottom-full' : 'mt-10 top-full'} md:static focus:outline-none focus:ring-4 focus:ring-indigo-400/40`}
                     >
-                      <div className="flex items-center gap-3 mb-2">
+                      <div className="flex items-center gap-2 mb-1">
                         {item.icon}
-                        <h4 className="text-lg sm:text-base font-semibold text-zinc-800 dark:text-white">
+                        <h4 className="text-base sm:text-sm font-semibold text-zinc-800 dark:text-white">
                           {item.title}
                         </h4>
                       </div>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-1">
+                      <p className="text-xs text-zinc-600 dark:text-zinc-300 mb-1">
                         {item.desc}
                       </p>
                       <span className="text-xs text-indigo-400 dark:text-indigo-300">
                         {item.year}
                       </span>
                     </motion.div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
