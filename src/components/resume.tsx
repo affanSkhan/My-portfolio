@@ -18,6 +18,12 @@ interface TimelineItem {
 }
 
 const studentTimeline: TimelineItem[] = [
+    {
+    year: "2020",
+    title: "Won Competitions",
+    desc: "Chess & Drawing awards",
+    icon: <Award className="text-indigo-600 w-6 h-6" />,
+  },
   {
     year: "2023",
     title: "Topped in Taluqa",
@@ -31,14 +37,8 @@ const studentTimeline: TimelineItem[] = [
     icon: <GraduationCap className="text-indigo-600 w-6 h-6" />,
   },
   {
-    year: "2023",
-    title: "Won Competitions",
-    desc: "Chess & Drawing awards",
-    icon: <Award className="text-indigo-600 w-6 h-6" />,
-  },
-  {
     year: "2025",
-    title: "College Services App",
+    title: "CIE Exam App",
     desc: "Real-world project",
     icon: <Lightbulb className="text-indigo-600 w-6 h-6" />,
   },
@@ -53,8 +53,8 @@ const entrepreneurTimeline: TimelineItem[] = [
   },
   {
     year: "2025",
-    title: "AI from Dharni",
-    desc: "Solo rural AI startup",
+    title: "AI Prompts Lab",
+    desc: "Solo AI startup",
     icon: <Lightbulb className="text-green-500 w-6 h-6" />,
   },
   {
@@ -189,8 +189,7 @@ export function Resume() {
             <motion.div
               className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0"
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              animate="visible"
               variants={{
                 visible: { transition: { staggerChildren: 0.25 } },
                 hidden: {},

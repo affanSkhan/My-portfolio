@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import ClientRoot from "@/components/ClientRoot";
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Now using custom fonts manually",
+  title: "My Portfolio - Affan",
+  description: "This website shows my skills showcase.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

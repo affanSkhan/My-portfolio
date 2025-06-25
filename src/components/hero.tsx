@@ -100,6 +100,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero"
       className={`relative w-full h-screen flex items-center justify-center overflow-hidden scroll-snap-start ${isMobile ? 'bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900' : 'bg-gradient-to-br from-zinc-900 via-black to-zinc-800'}`}
       onMouseMove={handleMouseMove}
       style={{ WebkitOverflowScrolling: "touch", paddingTop: 0, marginTop: 0 }}
@@ -173,7 +174,7 @@ export default function Hero() {
         >
           <button
             className="relative group bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 focus:outline-none overflow-hidden dark:bg-indigo-700 dark:hover:bg-indigo-600 dark:shadow-[0_0_24px_#6366f1cc] dark:ring-2 dark:ring-indigo-400/40 dark:ring-offset-2 dark:ring-offset-zinc-900"
-            onClick={() => window.open('/cv.pdf', '_blank')}
+            onClick={() => window.open('/Affan_Regular_cv.pdf', '_blank')}
             tabIndex={0}
             aria-label="Download my CV"
           >

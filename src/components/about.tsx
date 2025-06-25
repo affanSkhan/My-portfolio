@@ -87,7 +87,7 @@ export default function About() {
     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
       <p className="text-indigo-500 font-semibold">🎓 Computer Engineering Student @ VIIT Pune</p>
       <p className="text-zinc-700 dark:text-zinc-300 mt-2">
-        Exploring AI, ML, and full‑stack development via practical tools like the CIE Exam Reminder and Student Companion App.
+        Exploring AI, ML, and full‑stack development via practical tools like the AI Prompts Lab and CIE Exam App.
       </p>
     </motion.div>
   );
