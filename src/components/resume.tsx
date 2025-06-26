@@ -18,7 +18,7 @@ interface TimelineItem {
 }
 
 const studentTimeline: TimelineItem[] = [
-    {
+  {
     year: "2020",
     title: "Won Competitions",
     desc: "Chess & Drawing awards",
@@ -102,7 +102,10 @@ export function Resume() {
   const [view, setView] = useState<'student' | 'entrepreneur'>('student');
   const timeline = view === 'student' ? studentTimeline : entrepreneurTimeline;
   const [isClient, setIsClient] = useState(false);
-  useEffect(() => { setIsClient(true); }, []);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <motion.section
@@ -187,9 +190,11 @@ export function Resume() {
               style={{ transform: 'md:translateY(-50%) translateX(-50%)' }}
             />
             <motion.div
+              key={view}
               className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0"
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
               variants={{
                 visible: { transition: { staggerChildren: 0.25 } },
                 hidden: {},
@@ -201,7 +206,7 @@ export function Resume() {
                 const isLast = i === timeline.length - 1;
                 return (
                   <motion.div
-                    key={i}
+                    key={item.title + item.year}
                     className={`relative flex flex-col items-center md:w-1/4 z-10 group focus-within:ring-4 focus-within:ring-indigo-400/40 focus-within:rounded-2xl ${isFirst ? 'mt-0' : 'mt-12'} ${isLast ? 'mb-0' : 'mb-12'} md:mt-0 md:mb-0`}
                     tabIndex={0}
                     aria-label={item.title + ' - ' + item.year}

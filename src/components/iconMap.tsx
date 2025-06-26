@@ -1,4 +1,5 @@
 // components/iconMap.ts
+
 import {
   SiHtml5,
   SiCss3,
@@ -11,9 +12,20 @@ import {
   SiPython,
   SiCplusplus,
   SiMysql,
+  SiMongodb,
   SiGit,
+  SiDocker,
+  SiVercel,
+  SiLinux,
+  SiFlutter,
+  SiDart,
+  SiNumpy,
+  SiPandas,
+  SiScikitlearn,
+  SiTensorflow,
 } from 'react-icons/si';
 
+import { FaJava, FaCode } from 'react-icons/fa';
 import { ReactElement } from 'react';
 
 const iconMap: Record<string, ReactElement> = {
@@ -28,7 +40,19 @@ const iconMap: Record<string, ReactElement> = {
   python: <SiPython />,
   cplusplus: <SiCplusplus />,
   mysql: <SiMysql />,
+  mongodb: <SiMongodb />,
   git: <SiGit />,
+  docker: <SiDocker />,
+  vercel: <SiVercel />,
+  linux: <SiLinux />,
+  vscode: <FaCode />,
+  flutter: <SiFlutter />,
+  dart: <SiDart />,
+  numpy: <SiNumpy />,
+  pandas: <SiPandas />,
+  scikitlearn: <SiScikitlearn />,
+  tensorflow: <SiTensorflow />,
+  java: <FaJava />,
 };
 
 export default iconMap;

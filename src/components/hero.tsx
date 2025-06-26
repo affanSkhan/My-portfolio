@@ -201,7 +201,7 @@ export default function Hero() {
             className="w-fit mx-auto"
           >
             <Image
-              src="/affan-profile.png"
+              src="/affan-profile.jpg"
               alt="Affan's Profile"
               width={120}
               height={120}

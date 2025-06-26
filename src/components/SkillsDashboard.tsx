@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import SkillCard from "./SkillCard";
 import { skills } from "./skillsData";
 import { motion } from "framer-motion";
-import { FaLayerGroup, FaCode, FaDatabase, FaTools, FaRobot, FaAsterisk } from "react-icons/fa";
+import { FaLayerGroup, FaCode, FaDatabase, FaTools, FaRobot, FaAsterisk, FaMobile } from "react-icons/fa";
 import React from "react";
 // import FloatingTechOrbs from "./FloatingTechOrbs";
 
@@ -14,6 +14,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   All: <FaAsterisk className="text-indigo-400" />,
   Frontend: <FaCode className="text-pink-400" />,
   Backend: <FaLayerGroup className="text-green-400" />,
+  Mobile: <FaMobile className= "text-yellow-400" />,
   "AI/ML": <FaRobot className="text-purple-400" />,
   Databases: <FaDatabase className="text-blue-400" />,
   Tools: <FaTools className="text-emerald-400" />,
@@ -55,7 +56,7 @@ function FloatingParticles({ count = 12 }) {
 export default function SkillsDashboard() {
   const [filter, setFilter] = useState("All");
 
-  const categories = ["All", "Frontend", "Backend", "AI/ML", "Databases", "Tools"];
+  const categories = ["All", "Frontend", "Backend", "Mobile", "AI/ML", "Databases", "Tools"];
 
   const filteredSkills =
     filter === "All" ? skills : skills.filter((s) => s.category === filter);

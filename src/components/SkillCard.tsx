@@ -24,7 +24,7 @@ export default function SkillCard({ skill, index = 0 }: { skill: Skill; index?: 
       <p className="text-xs text-zinc-500 dark:text-zinc-300 mb-2">{skill.category}</p>
       {/* Proficiency Bar (static for now) */}
       <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden mt-2">
-        <div className="h-full bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400" style={{ width: '80%' }} />
+        <div className="h-full bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400" style={{ width: `${skill.level}%` }} />
       </div>
     </motion.div>
   );

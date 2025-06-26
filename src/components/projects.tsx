@@ -6,16 +6,27 @@ import {
   SiReact,
   SiFirebase,
   SiTailwindcss,
-  SiNextdotjs
+  SiNextdotjs,
+  SiTypescript,
+  SiFlutter
 } from "react-icons/si";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
   {
+    title: "AI Prompts Lab",
+    description:
+      "Platform for generating, saving, editing, and enhancing AI prompts with integrated image generation and editing features.",
+    tech: [<SiNextdotjs key="nextjs" />, <SiTypescript key="typescript" />, <SiTailwindcss key="tailwind" />, <SiFirebase key="firebase" />],
+    github: "https://github.com/affanSkhan/ai-prompts-lab",
+    live: "https://ai-prompts-lab.netlify.app",
+    lessons: ["Prompt engineering", "Image generation APIs", "Dynamic UI state management"]
+  },  
+  {
     title: "CIE Exam Reminder App",
     description:
       "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
-    tech: [<SiReact key="react" />, <SiFirebase key="firebase" />, <SiTailwindcss key="tailwind" />],
+    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
     github: "https://github.com/affanSkhan/cie-app",
     live: "https://cie-exam-app.netlify.app/",
     lessons: ["Notification APIs", "User input validation", "Timely UX design"]
@@ -24,29 +35,39 @@ const projects = [
     title: "AI Job Recommender",
     description:
       "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
-    tech: [<SiNextdotjs key="next" />, <SiTailwindcss key="tailwind" />, <SiFirebase key="firebase" />],
-    github: "https://github.com/your-username/ai-job-recommender",
-    live: "https://ai-job.vercel.app",
+    tech: [<SiFlutter key="flutter" />],
+    github: "https://github.com/affanSkhan/ai-job-role-recommender",
+    live: "https://ai-job.netlify.app",
     lessons: ["AI UX design", "Keyword clustering", "Career logic modeling"]
   },
   {
     title: "Fashion E-Com App with Admin",
     description:
       "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
-    tech: [<SiReact key="react" />, <SiFirebase key="firebase" />, <SiTailwindcss key="tailwind" />],
-    github: "https://github.com/your-username/fashion-store",
-    live: "https://fashion-ecom.vercel.app",
+    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
+    github: "https://github.com/affanSkhan/Fashion-App",
+    live: "https://fashion-ecom.netlify.app",
     lessons: ["State management", "CRUD with Firebase", "Component modularity"]
   },
   {
     title: "One Area One App",
     description:
       "Commission-based platform for rural business discovery, bookings, and payment automation.",
-    tech: [<SiNextdotjs key="next" />, <SiFirebase key="firebase" />, <SiTailwindcss key="tailwind" />],
-    github: "https://github.com/your-username/one-area-one-app",
-    live: "https://one-area-app.vercel.app",
+    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
+    github: "https://github.com/affanSkhan/one-area-one-app",
+    live: "https://one-area-app.netlify.app",
     lessons: ["Multi-role UX", "Rural-friendly UI", "Payment system structure"]
+  },
+  {
+    title: "Developer Portfolio Website",
+    description:
+      "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
+    tech: [<SiNextdotjs key="nextjs" />, <SiReact key="react" />, <SiTailwindcss key="tailwind" />, <SiTypescript key="typescript" />],
+    github: "https://github.com/affanSkhan/My-portfolio",
+    live: "https://affan-web.netlify.app",
+    lessons: ["Responsive design", "Framer Motion animations", "Reusable component architecture"]
   }
+  
 ];
 
 // FloatingParticles component to avoid hydration mismatch
