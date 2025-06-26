@@ -23,15 +23,24 @@ const categoryIcons: Record<string, React.ReactNode> = {
 // FloatingParticles component to avoid hydration mismatch
 function FloatingParticles({ count = 12 }) {
   const [positions, setPositions] = useState<{top:number;left:number;}[]>([]);
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    setPositions(
-      Array.from({ length: count }, () => ({
-        top: Math.random() * 90,
-        left: Math.random() * 90,
-      }))
-    );
-  }, [count]);
-  if (positions.length === 0) return null;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      setPositions(
+        Array.from({ length: count }, () => ({
+          top: Math.random() * 90,
+          left: Math.random() * 90,
+        }))
+      );
+    }
+  }, [count, mounted]);
+
+  if (!mounted || positions.length === 0) return null;
   return positions.map((pos, i) => (
     <motion.span
       key={i}
@@ -55,6 +64,8 @@ function FloatingParticles({ count = 12 }) {
 
 export default function SkillsDashboard() {
   const [filter, setFilter] = useState("All");
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const categories = ["All", "Frontend", "Backend", "Mobile", "AI/ML", "Databases", "Tools"];
 
@@ -74,7 +85,7 @@ export default function SkillsDashboard() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="hidden md:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/30 via-fuchsia-400/20 to-emerald-400/20 blur-3xl opacity-60 animate-pulse" />
         <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-gradient-to-tr from-pink-400/20 via-blue-400/20 to-indigo-400/20 blur-2xl opacity-50 animate-pulse" />
-        <FloatingParticles count={12} />
+        {mounted && <FloatingParticles count={12} />}
       </div>
       <div className="relative z-10 w-full max-w-6xl mx-auto">
         {/* Glassmorphism Card Container */}
@@ -114,7 +125,7 @@ export default function SkillsDashboard() {
             ))}
           </div>
           {/* Skills Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {filteredSkills.map((skill, index) => (
               <SkillCard key={index} skill={skill} index={index} />
             ))}

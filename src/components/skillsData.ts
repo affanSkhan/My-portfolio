@@ -41,7 +41,7 @@ export const skills: Skill[] = [
   // === Tools & DevOps ===
   { name: "Git & GitHub", iconName: "git", colorClass: "text-orange-500", category: "Tools", level: 90 },
   { name: "Docker", iconName: "docker", colorClass: "text-blue-500", category: "Tools", level: 50 },
-  { name: "Vercel", iconName: "vercel", colorClass: "text-black", category: "Tools", level: 80 },
+  { name: "Netlify", iconName: "netlify", colorClass: "text-black", category: "Tools", level: 80 },
   { name: "Linux", iconName: "linux", colorClass: "text-gray-600", category: "Tools", level: 65 },
   { name: "VS Code", iconName: "vscode", colorClass: "text-blue-500", category: "Tools", level: 95 },
 ];

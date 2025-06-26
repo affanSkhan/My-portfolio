@@ -14,13 +14,13 @@ export default function SkillCard({ skill, index = 0 }: { skill: Skill; index?: 
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.08 * index, duration: 0.5 }}
       whileHover={{ scale: 1.07, boxShadow: "0 0 24px #6366f1cc" }}
-      className="p-5 rounded-2xl shadow-xl bg-white/70 dark:bg-zinc-900/80 border border-white/30 dark:border-zinc-700/60 backdrop-blur-lg flex flex-col items-center text-center transition-all group"
+      className="w-full max-w-xs sm:max-w-none p-3 sm:p-5 rounded-2xl shadow-xl bg-white/70 dark:bg-zinc-900/80 border border-white/30 dark:border-zinc-700/60 backdrop-blur-lg flex flex-col items-center text-center transition-all group"
       title={skill.name}
     >
-      <div className={`text-4xl mb-2 transition-transform group-hover:scale-125 group-hover:animate-pulse ${skill.colorClass} drop-shadow dark:drop-shadow-[0_0_12px_#6366f1cc]`}>
+      <div className={`text-3xl sm:text-4xl mb-2 transition-transform group-hover:scale-125 group-hover:animate-pulse ${skill.colorClass} drop-shadow dark:drop-shadow-[0_0_12px_#6366f1cc]`}>
         {IconComponent ?? "❓"}
       </div>
-      <h3 className="text-lg font-bold mb-1">{skill.name}</h3>
+      <h3 className="text-base sm:text-lg font-bold mb-1">{skill.name}</h3>
       <p className="text-xs text-zinc-500 dark:text-zinc-300 mb-2">{skill.category}</p>
       {/* Proficiency Bar (static for now) */}
       <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden mt-2">
