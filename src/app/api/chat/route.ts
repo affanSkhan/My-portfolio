@@ -95,13 +95,15 @@ Goals: ${JSON.stringify(goals, null, 2)}
     const chatText = mode === "private" && pinOk 
       ? `You must respond with ONLY a JSON command. No explanations, no text, just the JSON.
 
-When user asks to "add a project", respond with exactly this format:
+EXACT COMMAND FORMATS:
+
+Add project:
 {
   "type": "add_project",
   "payload": {
-    "title": "User's Title",
-    "description": "A brief description",
-    "stack": ["Technology1", "Technology2"],
+    "title": "Project Name",
+    "description": "Description",
+    "stack": ["Tech1", "Tech2"],
     "year": 2024,
     "links": {"github": "", "live": ""},
     "featured": false,
@@ -110,7 +112,24 @@ When user asks to "add a project", respond with exactly this format:
   }
 }
 
-NEVER use "noop" unless the user specifically says "do nothing" or "cancel".
+Update project:
+{
+  "type": "update_project",
+  "payload": {
+    "matchTitle": "Exact Current Title",
+    "patch": {"title": "New Title"}
+  }
+}
+
+Remove project:
+{
+  "type": "remove_project",
+  "payload": {
+    "matchTitle": "Exact Title to Remove"
+  }
+}
+
+IMPORTANT: Use "matchTitle" not "title" for updates/removes. Use "patch" not "set" for updates.
 
 User says: ${latestMessage}
 
@@ -183,6 +202,7 @@ User: ${latestMessage}
             jsonCommand = jsonMatch[0];
           }
           
+          console.log("🔍 Generated JSON:", jsonCommand);
           const parsed = CommandSchema.parse(JSON.parse(jsonCommand)) as Command;
           
           // Execute the validated command
@@ -285,11 +305,19 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         );
 
         if (index >= 0) {
+          const oldTitle = projects[index].title;
           projects[index] = { ...projects[index], ...command.payload.patch };
           await writeJson("projects.json", projects);
-          return { success: true, message: `Updated project "${command.payload.matchTitle}"` };
+          return { 
+            success: true, 
+            message: `Updated project "${oldTitle}" → Changes: ${Object.keys(command.payload.patch).join(', ')}` 
+          };
         } else {
-          return { success: false, message: `Project "${command.payload.matchTitle}" not found` };
+          const availableTitles = projects.map(p => p.title).join(', ');
+          return { 
+            success: false, 
+            message: `Project "${command.payload.matchTitle}" not found. Available: ${availableTitles}` 
+          };
         }
       } catch (error) {
         return { success: false, message: `Failed to update project: ${error instanceof Error ? error.message : 'Unknown error'}` };
@@ -304,11 +332,16 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         );
 
         if (index >= 0) {
+          const removedTitle = projects[index].title;
           projects.splice(index, 1);
           await writeJson("projects.json", projects);
-          return { success: true, message: `Removed project "${command.payload.matchTitle}"` };
+          return { success: true, message: `Removed project "${removedTitle}"` };
         } else {
-          return { success: false, message: `Project "${command.payload.matchTitle}" not found` };
+          const availableTitles = projects.map(p => p.title).join(', ');
+          return { 
+            success: false, 
+            message: `Project "${command.payload.matchTitle}" not found. Available: ${availableTitles}` 
+          };
         }
       } catch (error) {
         return { success: false, message: `Failed to remove project: ${error instanceof Error ? error.message : 'Unknown error'}` };
