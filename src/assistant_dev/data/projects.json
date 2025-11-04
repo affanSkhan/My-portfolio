@@ -1,0 +1,80 @@
+[
+  {
+    "title": "AI Prompts Lab",
+    "description": "Platform for generating, saving, editing, and enhancing AI prompts with integrated image generation and editing features.",
+    "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/ai-prompts-lab",
+      "live": "https://ai-prompts-lab.netlify.app"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": ["Prompt engineering", "Image generation APIs", "Dynamic UI state management"]
+  },
+  {
+    "title": "CIE Exam Reminder App",
+    "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
+    "stack": ["Flutter", "Firebase"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/cie-app",
+      "live": "https://cie-exam-app.netlify.app/"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": ["Notification APIs", "User input validation", "Timely UX design"]
+  },
+  {
+    "title": "AI Job Recommender",
+    "description": "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
+    "stack": ["Flutter"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/ai-job-role-recommender",
+      "live": "https://ai-job.netlify.app"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": ["AI UX design", "Keyword clustering", "Career logic modeling"]
+  },
+  {
+    "title": "Fashion E-Com App with Admin",
+    "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
+    "stack": ["Flutter", "Firebase"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/Fashion-App",
+      "live": "https://fashion-ecom.netlify.app"
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": ["State management", "CRUD with Firebase", "Component modularity"]
+  },
+  {
+    "title": "One Area One App",
+    "description": "Commission-based platform for rural business discovery, bookings, and payment automation.",
+    "stack": ["Flutter", "Firebase"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/one-area-one-app",
+      "live": "https://one-area-app.netlify.app"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": ["Multi-role UX", "Rural-friendly UI", "Payment system structure"]
+  },
+  {
+    "title": "Developer Portfolio Website",
+    "description": "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
+    "stack": ["Next.js", "React", "Tailwind CSS", "TypeScript"],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/My-portfolio",
+      "live": "https://affan-web.netlify.app"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": ["Responsive design", "Framer Motion animations", "Reusable component architecture"]
+  }
+]

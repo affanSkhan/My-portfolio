@@ -1,0 +1,22 @@
+[
+  {
+    "category": "Mobile Development",
+    "skills": ["Flutter", "Dart", "Firebase", "FCM", "Android", "iOS"]
+  },
+  {
+    "category": "AI & Machine Learning",
+    "skills": ["Python", "TensorFlow", "LangChain", "Gemini AI", "Machine Learning", "Neural Networks"]
+  },
+  {
+    "category": "Web Development",
+    "skills": ["Next.js", "React", "TypeScript", "Tailwind CSS", "JavaScript", "HTML", "CSS"]
+  },
+  {
+    "category": "Backend & Cloud",
+    "skills": ["Node.js", "Firebase", "Vercel", "Git", "REST APIs", "Database Design"]
+  },
+  {
+    "category": "Tools & Technologies",
+    "skills": ["VS Code", "Android Studio", "Git", "GitHub", "Figma", "Postman"]
+  }
+]

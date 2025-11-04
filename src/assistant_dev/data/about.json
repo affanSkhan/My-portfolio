@@ -1,0 +1,24 @@
+{
+  "name": "Affan",
+  "title": "Computer Engineering Student",
+  "location": "VIIT Pune | Rooted in Dharni",
+  "roles": [
+    "AI Enthusiast",
+    "Flutter Developer",
+    "Full-Stack Explorer",
+    "Tech Visionary",
+    "ML Practitioner",
+    "Code Storyteller",
+    "Digital Problem Solver",
+    "Student Entrepreneur",
+    "Startup Dreamer",
+    "Creative Technologist",
+    "Purpose-Driven Engineer"
+  ],
+  "profileImage": "/affan-profile.jpg",
+  "cv": "/Affan_Regular_cv.pdf",
+  "bio": "Passionate computer engineering student with expertise in AI and Flutter development, building innovative solutions for real-world problems.",
+  "email": "affan@example.com",
+  "github": "https://github.com/affanSkhan",
+  "linkedin": "https://linkedin.com/in/affan-khan"
+}

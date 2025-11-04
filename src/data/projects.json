@@ -1,0 +1,35 @@
+[
+  {
+    "title": "CIE Exam App",
+    "stack": ["Flutter", "Firebase", "FCM"],
+    "description": "Helps VIIT students schedule and get reminders for CIE exams with push notifications and smart scheduling.",
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": true
+  },
+  {
+    "title": "One Area, One App",
+    "stack": ["Flutter", "Firebase", "Maps API"],
+    "description": "Comprehensive local services app connecting users with area-specific businesses and services.",
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": true
+  },
+  {
+    "title": "Smart Yoga Mat POC",
+    "stack": ["Flutter", "Firebase", "Bluetooth", "IoT"],
+    "description": "Bluetooth-enabled yoga mat with pose detection and OTA updates for guided sessions.",
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": false
+  }
+]
