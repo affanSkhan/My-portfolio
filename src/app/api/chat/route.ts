@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { Command, CommandSchema, toUserFacingSummary } from "@/lib/commands";
 import { readJson } from "@/lib/fs-json";
 
-// Initialize Gemini client
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+// Initialize Gemini client using new SDK
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY!
+});
 
 const SYSTEM_PROMPT = `
 You are Affan's AI Assistant, helping visitors learn about Affan Khan, a Computer Engineering student from VIIT Pune.
@@ -89,35 +90,27 @@ CONVERSATION:
 ${truncated.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n')}
 `;
 
-    // Configure response format based on mode
-    const generationConfig = mode === "private" && pinOk ? {
-      responseMimeType: "application/json",
-      temperature: 0.1, // Lower temperature for more consistent JSON
-    } : {
-      temperature: 0.7, // Higher temperature for more conversational responses
-    };
+    // Generate response with Gemini using new SDK
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: chatText
+      });
+      const text = response.text || "";
 
-    // Generate response with Gemini
-    const response = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: chatText }] }],
-      generationConfig
-    });
-
-    const text = response.response.text() ?? "";
-
-    // Handle private mode with command validation and execution
-    if (mode === "private" && pinOk) {
-      try {
-        const parsed = CommandSchema.parse(JSON.parse(text)) as Command;
-        
-        // Execute the validated command
-        const result = await executeCommand(parsed);
-        
-        return NextResponse.json({ 
-          reply: result.message,
-          command: toUserFacingSummary(parsed),
-          success: result.success
-        });
+      // Handle private mode with command validation and execution
+      if (mode === "private" && pinOk) {
+        try {
+          const parsed = CommandSchema.parse(JSON.parse(text)) as Command;
+          
+          // Execute the validated command
+          const result = await executeCommand(parsed);
+          
+          return NextResponse.json({ 
+            reply: result.message,
+            command: toUserFacingSummary(parsed),
+            success: result.success
+          });
         
       } catch (error) {
         console.error("Command parsing/execution error:", error);
@@ -133,6 +126,14 @@ ${truncated.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n')}
     return NextResponse.json({ 
       reply: text || "Hello! I'm Affan's AI assistant. Ask me about his projects, skills, or goals!"
     });
+
+    } catch (error) {
+      console.error('Gemini API error:', error);
+      return NextResponse.json(
+        { error: 'Failed to generate response. Please check your Gemini API key and try again.' },
+        { status: 500 }
+      );
+    }
 
   } catch (error) {
     console.error("Chat API error:", error);

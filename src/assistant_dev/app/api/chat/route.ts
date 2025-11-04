@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { validateCommand, executeCommand } from '@/assistant_dev/lib/commands';
 import { readJson } from '@/assistant_dev/lib/fs-json';
 
-// Initialize Gemini
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+// Initialize Gemini using new SDK
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY || ''
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,26 +24,19 @@ export async function POST(request: NextRequest) {
       ? createPrivateSystemPrompt(portfolioContext)
       : createPublicSystemPrompt(portfolioContext);
 
-    // Generate response from Gemini
-    const chat = model.startChat({
-      history: [
-        {
-          role: 'user',
-          parts: [{ text: systemPrompt }],
-        },
-        {
-          role: 'model',
-          parts: [{ text: 'I understand. I\'m ready to help!' }],
-        },
-      ],
-    });
+    // Build the full prompt
+    const fullPrompt = `${systemPrompt}\n\nUser: ${message}`;
 
-    const result = await chat.sendMessage(message);
-    const response = result.response.text();
+    // Generate response from Gemini using new SDK
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: fullPrompt
+    });
+    const responseText = response.text || "";
 
     // If private mode, try to extract and execute commands
     if (isPrivate) {
-      const commands = extractCommands(response);
+      const commands = extractCommands(responseText);
       const executionResults = [];
 
       for (const commandText of commands) {
@@ -60,12 +54,12 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json({ 
-        response,
+        response: responseText,
         executionResults: executionResults.length > 0 ? executionResults : undefined
       });
     }
 
-    return NextResponse.json({ response });
+    return NextResponse.json({ response: responseText });
 
   } catch (error) {
     console.error('Chat API error:', error);
