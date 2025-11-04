@@ -264,7 +264,6 @@ User: ${latestMessage}
 // Execute validated commands
 async function executeCommand(command: Command): Promise<{ success: boolean; message: string }> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     
     if (command.type === "noop") {
       return { 
@@ -350,29 +349,97 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
 
     // Handle skill operations
     if (command.type === "add_skill") {
-      const response = await fetch(`${baseUrl}/api/content/update`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pinOk: true,
-          file: "skills.json",
-          op: { type: "add", item: command.payload }
-        })
-      });
-      
-      if (response.ok) {
+      try {
+        const skills = await readJson('skills.json');
+        if (!Array.isArray(skills)) {
+          return { success: false, message: "❌ Skills data is not an array" };
+        }
+        
+        skills.push(command.payload);
+        await writeJson('skills.json', skills);
         return { success: true, message: `✅ Added skill "${command.payload.name}"` };
-      } else {
-        const error = await response.json();
-        return { success: false, message: `❌ Failed to add skill: ${error.error}` };
+      } catch (error) {
+        return { success: false, message: `Failed to add skill: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 
-    // Add other command handlers as needed...
+    if (command.type === "update_skill") {
+      try {
+        const skills = await readJson('skills.json');
+        if (!Array.isArray(skills)) {
+          return { success: false, message: "❌ Skills data is not an array" };
+        }
+        
+        const index = skills.findIndex(skill => skill.name === command.payload.matchName);
+        if (index === -1) {
+          return { success: false, message: `❌ Skill "${command.payload.matchName}" not found` };
+        }
+        
+        skills[index] = { ...skills[index], ...command.payload.patch };
+        await writeJson('skills.json', skills);
+        return { success: true, message: `✅ Updated skill "${command.payload.matchName}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to update skill: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    // Handle about operations
+    if (command.type === "update_about") {
+      try {
+        const about = await readJson('about.json') as Record<string, unknown>;
+        about[command.payload.field] = command.payload.value;
+        await writeJson('about.json', about);
+        return { success: true, message: `✅ Updated about ${command.payload.field}` };
+      } catch (error) {
+        return { success: false, message: `Failed to update about: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    if (command.type === "add_role") {
+      try {
+        const about = await readJson('about.json') as Record<string, unknown>;
+        if (!Array.isArray(about.roles)) {
+          return { success: false, message: "❌ About roles is not an array" };
+        }
+        
+        (about.roles as string[]).push(command.payload.role);
+        await writeJson('about.json', about);
+        return { success: true, message: `✅ Added role "${command.payload.role}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to add role: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    // Handle goals operations
+    if (command.type === "add_goal") {
+      try {
+        const goals = await readJson('goals.json');
+        if (!Array.isArray(goals)) {
+          return { success: false, message: "❌ Goals data is not an array" };
+        }
+        
+        goals.push(command.payload);
+        await writeJson('goals.json', goals);
+        return { success: true, message: `✅ Added goal "${command.payload.goal}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to add goal: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    if (command.type === "update_goals") {
+      try {
+        const goals = await readJson('goals.json') as Record<string, unknown>;
+        goals[command.payload.field] = command.payload.value;
+        await writeJson('goals.json', goals);
+        return { success: true, message: `✅ Updated goals ${command.payload.field}` };
+      } catch (error) {
+        return { success: false, message: `Failed to update goals: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
     
     return { 
       success: false, 
-      message: `❌ Command type "${command.type}" not yet implemented` 
+      message: `❌ Command type not yet implemented` 
     };
 
   } catch (error) {

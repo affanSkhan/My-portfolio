@@ -81,7 +81,7 @@
     ]
   },
   {
-    "title": "One Area One App",
+    "title": "OneApp",
     "description": "Commission-based platform for rural business discovery, bookings, and payment automation.",
     "stack": [
       "Flutter",
@@ -133,19 +133,6 @@
     },
     "featured": false,
     "status": "planning",
-    "lessons": []
-  },
-  {
-    "title": "test project",
-    "description": "A brief description",
-    "stack": [],
-    "year": 2024,
-    "links": {
-      "github": "",
-      "live": ""
-    },
-    "featured": false,
-    "status": "completed",
     "lessons": []
   }
 ]
