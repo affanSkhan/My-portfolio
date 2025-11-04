@@ -541,14 +541,16 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
     // Handle goals operations
     if (command.type === "add_goal") {
       try {
-        const goals = await readJson('goals.json');
-        if (!Array.isArray(goals)) {
-          return { success: false, message: "❌ Goals data is not an array" };
+        const goals = await readJson('goals.json') as Record<string, unknown>;
+        const targetArray = goals[command.payload.type] as string[];
+        
+        if (!Array.isArray(targetArray)) {
+          return { success: false, message: `❌ Goals ${command.payload.type} is not an array` };
         }
         
-        goals.push(command.payload);
+        targetArray.push(command.payload.goal);
         await writeJson('goals.json', goals);
-        return { success: true, message: `✅ Added goal "${command.payload.goal}"` };
+        return { success: true, message: `✅ Added ${command.payload.type} goal "${command.payload.goal}"` };
       } catch (error) {
         return { success: false, message: `Failed to add goal: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
@@ -567,20 +569,33 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
 
     if (command.type === "remove_goal") {
       try {
-        const goals = await readJson('goals.json');
-        if (!Array.isArray(goals)) {
-          return { success: false, message: "❌ Goals data is not an array" };
+        const goals = await readJson('goals.json') as Record<string, unknown>;
+        const shortTerm = goals.shortTerm as string[];
+        const longTerm = goals.longTerm as string[];
+        
+        if (!Array.isArray(shortTerm) || !Array.isArray(longTerm)) {
+          return { success: false, message: "❌ Goals structure is invalid" };
         }
         
-        const index = goals.findIndex(goal => goal.goal && goal.goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase()));
-        if (index === -1) {
-          return { success: false, message: `❌ Goal containing "${command.payload.matchGoal}" not found` };
+        // Search in shortTerm first
+        let index = shortTerm.findIndex(goal => goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase()));
+        if (index !== -1) {
+          const removedGoal = shortTerm[index];
+          shortTerm.splice(index, 1);
+          await writeJson('goals.json', goals);
+          return { success: true, message: `✅ Removed shortTerm goal "${removedGoal}"` };
         }
         
-        const removedGoal = goals[index].goal;
-        goals.splice(index, 1);
-        await writeJson('goals.json', goals);
-        return { success: true, message: `✅ Removed goal "${removedGoal}"` };
+        // Search in longTerm if not found in shortTerm
+        index = longTerm.findIndex(goal => goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase()));
+        if (index !== -1) {
+          const removedGoal = longTerm[index];
+          longTerm.splice(index, 1);
+          await writeJson('goals.json', goals);
+          return { success: true, message: `✅ Removed longTerm goal "${removedGoal}"` };
+        }
+        
+        return { success: false, message: `❌ Goal containing "${command.payload.matchGoal}" not found` };
       } catch (error) {
         return { success: false, message: `Failed to remove goal: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
