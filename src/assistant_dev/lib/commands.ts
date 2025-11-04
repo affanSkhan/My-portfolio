@@ -258,3 +258,58 @@ export function getFileTargetForCommand(cmd: Command): string {
       return "";
   }
 }
+
+/**
+ * Validates a command against the CommandSchema
+ */
+export function validateCommand(command: unknown) {
+  return CommandSchema.safeParse(command);
+}
+
+/**
+ * Executes a validated command by calling the appropriate API
+ */
+export async function executeCommand(command: Command): Promise<{ success: boolean; message: string }> {
+  try {
+    const filename = getFileTargetForCommand(command);
+    
+    if (!filename) {
+      return { success: false, message: "Unknown command type" };
+    }
+
+    // For destructive operations, we could add additional validation here
+    if (isDestructiveCommand(command)) {
+      // Add any safety checks if needed
+    }
+
+    // Call the content API to execute the command
+    const response = await fetch('/api/content/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filename,
+        command,
+        pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      return { success: false, message: `API error: ${error}` };
+    }
+
+    await response.json(); // Consume the response
+    return { 
+      success: true, 
+      message: `Successfully executed: ${toUserFacingSummary(command)}` 
+    };
+
+  } catch (error) {
+    return { 
+      success: false, 
+      message: `Execution failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    };
+  }
+}
