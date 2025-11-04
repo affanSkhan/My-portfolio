@@ -2,6 +2,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import ClientRoot from "@/components/ClientRoot";
+import ChatWidget from "@/assistant_dev/chat/ChatWidget";
 
 export const metadata: Metadata = {
   title: "My Portfolio - Affan",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased font-sans">
         <ClientRoot>{children}</ClientRoot>
+        <ChatWidget />
       </body>
     </html>
   );
