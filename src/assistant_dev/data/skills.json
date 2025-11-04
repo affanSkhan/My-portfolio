@@ -166,5 +166,12 @@
     "colorClass": "text-blue-500",
     "category": "Tools",
     "level": 95
+  },
+  {
+    "name": "TypeScript",
+    "iconName": "typescript-icon",
+    "colorClass": "text-blue-500",
+    "category": "Frontend",
+    "level": 90
   }
 ]

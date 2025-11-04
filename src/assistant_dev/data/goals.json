@@ -17,6 +17,12 @@
   ],
   "currentFocus": "Building intelligent applications that solve real-world problems using AI and mobile technologies",
   "vision": "To bridge the gap between cutting-edge AI technology and practical solutions that improve people's daily lives, especially in rural communities.",
-  "values": ["Innovation", "Impact", "Integrity", "Inclusion", "Continuous Learning"],
+  "values": [
+    "Innovation",
+    "Impact",
+    "Integrity",
+    "Inclusion",
+    "Continuous Learning"
+  ],
   "mission": "Developing accessible technology solutions that empower communities and create meaningful impact through AI and mobile development."
 }
