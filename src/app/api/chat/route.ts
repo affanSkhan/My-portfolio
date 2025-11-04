@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { Command, CommandSchema, toUserFacingSummary } from "@/lib/commands";
-import { readJson } from "@/lib/fs-json";
+import { readJson, writeJson } from "@/lib/fs-json";
 
 // Initialize Gemini client using new SDK
 const ai = new GoogleGenAI({
@@ -93,17 +93,28 @@ Goals: ${JSON.stringify(goals, null, 2)}
     // Compose the full prompt for Gemini
     const latestMessage = messages[messages.length - 1]?.content || "";
     const chatText = mode === "private" && pinOk 
-      ? `PRIVATE EDITING MODE: Respond with ONLY pure JSON commands.
+      ? `You must respond with ONLY a JSON command. No explanations, no text, just the JSON.
 
-Format: {"type": "command_type", "payload": {...}}
+When user asks to "add a project", respond with exactly this format:
+{
+  "type": "add_project",
+  "payload": {
+    "title": "User's Title",
+    "description": "A brief description",
+    "stack": ["Technology1", "Technology2"],
+    "year": 2024,
+    "links": {"github": "", "live": ""},
+    "featured": false,
+    "status": "completed",
+    "lessons": []
+  }
+}
 
-Available commands: add_project, update_project, remove_project, add_skill, update_skill, update_about, add_role, add_goal, update_goals, noop
+NEVER use "noop" unless the user specifically says "do nothing" or "cancel".
 
-NO explanatory text. NO markdown. ONLY JSON.
+User says: ${latestMessage}
 
-Context: ${portfolioContext}
-
-User Request: ${latestMessage}`
+Respond with JSON only:`
       : `
 ${SYSTEM_PROMPT}
 
@@ -242,83 +253,65 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
       };
     }
 
-    // Handle project operations
+    // Handle project operations directly with fs-json
     if (command.type === "add_project") {
-      const response = await fetch(`${baseUrl}/api/content/update`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          pinOk: true,
-          file: "projects.json",
-          op: { type: "add", item: command.payload }
-        })
-      });
-      
-      if (response.ok) {
-        return { success: true, message: `✅ Added project "${command.payload.title}"` };
-      } else {
-        const error = await response.json();
-        return { success: false, message: `❌ Failed to add project: ${error.error}` };
+      try {
+        const projects = await readJson<Array<Record<string, unknown>>>("projects.json");
+        const newProject = {
+          title: command.payload.title,
+          description: command.payload.description,
+          stack: command.payload.stack || [],
+          year: command.payload.year,
+          links: command.payload.links || { github: "", live: "" },
+          featured: command.payload.featured || false,
+          status: command.payload.status || "completed",
+          lessons: command.payload.lessons || []
+        };
+        
+        projects.push(newProject);
+        await writeJson("projects.json", projects);
+        
+        return { success: true, message: `Added project "${command.payload.title}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to add project: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 
     if (command.type === "update_project") {
-      // Find project by title first
-      const projectsResponse = await fetch(`${baseUrl}/api/content/projects.json`);
-      const projects = await projectsResponse.json() as Array<{ title?: string; [key: string]: unknown }>;
-      const index = projects.findIndex((p) => 
-        p.title?.toLowerCase() === command.payload.matchTitle.toLowerCase()
-      );
+      try {
+        const projects = await readJson<Array<Record<string, unknown>>>("projects.json");
+        const index = projects.findIndex((p) => 
+          (p.title as string)?.toLowerCase() === command.payload.matchTitle.toLowerCase()
+        );
 
-      if (index >= 0) {
-        const response = await fetch(`${baseUrl}/api/content/update`, {
-          method: "POST", 
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            pinOk: true,
-            file: "projects.json",
-            op: { type: "update", index, patch: command.payload.patch }
-          })
-        });
-        
-        if (response.ok) {
-          return { success: true, message: `✅ Updated project "${command.payload.matchTitle}"` };
+        if (index >= 0) {
+          projects[index] = { ...projects[index], ...command.payload.patch };
+          await writeJson("projects.json", projects);
+          return { success: true, message: `Updated project "${command.payload.matchTitle}"` };
         } else {
-          const error = await response.json();
-          return { success: false, message: `❌ Failed to update project: ${error.error}` };
+          return { success: false, message: `Project "${command.payload.matchTitle}" not found` };
         }
-      } else {
-        return { success: false, message: `❌ Project "${command.payload.matchTitle}" not found` };
+      } catch (error) {
+        return { success: false, message: `Failed to update project: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 
     if (command.type === "remove_project") {
-      // Find and remove project
-      const projectsResponse = await fetch(`${baseUrl}/api/content/projects.json`);
-      const projects = await projectsResponse.json() as Array<{ title?: string; [key: string]: unknown }>;
-      const index = projects.findIndex((p) => 
-        p.title?.toLowerCase() === command.payload.matchTitle.toLowerCase()
-      );
+      try {
+        const projects = await readJson<Array<Record<string, unknown>>>("projects.json");
+        const index = projects.findIndex((p) => 
+          (p.title as string)?.toLowerCase() === command.payload.matchTitle.toLowerCase()
+        );
 
-      if (index >= 0) {
-        const response = await fetch(`${baseUrl}/api/content/update`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            pinOk: true,
-            file: "projects.json", 
-            op: { type: "remove", index }
-          })
-        });
-        
-        if (response.ok) {
-          return { success: true, message: `✅ Removed project "${command.payload.matchTitle}"` };
+        if (index >= 0) {
+          projects.splice(index, 1);
+          await writeJson("projects.json", projects);
+          return { success: true, message: `Removed project "${command.payload.matchTitle}"` };
         } else {
-          const error = await response.json();
-          return { success: false, message: `❌ Failed to remove project: ${error.error}` };
+          return { success: false, message: `Project "${command.payload.matchTitle}" not found` };
         }
-      } else {
-        return { success: false, message: `❌ Project "${command.payload.matchTitle}" not found` };
+      } catch (error) {
+        return { success: false, message: `Failed to remove project: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 
