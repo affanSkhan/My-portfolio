@@ -6,6 +6,19 @@ export async function POST(req: Request) {
   try {
     const { filename, command, pin } = await req.json();
     
+    // Check if running in production environment
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL || process.env.NETLIFY;
+    
+    if (isProduction) {
+      return NextResponse.json(
+        { 
+          error: "AI Assistant commands are disabled in production. File writes not supported in serverless environments.",
+          suggestion: "Commands work in development mode. Consider using a database for production."
+        }, 
+        { status: 503 }
+      );
+    }
+    
     // Verify authentication
     const expectedPin = process.env.ASSISTANT_ADMIN_PIN || '1234';
     if (pin !== expectedPin) {

@@ -301,6 +301,15 @@ User: ${latestMessage}
           // Execute the validated command
           const result = await executeCommand(parsed);
           
+          if (!result.success && result.message.includes('production environment')) {
+            return NextResponse.json({ 
+              reply: `🚫 AI Assistant commands are disabled in production.\n\n📖 **Why?** Serverless platforms have read-only file systems.\n\n💡 **Solutions:**\n• Use development mode for testing\n• Consider database integration for production\n• Commands work locally with \`npm run dev\``,
+              command: toUserFacingSummary(parsed),
+              executed: false,
+              reason: 'production_limitation'
+            });
+          }
+          
           return NextResponse.json({ 
             reply: result.success 
               ? `✅ ${result.message}` 

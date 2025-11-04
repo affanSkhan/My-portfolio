@@ -18,6 +18,11 @@ export async function readJson<T>(name: string): Promise<T> {
  * @param data - The data to write
  */
 export async function writeJson(name: string, data: unknown): Promise<void> {
+  // In production/serverless environments, the file system is read-only
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL || process.env.NETLIFY) {
+    throw new Error(`Cannot write to files in production environment. File: ${name}`);
+  }
+  
   const file = path.join(process.cwd(), "src", "assistant_dev", "data", name);
   const raw = JSON.stringify(data, null, 2);
   await fs.writeFile(file, raw, "utf-8");
