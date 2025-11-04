@@ -3,10 +3,10 @@ import { readJson, isAllowedFile } from "@/lib/fs-json";
 
 export async function GET(
   _req: Request,
-  { params }: { params: { file: string } }
+  { params }: { params: Promise<{ file: string }> }
 ) {
   try {
-    const filename = params.file;
+    const { file: filename } = await params;
     
     // Validate file is in allowed list
     if (!isAllowedFile(filename)) {
@@ -26,7 +26,8 @@ export async function GET(
     });
     
   } catch (error) {
-    console.error(`Error reading ${params.file}:`, error);
+    const { file } = await params;
+    console.error(`Error reading ${file}:`, error);
     
     if (error instanceof Error && error.message.includes('ENOENT')) {
       return NextResponse.json(
