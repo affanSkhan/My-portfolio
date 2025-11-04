@@ -4,10 +4,18 @@
 
 import { useState, useEffect } from "react";
 import SkillCard from "./SkillCard";
-import { skills } from "./skillsData";
 import { motion } from "framer-motion";
 import { FaLayerGroup, FaCode, FaDatabase, FaTools, FaRobot, FaAsterisk, FaMobile } from "react-icons/fa";
 import React from "react";
+
+// Type for skill data
+type Skill = {
+  name: string;
+  iconName: string;
+  colorClass: string;
+  category: string;
+  level: number;
+};
 // import FloatingTechOrbs from "./FloatingTechOrbs";
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -64,13 +72,63 @@ function FloatingParticles({ count = 12 }) {
 
 export default function SkillsDashboard() {
   const [filter, setFilter] = useState("All");
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch skills from API
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/content/skills.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch skills");
+        }
+        const data = await response.json();
+        setSkills(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
   const categories = ["All", "Frontend", "Backend", "Mobile", "AI/ML", "Databases", "Tools"];
 
   const filteredSkills =
-    filter === "All" ? skills : skills.filter((s) => s.category === filter);
+    filter === "All" ? skills : skills.filter((s: Skill) => s.category === filter);
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading skills...</div>
+      </div>
+    );
+  }
+
+  // Show error state  
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-400 text-xl mb-4">Error: {error}</div>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.section
@@ -126,7 +184,7 @@ export default function SkillsDashboard() {
           </div>
           {/* Skills Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {filteredSkills.map((skill, index) => (
+            {filteredSkills.map((skill: Skill, index: number) => (
               <SkillCard key={index} skill={skill} index={index} />
             ))}
           </div>

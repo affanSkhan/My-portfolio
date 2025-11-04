@@ -112,6 +112,8 @@ Add project:
   }
 }
 
+VALID PROJECT STATUS: "planning", "in-progress", "completed"
+
 Update project:
 {
   "type": "update_project",
@@ -140,6 +142,8 @@ Add skill:
     "level": 90
   }
 }
+
+VALID SKILL CATEGORIES: "Frontend", "Backend", "Mobile", "AI/ML", "Databases", "Tools"
 
 Update skill:
 {
@@ -215,6 +219,10 @@ IMPORTANT:
 - For about: use "update_about" with field/value
 - For updates: use "matchTitle"/"matchName" + "patch"
 - For removes: use exact names for skills/roles, partial text for goals
+
+CRITICAL ENUM VALUES:
+- Project status MUST be: "planning", "in-progress", or "completed" (NOT "planned")
+- Skill category MUST be: "Frontend", "Backend", "Mobile", "AI/ML", "Databases", or "Tools" (NOT "Programming Languages")
 
 User says: ${latestMessage}
 

@@ -121,18 +121,5 @@
       "Framer Motion animations",
       "Reusable component architecture"
     ]
-  },
-  {
-    "title": "New Project",
-    "description": "A brief description of this new project.",
-    "stack": [],
-    "year": 2024,
-    "links": {
-      "github": "",
-      "live": ""
-    },
-    "featured": false,
-    "status": "planning",
-    "lessons": []
   }
 ]

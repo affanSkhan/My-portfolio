@@ -5,6 +5,17 @@ import { useState, useEffect } from "react";
 import { Sparkles, Heart, Brain, Globe, Star } from "lucide-react";
 import Image from "next/image";
 
+// Type for about data
+type AboutData = {
+  name: string;
+  title: string;
+  location: string;
+  roles: string[];
+  profileImage: string;
+  cv: string;
+  bio: string;
+};
+
 // --- Typewriter Hook ---
 function useTypewriter(text: string, speed = 40) {
   const [displayed, setDisplayed] = useState("");
@@ -74,6 +85,31 @@ const colorMap = {
 
 export default function About() {
   const [view, setView] = useState<"student" | "entrepreneur">("student");
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch about data from API
+  useEffect(() => {
+    const fetchAboutData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/content/about.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch about data");
+        }
+        const data = await response.json();
+        setAboutData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAboutData();
+  }, []);
+
   const intro = useTypewriter("I'm not just coding my future — I'm engineering a journey from Dharni to global impact.", 30);
   
   const funFacts = [
@@ -85,9 +121,9 @@ export default function About() {
 
   const studentBio = (
     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-      <p className="text-indigo-500 font-semibold">🎓 Computer Engineering Student @ VIIT Pune</p>
+      <p className="text-indigo-500 font-semibold">🎓 {aboutData?.title || "Computer Engineering Student @ VIIT Pune"}</p>
       <p className="text-zinc-700 dark:text-zinc-300 mt-2">
-        Exploring AI, ML, and full‑stack development via practical tools like the AI Prompts Lab and CIE Exam App.
+        {aboutData?.bio || "Exploring AI, ML, and full‑stack development via practical tools like the AI Prompts Lab and CIE Exam App."}
       </p>
     </motion.div>
   );
@@ -99,6 +135,36 @@ export default function About() {
       </p>
     </motion.div>
   );
+
+  // Show loading state
+  if (loading) {
+    return (
+      <section id="about" className="relative min-h-[100dvh] py-16 px-4 sm:py-20 sm:px-8 md:px-12 bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:to-zinc-950">
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-indigo-600 text-xl">Loading about information...</div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <section id="about" className="relative min-h-[100dvh] py-16 px-4 sm:py-20 sm:px-8 md:px-12 bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:to-zinc-950">
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-center">
+            <div className="text-red-600 text-xl mb-4">Error: {error}</div>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="about"
@@ -112,27 +178,36 @@ export default function About() {
         <div className="w-full lg:w-1/2 space-y-8">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8 }}
             whileHover={{ rotate: [0, 5, -5, 0] }} className="flex justify-center">
-            <Image src="/affan-profile1.jpg" alt="Affan profile"
+            <Image src={aboutData?.profileImage || "/affan-profile1.jpg"} alt={`${aboutData?.name || "Affan"} profile`}
               width={140} height={140} className="rounded-full border-4 border-white dark:border-zinc-800 shadow-lg"
-              aria-label="Photo of Affan" />
+              aria-label={`Photo of ${aboutData?.name || "Affan"}`} />
           </motion.div>
 
           <motion.ul initial="hidden" animate="visible" variants={{
             visible: { transition: { staggerChildren: 0.1 }},
           }} className="flex flex-wrap gap-2 justify-center">
-            {([
-              ["Innovative Thinker", Sparkles, "indigo"],
-              ["Passionate Learner", Heart, "pink"],
-              ["AI/ML Enthusiast", Brain, "purple"],
-              ["Global Vision", Globe, "blue"],
-              ["Purpose Driven", Star, "emerald"],
-            ] as [string, React.FC<React.SVGProps<SVGSVGElement>>, string][]).map(([label, IconRaw, color], i) => {
-              const { bg, text } = colorMap[color as keyof typeof colorMap];
+            {aboutData?.roles.map((role, i) => {
+              // Map roles to icons and colors
+              const roleConfig = {
+                "AI Enthusiast": { icon: Brain, color: "purple" },
+                "Flutter Developer": { icon: Sparkles, color: "indigo" },
+                "Tech Visionary": { icon: Globe, color: "blue" },
+                "Innovative Thinker": { icon: Sparkles, color: "indigo" },
+                "Passionate Learner": { icon: Heart, color: "pink" },
+                "AI/ML Enthusiast": { icon: Brain, color: "purple" },
+                "Global Vision": { icon: Globe, color: "blue" },
+                "Purpose Driven": { icon: Star, color: "emerald" },
+              };
+              
+              const config = roleConfig[role as keyof typeof roleConfig] || { icon: Star, color: "indigo" };
+              const IconComponent = config.icon;
+              const { bg, text } = colorMap[config.color as keyof typeof colorMap];
+              
               return (
                 <motion.li key={i} variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity:1,y:0 } }}
                   className={`flex items-center gap-1 px-3 py-1 rounded-full ${bg} ${text}`}>
-                  <IconRaw width={16} height={16} aria-hidden />
-                  {label}
+                  <IconComponent width={16} height={16} aria-hidden />
+                  {role}
                 </motion.li>
               );
             })}

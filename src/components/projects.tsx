@@ -12,63 +12,30 @@ import {
 } from "react-icons/si";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-const projects = [
-  {
-    title: "AI Prompts Lab",
-    description:
-      "Platform for generating, saving, editing, and enhancing AI prompts with integrated image generation and editing features.",
-    tech: [<SiNextdotjs key="nextjs" />, <SiTypescript key="typescript" />, <SiTailwindcss key="tailwind" />, <SiFirebase key="firebase" />],
-    github: "https://github.com/affanSkhan/ai-prompts-lab",
-    live: "https://ai-prompts-lab.netlify.app",
-    lessons: ["Prompt engineering", "Image generation APIs", "Dynamic UI state management"]
-  },  
-  {
-    title: "CIE Exam Reminder App",
-    description:
-      "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
-    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
-    github: "https://github.com/affanSkhan/cie-app",
-    live: "https://cie-exam-app.netlify.app/",
-    lessons: ["Notification APIs", "User input validation", "Timely UX design"]
-  },
-  {
-    title: "AI Job Recommender",
-    description:
-      "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
-    tech: [<SiFlutter key="flutter" />],
-    github: "https://github.com/affanSkhan/ai-job-role-recommender",
-    live: "https://ai-job.netlify.app",
-    lessons: ["AI UX design", "Keyword clustering", "Career logic modeling"]
-  },
-  {
-    title: "Fashion E-Com App with Admin",
-    description:
-      "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
-    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
-    github: "https://github.com/affanSkhan/Fashion-App",
-    live: "https://fashion-ecom.netlify.app",
-    lessons: ["State management", "CRUD with Firebase", "Component modularity"]
-  },
-  {
-    title: "One Area One App",
-    description:
-      "Commission-based platform for rural business discovery, bookings, and payment automation.",
-    tech: [<SiFlutter key="flutter" />, <SiFirebase key="firebase" />],
-    github: "https://github.com/affanSkhan/one-area-one-app",
-    live: "https://one-area-app.netlify.app",
-    lessons: ["Multi-role UX", "Rural-friendly UI", "Payment system structure"]
-  },
-  {
-    title: "Developer Portfolio Website",
-    description:
-      "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
-    tech: [<SiNextdotjs key="nextjs" />, <SiReact key="react" />, <SiTailwindcss key="tailwind" />, <SiTypescript key="typescript" />],
-    github: "https://github.com/affanSkhan/My-portfolio",
-    live: "https://affan-web.netlify.app",
-    lessons: ["Responsive design", "Framer Motion animations", "Reusable component architecture"]
-  }
-  
-];
+// Type for project data
+type Project = {
+  title: string;
+  description: string;
+  stack: string[];
+  year: number;
+  links: {
+    github?: string;
+    live?: string;
+  };
+  featured: boolean;
+  status: string;
+  lessons: string[];
+};
+
+// Icon mapping for tech stack
+const techIcons: Record<string, React.ReactElement> = {
+  "Next.js": <SiNextdotjs key="nextjs" />,
+  "TypeScript": <SiTypescript key="typescript" />,
+  "Tailwind CSS": <SiTailwindcss key="tailwind" />,
+  "Firebase": <SiFirebase key="firebase" />,
+  "React": <SiReact key="react" />,
+  "Flutter": <SiFlutter key="flutter" />,
+};
 
 // FloatingParticles component to avoid hydration mismatch
 function FloatingParticles({ count = 12 }) {
@@ -105,10 +72,68 @@ function FloatingParticles({ count = 12 }) {
 
 export default function Projects() {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch projects from API
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/content/projects.json");
+        if (!res.ok) {
+          throw new Error(`Failed to fetch projects: ${res.status}`);
+        }
+        const data = await res.json();
+        setProjects(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load projects");
+        console.error("Error fetching projects:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
 
   const handleToggle = (index: number) => {
     setFlippedIndex(flippedIndex === index ? null : index);
   };
+
+  if (loading) {
+    return (
+      <motion.section
+        id="projects"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900 py-24 px-2 sm:px-6"
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-500 mx-auto"></div>
+          <p className="mt-4 text-zinc-600 dark:text-zinc-400">Loading projects...</p>
+        </div>
+      </motion.section>
+    );
+  }
+
+  if (error) {
+    return (
+      <motion.section
+        id="projects"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900 py-24 px-2 sm:px-6"
+      >
+        <div className="text-center">
+          <p className="text-red-500 dark:text-red-400">Error: {error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </motion.section>
+    );
+  }
 
   return (
     <motion.section
@@ -140,7 +165,7 @@ export default function Projects() {
             transition={{ duration: 0.7 }}
             className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-center mb-10 relative animate-shimmer"
           >
-            🛠️ DIY & Projects Lab
+            🛠️ DIY & Projects Lab ({projects.length} projects)
             <span className="block h-1 w-16 mx-auto mt-2 bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-emerald-400 rounded-full animate-pulse" />
           </motion.h2>
           {/* Projects Grid */}
@@ -170,8 +195,10 @@ export default function Projects() {
                       <div>
                         <h3 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">{project.title}</h3>
                         <div className="flex space-x-2 text-xl text-blue-500">
-                          {project.tech.map((icon, i) => (
-                            <span key={i} className="transition-transform group-hover:scale-125 group-hover:animate-pulse dark:drop-shadow-[0_0_12px_#6366f1cc]" title={icon.type?.displayName || ''}>{icon}</span>
+                          {project.stack.map((tech, i) => (
+                            <span key={i} className="transition-transform group-hover:scale-125 group-hover:animate-pulse dark:drop-shadow-[0_0_12px_#6366f1cc]" title={tech}>
+                              {techIcons[tech] || <span className="text-xs bg-zinc-200 dark:bg-zinc-700 px-2 py-1 rounded">{tech}</span>}
+                            </span>
                           ))}
                         </div>
                       </div>
@@ -189,12 +216,16 @@ export default function Projects() {
                         </ul>
                       </div>
                       <div className="flex items-center gap-4 mt-4">
-                        <a href={project.github} target="_blank" className="text-sm underline flex items-center gap-1 transition-transform hover:scale-110 hover:text-indigo-200">
-                          <FaGithub /> GitHub
-                        </a>
-                        <a href={project.live} target="_blank" className="text-sm underline flex items-center gap-1 transition-transform hover:scale-110 hover:text-emerald-200">
-                          <FaExternalLinkAlt /> Live
-                        </a>
+                        {project.links.github && (
+                          <a href={project.links.github} target="_blank" className="text-sm underline flex items-center gap-1 transition-transform hover:scale-110 hover:text-indigo-200">
+                            <FaGithub /> GitHub
+                          </a>
+                        )}
+                        {project.links.live && (
+                          <a href={project.links.live} target="_blank" className="text-sm underline flex items-center gap-1 transition-transform hover:scale-110 hover:text-emerald-200">
+                            <FaExternalLinkAlt /> Live
+                          </a>
+                        )}
                       </div>
                     </div>
                   </motion.div>

@@ -61,6 +61,13 @@ export const UpdateSkillSchema = z.object({
   })
 });
 
+export const RemoveSkillSchema = z.object({
+  type: z.literal("remove_skill"),
+  payload: z.object({
+    matchName: z.string().min(1, "Skill name to remove is required")
+  })
+});
+
 // === About Operations ===
 
 export const UpdateAboutSchema = z.object({
@@ -115,6 +122,7 @@ export const CommandSchema = z.discriminatedUnion("type", [
   // Skill operations
   AddSkillSchema,
   UpdateSkillSchema,
+  RemoveSkillSchema,
   // About operations
   UpdateAboutSchema,
   AddRoleSchema,
@@ -137,7 +145,8 @@ export const ProjectCommands = z.union([
 
 export const SkillCommands = z.union([
   AddSkillSchema,
-  UpdateSkillSchema
+  UpdateSkillSchema,
+  RemoveSkillSchema
 ]);
 
 export const AboutCommands = z.union([
@@ -178,6 +187,9 @@ export function toUserFacingSummary(cmd: Command): string {
       const skillFields = Object.keys(cmd.payload.patch).join(", ");
       return `Update skill "${cmd.payload.matchName}": ${skillFields}`;
     
+    case "remove_skill":
+      return `Remove skill: "${cmd.payload.matchName}"`;
+    
     // About operations
     case "update_about":
       return `Update ${cmd.payload.field}: "${cmd.payload.value}"`;
@@ -210,6 +222,7 @@ export function getCommandCategory(cmd: Command): string {
     
     case "add_skill":
     case "update_skill":
+    case "remove_skill":
       return "Skills";
     
     case "update_about":
@@ -241,6 +254,7 @@ export function getFileTargetForCommand(cmd: Command): string {
     
     case "add_skill":
     case "update_skill":
+    case "remove_skill":
       return "skills.json";
     
     case "update_about":
@@ -283,13 +297,12 @@ export async function executeCommand(command: Command): Promise<{ success: boole
     }
 
     // Call the content API to execute the command
-    const response = await fetch('/api/content/update', {
+    const response = await fetch('/api/content/command', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        filename,
         command,
         pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
       }),

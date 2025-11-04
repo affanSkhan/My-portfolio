@@ -310,13 +310,12 @@ export async function executeCommand(command: Command): Promise<{ success: boole
     }
 
     // Call the content API to execute the command
-    const response = await fetch('/api/content/update', {
+    const response = await fetch('/api/content/command', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        filename,
         command,
         pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
       }),
