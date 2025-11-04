@@ -129,7 +129,67 @@ Remove project:
   }
 }
 
-IMPORTANT: Use "matchTitle" not "title" for updates/removes. Use "patch" not "set" for updates.
+Add skill:
+{
+  "type": "add_skill",
+  "payload": {
+    "name": "Skill Name",
+    "iconName": "icon-name",
+    "colorClass": "text-blue-600",
+    "category": "Frontend",
+    "level": 90
+  }
+}
+
+Update skill:
+{
+  "type": "update_skill",
+  "payload": {
+    "matchName": "Exact Current Skill Name",
+    "patch": {"level": 95}
+  }
+}
+
+Update about:
+{
+  "type": "update_about",
+  "payload": {
+    "field": "bio",
+    "value": "New bio text"
+  }
+}
+
+Add role:
+{
+  "type": "add_role",
+  "payload": {
+    "role": "New Role Title"
+  }
+}
+
+Add goal:
+{
+  "type": "add_goal",
+  "payload": {
+    "type": "shortTerm",
+    "goal": "Goal description"
+  }
+}
+
+Update goals:
+{
+  "type": "update_goals",
+  "payload": {
+    "field": "currentFocus",
+    "value": "New focus area"
+  }
+}
+
+IMPORTANT: 
+- Use exact command types above
+- For skills: use "add_skill" not "add_project"
+- For about: use "update_about" with field/value
+- For updates: use "matchTitle"/"matchName" + "patch"
 
 User says: ${latestMessage}
 
