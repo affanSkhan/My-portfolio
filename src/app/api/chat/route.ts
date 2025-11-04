@@ -185,11 +185,36 @@ Update goals:
   }
 }
 
+Remove skill:
+{
+  "type": "remove_skill",
+  "payload": {
+    "matchName": "Exact Skill Name"
+  }
+}
+
+Remove role:
+{
+  "type": "remove_role",
+  "payload": {
+    "role": "Exact Role Name"
+  }
+}
+
+Remove goal:
+{
+  "type": "remove_goal",
+  "payload": {
+    "matchGoal": "Part of goal text to match"
+  }
+}
+
 IMPORTANT: 
 - Use exact command types above
 - For skills: use "add_skill" not "add_project"
 - For about: use "update_about" with field/value
 - For updates: use "matchTitle"/"matchName" + "patch"
+- For removes: use exact names for skills/roles, partial text for goals
 
 User says: ${latestMessage}
 
@@ -443,6 +468,27 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
       }
     }
 
+    if (command.type === "remove_skill") {
+      try {
+        const skills = await readJson('skills.json');
+        if (!Array.isArray(skills)) {
+          return { success: false, message: "❌ Skills data is not an array" };
+        }
+        
+        const index = skills.findIndex(skill => skill.name === command.payload.matchName);
+        if (index === -1) {
+          return { success: false, message: `❌ Skill "${command.payload.matchName}" not found` };
+        }
+        
+        const removedName = skills[index].name;
+        skills.splice(index, 1);
+        await writeJson('skills.json', skills);
+        return { success: true, message: `✅ Removed skill "${removedName}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to remove skill: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
     // Handle about operations
     if (command.type === "update_about") {
       try {
@@ -470,6 +516,28 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
       }
     }
 
+    if (command.type === "remove_role") {
+      try {
+        const about = await readJson('about.json') as Record<string, unknown>;
+        if (!Array.isArray(about.roles)) {
+          return { success: false, message: "❌ About roles is not an array" };
+        }
+        
+        const roles = about.roles as string[];
+        const index = roles.findIndex(role => role.toLowerCase() === command.payload.role.toLowerCase());
+        if (index === -1) {
+          return { success: false, message: `❌ Role "${command.payload.role}" not found` };
+        }
+        
+        const removedRole = roles[index];
+        roles.splice(index, 1);
+        await writeJson('about.json', about);
+        return { success: true, message: `✅ Removed role "${removedRole}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to remove role: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
     // Handle goals operations
     if (command.type === "add_goal") {
       try {
@@ -494,6 +562,27 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         return { success: true, message: `✅ Updated goals ${command.payload.field}` };
       } catch (error) {
         return { success: false, message: `Failed to update goals: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    if (command.type === "remove_goal") {
+      try {
+        const goals = await readJson('goals.json');
+        if (!Array.isArray(goals)) {
+          return { success: false, message: "❌ Goals data is not an array" };
+        }
+        
+        const index = goals.findIndex(goal => goal.goal && goal.goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase()));
+        if (index === -1) {
+          return { success: false, message: `❌ Goal containing "${command.payload.matchGoal}" not found` };
+        }
+        
+        const removedGoal = goals[index].goal;
+        goals.splice(index, 1);
+        await writeJson('goals.json', goals);
+        return { success: true, message: `✅ Removed goal "${removedGoal}"` };
+      } catch (error) {
+        return { success: false, message: `Failed to remove goal: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
     

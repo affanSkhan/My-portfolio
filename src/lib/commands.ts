@@ -78,6 +78,20 @@ export const AddRoleSchema = z.object({
   })
 });
 
+export const RemoveRoleSchema = z.object({
+  type: z.literal("remove_role"),
+  payload: z.object({
+    role: z.string().min(1, "Role to remove is required")
+  })
+});
+
+export const RemoveSkillSchema = z.object({
+  type: z.literal("remove_skill"),
+  payload: z.object({
+    matchName: z.string().min(1, "Skill name to remove is required")
+  })
+});
+
 // === Goals Operations ===
 
 export const AddGoalSchema = z.object({
@@ -93,6 +107,13 @@ export const UpdateGoalsSchema = z.object({
   payload: z.object({
     field: z.enum(["currentFocus", "vision", "mission"]),
     value: z.string().min(1, "Value is required")
+  })
+});
+
+export const RemoveGoalSchema = z.object({
+  type: z.literal("remove_goal"),
+  payload: z.object({
+    matchGoal: z.string().min(1, "Goal text to remove is required")
   })
 });
 
@@ -115,12 +136,15 @@ export const CommandSchema = z.discriminatedUnion("type", [
   // Skill operations
   AddSkillSchema,
   UpdateSkillSchema,
+  RemoveSkillSchema,
   // About operations
   UpdateAboutSchema,
   AddRoleSchema,
+  RemoveRoleSchema,
   // Goals operations
   AddGoalSchema,
   UpdateGoalsSchema,
+  RemoveGoalSchema,
   // No operation
   NoopSchema
 ]);
@@ -137,17 +161,20 @@ export const ProjectCommands = z.union([
 
 export const SkillCommands = z.union([
   AddSkillSchema,
-  UpdateSkillSchema
+  UpdateSkillSchema,
+  RemoveSkillSchema
 ]);
 
 export const AboutCommands = z.union([
   UpdateAboutSchema,
-  AddRoleSchema
+  AddRoleSchema,
+  RemoveRoleSchema
 ]);
 
 export const GoalCommands = z.union([
   AddGoalSchema,
-  UpdateGoalsSchema
+  UpdateGoalsSchema,
+  RemoveGoalSchema
 ]);
 
 export type ProjectCommand = z.infer<typeof ProjectCommands>;
