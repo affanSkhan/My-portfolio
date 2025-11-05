@@ -134,11 +134,15 @@
     ],
     "year": 2024,
     "links": {
-      "github": "",
-      "live": ""
+      "github": "https://github.com/affanSkhan/predictive-maintenance-system"
     },
     "featured": false,
     "status": "completed",
-    "lessons": []
+    "lessons": [
+      "RUL Prediction",
+      "Anomaly Detection",
+      "Professional Dashboard",
+      "Intelligent Alerting"
+    ]
   }
 ]
