@@ -168,8 +168,8 @@ export default function ChatWidget() {
                 <textarea
                   value={input} 
                   onChange={e=>setInput(e.target.value)} 
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
+                  onKeyDown={e => {
+                    if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault();
                       send();
                     }
