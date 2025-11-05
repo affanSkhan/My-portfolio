@@ -165,30 +165,25 @@ export default function ChatWidget() {
             {/* Input */}
             <div className="p-3 border-t border-zinc-200 dark:border-zinc-800">
               <div className="flex gap-2 items-end">
-                <textarea
+                <input
+                  type="text"
                   value={input} 
                   onChange={e=>setInput(e.target.value)} 
-                  onKeyDown={e => {
-                    if (e.key === "Enter" && !e.shiftKey) {
-                      e.preventDefault();
-                      send();
-                    }
-                  }}
-                  placeholder="Type your message... (Enter to send, Shift+Enter for new line)"
-                  className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none resize-none min-h-[40px] max-h-[120px]"
-                  rows={Math.min(6, Math.max(1, input.split('\n').length))}
+                  placeholder="Type your message..."
+                  className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none"
+                  onKeyDown={e => e.key === "Enter" && send()}
                 />
                 <button 
                   onClick={send} 
                   className="px-3 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 shrink-0"
-                  title="Send message (Enter)"
+                  title="Send message"
                   aria-label="Send message"
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </div>
               <div className="text-xs text-zinc-500 mt-1">
-                Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send, <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Shift+Enter</kbd> for new line
+                Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send
               </div>
             </div>
           </motion.div>
