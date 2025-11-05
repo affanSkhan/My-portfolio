@@ -142,5 +142,24 @@
       "Professional Dashboard",
       "Intelligent Alerting"
     ]
+  },
+  {
+    "title": "Sales Analytics Data Pipeline (GCP)",
+    "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
+    "stack": [
+      "Python"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/gm_sales_analytics_pipeline",
+      "live": ""
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": [
+      "Built end-to-end ETL automation using Airflow and BigQuery",
+      "Designed star schema for efficient analytical querying",
+      "Improved understanding of data quality, orchestration, and cost optimization in GCP"
+    ]
   }
 ]
