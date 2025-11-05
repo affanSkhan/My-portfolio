@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { Command, CommandSchema, toUserFacingSummary } from "@/lib/commands";
+import { Command, CommandSchema, toUserFacingSummary } from "@/assistant_dev/lib/commands";
 import { readJson, writeJson } from "@/lib/fs-json";
 
 // Initialize Gemini client using new SDK
@@ -213,6 +213,60 @@ Remove goal:
     "matchGoal": "Part of goal text to match"
   }
 }
+
+Reorder projects (basic):
+{
+  "type": "reorder_projects",
+  "payload": {
+    "strategy": "featured_first",
+    "description": "Show featured projects first"
+  }
+}
+
+VALID REORDER STRATEGIES: "featured_first", "by_year_desc", "by_year_asc", "by_tech_stack", "by_status", "custom_order"
+
+Adaptive sort projects (intelligent):
+{
+  "type": "adaptive_sort_projects",
+  "payload": {
+    "intent": "prioritize_specific_project",
+    "targetProject": "Exact Project Title"
+  }
+}
+
+{
+  "type": "adaptive_sort_projects",
+  "payload": {
+    "intent": "prioritize_category",
+    "category": "ai_ml"
+  }
+}
+
+{
+  "type": "adaptive_sort_projects",
+  "payload": {
+    "intent": "prioritize_technology",
+    "technologies": ["Python", "TensorFlow"]
+  }
+}
+
+{
+  "type": "adaptive_sort_projects",
+  "payload": {
+    "intent": "prioritize_by_keywords",
+    "keywords": ["data", "analytics", "pipeline"]
+  }
+}
+
+VALID ADAPTIVE INTENTS: "prioritize_specific_project", "prioritize_category", "prioritize_technology", "prioritize_by_keywords", "custom_adaptive_sort"
+VALID CATEGORIES: "ai_ml", "data_science", "web_development", "mobile_development", "backend", "full_stack", "cloud_computing", "automation"
+
+USE ADAPTIVE SORTING FOR:
+- "Put [project] first" → prioritize_specific_project
+- "Show data science projects first" → prioritize_category: "data_science"  
+- "Prioritize AI projects" → prioritize_category: "ai_ml"
+- "Show Flutter projects first" → prioritize_technology: ["Flutter"]
+- "Order by machine learning" → prioritize_by_keywords: ["machine learning", "ML"]
 
 IMPORTANT: 
 - Use exact command types above
@@ -448,6 +502,56 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         }
       } catch (error) {
         return { success: false, message: `Failed to remove project: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    // Handle adaptive sorting
+    if (command.type === "adaptive_sort_projects") {
+      try {
+        // Use the existing API endpoint for consistency
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/content/command`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            command,
+            pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          return { success: false, message: `❌ API error: ${errorText}` };
+        }
+
+        const result = await response.json();
+        return { success: true, message: `✅ Projects reordered using ${command.payload.intent} strategy` };
+      } catch (error) {
+        return { success: false, message: `Failed to sort projects: ${error instanceof Error ? error.message : 'Unknown error'}` };
+      }
+    }
+
+    // Handle basic reordering
+    if (command.type === "reorder_projects") {
+      try {
+        // Use the existing API endpoint for consistency
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/content/command`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            command,
+            pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          return { success: false, message: `❌ API error: ${errorText}` };
+        }
+
+        const result = await response.json();
+        return { success: true, message: `✅ Projects reordered using ${command.payload.strategy} strategy` };
+      } catch (error) {
+        return { success: false, message: `Failed to reorder projects: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 

@@ -103,6 +103,60 @@ export const UpdateGoalsSchema = z.object({
   })
 });
 
+export const RemoveRoleSchema = z.object({
+  type: z.literal("remove_role"),
+  payload: z.object({
+    role: z.string().min(1, "Role to remove is required")
+  })
+});
+
+export const RemoveGoalSchema = z.object({
+  type: z.literal("remove_goal"),
+  payload: z.object({
+    matchGoal: z.string().min(1, "Goal text to remove is required")
+  })
+});
+
+// === Project Reordering ===
+
+export const ReorderProjectsSchema = z.object({
+  type: z.literal("reorder_projects"),
+  payload: z.object({
+    strategy: z.enum(["featured_first", "by_year_desc", "by_year_asc", "by_tech_stack", "by_status", "custom_order"]).default("featured_first"),
+    customOrder: z.array(z.string()).optional(), // Array of project titles in desired order
+    description: z.string().optional() // Optional description of why reordering
+  })
+});
+
+// === Adaptive Project Sorting ===
+
+export const AdaptiveSortProjectsSchema = z.object({
+  type: z.literal("adaptive_sort_projects"),
+  payload: z.object({
+    intent: z.enum([
+      "prioritize_specific_project", 
+      "prioritize_category", 
+      "prioritize_technology",
+      "prioritize_by_keywords",
+      "custom_adaptive_sort"
+    ]),
+    targetProject: z.string().optional(), // Specific project to prioritize
+    category: z.enum([
+      "ai_ml", 
+      "data_science", 
+      "web_development", 
+      "mobile_development", 
+      "backend", 
+      "full_stack",
+      "cloud_computing",
+      "automation"
+    ]).optional(),
+    technologies: z.array(z.string()).optional(), // Technologies to prioritize
+    keywords: z.array(z.string()).optional(), // Keywords to search for in titles/descriptions
+    reasoning: z.string().optional() // AI's reasoning for the sorting decision
+  })
+});
+
 // === No-op Command ===
 
 export const NoopSchema = z.object({ 
@@ -119,6 +173,8 @@ export const CommandSchema = z.discriminatedUnion("type", [
   AddProjectSchema,
   UpdateProjectSchema,
   RemoveProjectSchema,
+  ReorderProjectsSchema,
+  AdaptiveSortProjectsSchema,
   // Skill operations
   AddSkillSchema,
   UpdateSkillSchema,
@@ -126,9 +182,11 @@ export const CommandSchema = z.discriminatedUnion("type", [
   // About operations
   UpdateAboutSchema,
   AddRoleSchema,
+  RemoveRoleSchema,
   // Goals operations
   AddGoalSchema,
   UpdateGoalsSchema,
+  RemoveGoalSchema,
   // No operation
   NoopSchema
 ]);
@@ -179,6 +237,12 @@ export function toUserFacingSummary(cmd: Command): string {
     case "remove_project":
       return `Remove project: "${cmd.payload.matchTitle}"`;
     
+    case "reorder_projects":
+      return `Reorder projects: ${cmd.payload.strategy}${cmd.payload.description ? ` - ${cmd.payload.description}` : ""}`;
+    
+    case "adaptive_sort_projects":
+      return `Adaptive sort projects: ${cmd.payload.intent}${cmd.payload.reasoning ? ` - ${cmd.payload.reasoning}` : ""}`;
+    
     // Skill operations
     case "add_skill":
       return `Add skill: ${cmd.payload.name} (${cmd.payload.category}, level ${cmd.payload.level}%)`;
@@ -197,12 +261,18 @@ export function toUserFacingSummary(cmd: Command): string {
     case "add_role":
       return `Add role: "${cmd.payload.role}"`;
     
+    case "remove_role":
+      return `Remove role: "${cmd.payload.role}"`;
+    
     // Goal operations
     case "add_goal":
       return `Add ${cmd.payload.type} goal: "${cmd.payload.goal}"`;
     
     case "update_goals":
       return `Update ${cmd.payload.field}: "${cmd.payload.value}"`;
+    
+    case "remove_goal":
+      return `Remove goal: "${cmd.payload.matchGoal}"`;
     
     // No operation
     case "noop":
@@ -250,6 +320,8 @@ export function getFileTargetForCommand(cmd: Command): string {
     case "add_project":
     case "update_project":
     case "remove_project":
+    case "reorder_projects":
+    case "adaptive_sort_projects":
       return "projects.json";
     
     case "add_skill":
@@ -259,10 +331,12 @@ export function getFileTargetForCommand(cmd: Command): string {
     
     case "update_about":
     case "add_role":
+    case "remove_role":
       return "about.json";
     
     case "add_goal":
     case "update_goals":
+    case "remove_goal":
       return "goals.json";
     
     case "noop":
