@@ -47,6 +47,46 @@
     ]
   },
   {
+    "title": "AI Prompts Lab",
+    "description": "Updated description for testing",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Firebase"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/ai-promopts-lab"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Prompt engineering",
+      "Image generation APIs",
+      "Dynamic UI state management"
+    ]
+  },
+  {
+    "title": "AI Job Recommender",
+    "description": "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
+    "stack": [
+      "Flutter"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/ai-job-role-recommender",
+      "live": ""
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "AI UX design",
+      "Keyword clustering",
+      "Career logic modeling"
+    ]
+  },
+  {
     "title": "CIE Exam Reminder App",
     "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
     "stack": [
@@ -64,25 +104,6 @@
       "Notification APIs",
       "User input validation",
       "Timely UX design"
-    ]
-  },
-  {
-    "title": "AI Job Recommender",
-    "description": "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
-    "stack": [
-      "Flutter"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/affanSkhan/ai-job-role-recommender",
-      "live": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "AI UX design",
-      "Keyword clustering",
-      "Career logic modeling"
     ]
   },
   {
@@ -106,27 +127,6 @@
     ]
   },
   {
-    "title": "AI Prompts Lab",
-    "description": "Updated description for testing",
-    "stack": [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/affanSkhan/ai-promopts-lab"
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Prompt engineering",
-      "Image generation APIs",
-      "Dynamic UI state management"
-    ]
-  },
-  {
     "title": "Developer Portfolio Website",
     "description": "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
     "stack": [
@@ -135,7 +135,7 @@
       "Tailwind CSS",
       "TypeScript"
     ],
-    "year": 2024,
+    "year": 2025,
     "links": {
       "github": "https://github.com/affanSkhan/My-portfolio",
       "live": "https://affan-web.netlify.app"
