@@ -215,7 +215,7 @@ export default function About() {
 
           <div className="mt-8">
             <h2 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-500 text-center lg:text-left">
-              Who am I?
+              Hi, I&apos;m {aboutData?.name || "Affan"}!
             </h2>
             <p className="mt-2 text-base text-zinc-700 dark:text-zinc-300 text-center lg:text-left">
               {intro}<span className="inline-block w-1 h-5 bg-zinc-400 ml-1 animate-blink" />
