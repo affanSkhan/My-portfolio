@@ -124,23 +124,6 @@
   },
   {
     "title": "New Project Title",
-    "description": "A brief description of the new project.",
-    "stack": [
-      "React",
-      "Node.js",
-      "MongoDB"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/yourusername/new-project",
-      "live": ""
-    },
-    "featured": false,
-    "status": "planning",
-    "lessons": []
-  },
-  {
-    "title": "New Project Title",
     "description": "A description of this new project.",
     "stack": [],
     "year": 2024,
