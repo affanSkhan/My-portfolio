@@ -19,6 +19,15 @@ interface TimelineItem {
   iconColor: string;
 }
 
+interface ProcessedTimelineItem {
+  id: string;
+  year: string;
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+  iconColor: string;
+}
+
 interface JourneyData {
   student: TimelineItem[];
   entrepreneur: TimelineItem[];
@@ -104,7 +113,7 @@ export function Resume() {
   }, []);
 
   // Convert timeline items to include proper icons
-  const convertTimelineItems = (items: TimelineItem[]): Array<TimelineItem & {icon: React.ReactNode}> => {
+  const convertTimelineItems = (items: TimelineItem[]): ProcessedTimelineItem[] => {
     return items.map(item => ({
       ...item,
       icon: (
