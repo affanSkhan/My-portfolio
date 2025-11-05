@@ -1,5 +1,52 @@
 [
   {
+    "title": "Sales Analytics Data Pipeline (GCP)",
+    "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
+    "stack": [
+      "Google Cloud Storage",
+      "BigQuery",
+      "Cloud Composer (Airflow)",
+      "Looker Studio",
+      "SQL",
+      "Python"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/gm_sales_analytics_pipeline",
+      "live": ""
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Built end-to-end ETL automation using Airflow and BigQuery",
+      "Designed star schema for efficient analytical querying",
+      "Improved understanding of data quality, orchestration, and cost optimization in GCP"
+    ]
+  },
+  {
+    "title": "Smart Health Monitor for Industrial Machines",
+    "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
+    "stack": [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Scikit-Learn",
+      "TensorFlow"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/predictive-maintenance-system"
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": [
+      "RUL Prediction",
+      "Anomaly Detection",
+      "Professional Dashboard",
+      "Intelligent Alerting"
+    ]
+  },
+  {
     "title": "CIE Exam Reminder App",
     "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
     "stack": [
@@ -59,72 +106,6 @@
     ]
   },
   {
-    "title": "Fashion E-Com App with Admin",
-    "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
-    "stack": [
-      "Flutter",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "live": ""
-    },
-    "featured": false,
-    "status": "completed",
-    "lessons": [
-      "State management",
-      "CRUD with Firebase",
-      "Component modularity"
-    ]
-  },
-  {
-    "title": "Sales Analytics Data Pipeline (GCP)",
-    "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
-    "stack": [
-      "Google Cloud Storage",
-      "BigQuery",
-      "Cloud Composer (Airflow)",
-      "Looker Studio",
-      "SQL",
-      "Python"
-    ],
-    "year": 2025,
-    "links": {
-      "github": "https://github.com/affanSkhan/gm_sales_analytics_pipeline",
-      "live": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Built end-to-end ETL automation using Airflow and BigQuery",
-      "Designed star schema for efficient analytical querying",
-      "Improved understanding of data quality, orchestration, and cost optimization in GCP"
-    ]
-  },
-  {
-    "title": "Smart Health Monitor for Industrial Machines",
-    "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
-    "stack": [
-      "Python",
-      "NumPy",
-      "Pandas",
-      "Scikit-Learn",
-      "TensorFlow"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/affanSkhan/predictive-maintenance-system"
-    },
-    "featured": false,
-    "status": "completed",
-    "lessons": [
-      "RUL Prediction",
-      "Anomaly Detection",
-      "Professional Dashboard",
-      "Intelligent Alerting"
-    ]
-  },
-  {
     "title": "AI Prompts Lab",
     "description": "Updated description for testing",
     "stack": [
@@ -165,6 +146,25 @@
       "Responsive design",
       "Framer Motion animations",
       "Reusable component architecture"
+    ]
+  },
+  {
+    "title": "Fashion E-Com App with Admin",
+    "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
+    "stack": [
+      "Flutter",
+      "Firebase"
+    ],
+    "year": 2024,
+    "links": {
+      "live": ""
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": [
+      "State management",
+      "CRUD with Firebase",
+      "Component modularity"
     ]
   }
 ]
