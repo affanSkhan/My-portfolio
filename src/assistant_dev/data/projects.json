@@ -121,5 +121,24 @@
       "Framer Motion animations",
       "Reusable component architecture"
     ]
+  },
+  {
+    "title": "Smart Health Monitor for Industrial Machines",
+    "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
+    "stack": [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Scikit-Learn",
+      "TensorFlow"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": []
   }
 ]
