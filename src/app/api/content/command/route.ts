@@ -6,19 +6,6 @@ export async function POST(req: Request) {
   try {
     const { filename, command, pin } = await req.json();
     
-    // Check if running in production environment
-    const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL || process.env.NETLIFY;
-    
-    if (isProduction) {
-      return NextResponse.json(
-        { 
-          error: "AI Assistant commands are disabled in production. File writes not supported in serverless environments.",
-          suggestion: "Commands work in development mode. Consider using a database for production."
-        }, 
-        { status: 503 }
-      );
-    }
-    
     // Verify authentication
     const expectedPin = process.env.ASSISTANT_ADMIN_PIN || '1234';
     if (pin !== expectedPin) {
@@ -98,7 +85,8 @@ async function handleAddSkill(command: Extract<Command, { type: "add_skill" }>) 
   }
   
   skills.push(command.payload);
-  await writeJson("skills.json", skills);
+  const commitMessage = `Add skill: ${command.payload.name} (${command.payload.category}, ${command.payload.level}%) via AI Assistant`;
+  await writeJson("skills.json", skills, commitMessage);
 }
 
 async function handleUpdateSkill(command: Extract<Command, { type: "update_skill" }>) {
@@ -110,7 +98,9 @@ async function handleUpdateSkill(command: Extract<Command, { type: "update_skill
   }
   
   skills[index] = { ...skills[index], ...command.payload.patch };
-  await writeJson("skills.json", skills);
+  const updateFields = Object.keys(command.payload.patch).join(", ");
+  const commitMessage = `Update skill: ${command.payload.matchName} (${updateFields}) via AI Assistant`;
+  await writeJson("skills.json", skills, commitMessage);
 }
 
 async function handleRemoveSkill(command: Extract<Command, { type: "remove_skill" }>) {
@@ -122,7 +112,8 @@ async function handleRemoveSkill(command: Extract<Command, { type: "remove_skill
   }
   
   skills.splice(index, 1);
-  await writeJson("skills.json", skills);
+  const commitMessage = `Remove skill: ${command.payload.matchName} via AI Assistant`;
+  await writeJson("skills.json", skills, commitMessage);
 }
 
 // === Project Operations ===
@@ -137,7 +128,8 @@ async function handleAddProject(command: Extract<Command, { type: "add_project" 
   }
   
   projects.push(command.payload);
-  await writeJson("projects.json", projects);
+  const commitMessage = `Add project: ${command.payload.title} (${command.payload.stack.join(", ")}) via AI Assistant`;
+  await writeJson("projects.json", projects, commitMessage);
 }
 
 async function handleUpdateProject(command: Extract<Command, { type: "update_project" }>) {
@@ -149,7 +141,9 @@ async function handleUpdateProject(command: Extract<Command, { type: "update_pro
   }
   
   projects[index] = { ...projects[index], ...command.payload.patch };
-  await writeJson("projects.json", projects);
+  const updateFields = Object.keys(command.payload.patch).join(", ");
+  const commitMessage = `Update project: ${command.payload.matchTitle} (${updateFields}) via AI Assistant`;
+  await writeJson("projects.json", projects, commitMessage);
 }
 
 async function handleRemoveProject(command: Extract<Command, { type: "remove_project" }>) {
@@ -161,7 +155,8 @@ async function handleRemoveProject(command: Extract<Command, { type: "remove_pro
   }
   
   projects.splice(index, 1);
-  await writeJson("projects.json", projects);
+  const commitMessage = `Remove project: ${command.payload.matchTitle} via AI Assistant`;
+  await writeJson("projects.json", projects, commitMessage);
 }
 
 // === About Operations ===
@@ -170,7 +165,8 @@ async function handleUpdateAbout(command: Extract<Command, { type: "update_about
   const about = await readJson<any>("about.json");
   
   about[command.payload.field] = command.payload.value;
-  await writeJson("about.json", about);
+  const commitMessage = `Update about ${command.payload.field}: "${command.payload.value}" via AI Assistant`;
+  await writeJson("about.json", about, commitMessage);
 }
 
 async function handleAddRole(command: Extract<Command, { type: "add_role" }>) {
@@ -186,7 +182,8 @@ async function handleAddRole(command: Extract<Command, { type: "add_role" }>) {
   }
   
   about.roles.push(command.payload.role);
-  await writeJson("about.json", about);
+  const commitMessage = `Add role: "${command.payload.role}" via AI Assistant`;
+  await writeJson("about.json", about, commitMessage);
 }
 
 // === Goals Operations ===
@@ -199,12 +196,14 @@ async function handleAddGoal(command: Extract<Command, { type: "add_goal" }>) {
   }
   
   goals[command.payload.type].push(command.payload.goal);
-  await writeJson("goals.json", goals);
+  const commitMessage = `Add ${command.payload.type} goal: "${command.payload.goal}" via AI Assistant`;
+  await writeJson("goals.json", goals, commitMessage);
 }
 
 async function handleUpdateGoals(command: Extract<Command, { type: "update_goals" }>) {
   const goals = await readJson<any>("goals.json");
   
   goals[command.payload.field] = command.payload.value;
-  await writeJson("goals.json", goals);
+  const commitMessage = `Update goals ${command.payload.field}: "${command.payload.value}" via AI Assistant`;
+  await writeJson("goals.json", goals, commitMessage);
 }
