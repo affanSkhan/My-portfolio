@@ -138,6 +138,11 @@
     },
     "featured": false,
     "status": "completed",
-    "lessons": []
+    "lessons": [
+      "RUL Prediction",
+      "Anomaly Detection",
+      "Professional Dashboard",
+      "Intelligent Alerting"
+    ]
   }
 ]
