@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { GraduationCap, Rocket, Lightbulb, Award } from "lucide-react";
+import { GraduationCap, Rocket, Lightbulb, Award, Trophy, Star, Book, Code, Users, Target } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Dynamically import Player from lottiefiles (client-side only)
@@ -11,59 +11,32 @@ const Player = dynamic(() => import("@lottiefiles/react-lottie-player").then(mod
 });
 
 interface TimelineItem {
+  id: string;
   year: string;
   title: string;
   desc: string;
-  icon: React.ReactNode;
+  icon: string;
+  iconColor: string;
 }
 
-const studentTimeline: TimelineItem[] = [
-  {
-    year: "2020",
-    title: "Won Competitions",
-    desc: "Chess & Drawing awards",
-    icon: <Award className="text-indigo-600 w-6 h-6" />,
-  },
-  {
-    year: "2023",
-    title: "Topped in Taluqa",
-    desc: "98.94%ile in MHT-CET",
-    icon: <Award className="text-indigo-600 w-6 h-6" />,
-  },
-  {
-    year: "2023",
-    title: "Joined VIIT Pune",
-    desc: "B.Tech Computer Engg.",
-    icon: <GraduationCap className="text-indigo-600 w-6 h-6" />,
-  },
-  {
-    year: "2025",
-    title: "CIE Exam App",
-    desc: "Real-world project",
-    icon: <Lightbulb className="text-indigo-600 w-6 h-6" />,
-  },
-];
+interface JourneyData {
+  student: TimelineItem[];
+  entrepreneur: TimelineItem[];
+}
 
-const entrepreneurTimeline: TimelineItem[] = [
-  {
-    year: "2024",
-    title: "One Area One App",
-    desc: "Local commerce platform",
-    icon: <Rocket className="text-green-500 w-6 h-6" />,
-  },
-  {
-    year: "2025",
-    title: "AI Prompts Lab",
-    desc: "Solo AI startup",
-    icon: <Lightbulb className="text-green-500 w-6 h-6" />,
-  },
-  {
-    year: "2025",
-    title: "Muslim.AI Vision",
-    desc: "Faith + AI model",
-    icon: <Rocket className="text-green-500 w-6 h-6" />,
-  },
-];
+// Icon mapping
+const iconMap: Record<string, React.ReactNode> = {
+  Award: <Award className="w-6 h-6" />,
+  GraduationCap: <GraduationCap className="w-6 h-6" />,
+  Lightbulb: <Lightbulb className="w-6 h-6" />,
+  Rocket: <Rocket className="w-6 h-6" />,
+  Trophy: <Trophy className="w-6 h-6" />,
+  Star: <Star className="w-6 h-6" />,
+  Book: <Book className="w-6 h-6" />,
+  Code: <Code className="w-6 h-6" />,
+  Users: <Users className="w-6 h-6" />,
+  Target: <Target className="w-6 h-6" />,
+};
 
 // FloatingParticles component to avoid hydration mismatch
 function FloatingParticles({ count = 12 }) {
@@ -100,12 +73,76 @@ function FloatingParticles({ count = 12 }) {
 
 export function Resume() {
   const [view, setView] = useState<'student' | 'entrepreneur'>('student');
-  const timeline = view === 'student' ? studentTimeline : entrepreneurTimeline;
+  const [journeyData, setJourneyData] = useState<JourneyData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
+
+  // Fetch journey data from API
+  useEffect(() => {
+    const fetchJourneyData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/content/journey.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch journey data");
+        }
+        const data = await response.json();
+        setJourneyData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJourneyData();
+  }, []);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Convert timeline items to include proper icons
+  const convertTimelineItems = (items: TimelineItem[]): Array<TimelineItem & {icon: React.ReactNode}> => {
+    return items.map(item => ({
+      ...item,
+      icon: (
+        <div className={item.iconColor}>
+          {iconMap[item.icon] || iconMap.Lightbulb}
+        </div>
+      )
+    }));
+  };
+
+  if (loading) {
+    return (
+      <motion.section
+        id="resume"
+        className="relative py-20 px-4 sm:px-8 flex justify-center items-center min-h-screen overflow-hidden bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900"
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-300">Loading journey...</p>
+        </div>
+      </motion.section>
+    );
+  }
+
+  if (error) {
+    return (
+      <motion.section
+        id="resume"
+        className="relative py-20 px-4 sm:px-8 flex justify-center items-center min-h-screen overflow-hidden bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900"
+      >
+        <div className="text-center">
+          <p className="text-red-600 dark:text-red-400">Error: {error}</p>
+        </div>
+      </motion.section>
+    );
+  }
+
+  const timeline = journeyData ? convertTimelineItems(journeyData[view]) : [];
 
   return (
     <motion.section

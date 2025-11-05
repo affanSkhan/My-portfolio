@@ -223,6 +223,49 @@ export const AdaptiveSortProjectsSchema = z.object({
   })
 });
 
+// === Journey Operations ===
+
+export const AddJourneyItemSchema = z.object({
+  type: z.literal("add_journey_item"),
+  payload: z.object({
+    timeline: z.enum(["student", "entrepreneur"]),
+    year: z.string().min(1, "Year is required"),
+    title: z.string().min(1, "Title is required"),
+    desc: z.string().min(1, "Description is required"),
+    icon: z.enum(["Award", "GraduationCap", "Lightbulb", "Rocket", "Trophy", "Star", "Book", "Code", "Users", "Target"]).default("Lightbulb"),
+    iconColor: z.string().default("text-indigo-600")
+  })
+});
+
+export const UpdateJourneyItemSchema = z.object({
+  type: z.literal("update_journey_item"),
+  payload: z.object({
+    timeline: z.enum(["student", "entrepreneur"]),
+    itemId: z.string().min(1, "Item ID is required"),
+    patch: z.record(z.string(), z.any()).refine(
+      (patch) => Object.keys(patch).length > 0,
+      { message: "At least one field must be updated" }
+    )
+  })
+});
+
+export const RemoveJourneyItemSchema = z.object({
+  type: z.literal("remove_journey_item"),
+  payload: z.object({
+    timeline: z.enum(["student", "entrepreneur"]),
+    itemId: z.string().min(1, "Item ID to remove is required")
+  })
+});
+
+export const ReorderJourneySchema = z.object({
+  type: z.literal("reorder_journey"),
+  payload: z.object({
+    timeline: z.enum(["student", "entrepreneur"]),
+    strategy: z.enum(["by_year_asc", "by_year_desc", "custom_order"]).default("by_year_asc"),
+    customOrder: z.array(z.string()).optional() // Array of item IDs in desired order
+  })
+});
+
 // === No-op Command ===
 
 export const NoopSchema = z.object({ 
@@ -253,6 +296,11 @@ export const CommandSchema = z.discriminatedUnion("type", [
   AddGoalSchema,
   UpdateGoalsSchema,
   RemoveGoalSchema,
+  // Journey operations
+  AddJourneyItemSchema,
+  UpdateJourneyItemSchema,
+  RemoveJourneyItemSchema,
+  ReorderJourneySchema,
   // Audit operations
   UndoCommandSchema,
   ViewAuditLogsSchema,
@@ -288,6 +336,13 @@ export const GoalCommands = z.union([
   RemoveGoalSchema
 ]);
 
+export const JourneyCommands = z.union([
+  AddJourneyItemSchema,
+  UpdateJourneyItemSchema,
+  RemoveJourneyItemSchema,
+  ReorderJourneySchema
+]);
+
 export const AuditCommands = z.union([
   UndoCommandSchema,
   ViewAuditLogsSchema,
@@ -298,6 +353,7 @@ export type ProjectCommand = z.infer<typeof ProjectCommands>;
 export type SkillCommand = z.infer<typeof SkillCommands>;
 export type AboutCommand = z.infer<typeof AboutCommands>;
 export type GoalCommand = z.infer<typeof GoalCommands>;
+export type JourneyCommand = z.infer<typeof JourneyCommands>;
 export type AuditCommand = z.infer<typeof AuditCommands>;
 
 // === User-Facing Summary Functions ===
@@ -352,6 +408,20 @@ export function toUserFacingSummary(cmd: Command): string {
     case "remove_goal":
       return `Remove goal: "${cmd.payload.matchGoal}"`;
     
+    // Journey operations
+    case "add_journey_item":
+      return `Add ${cmd.payload.timeline} milestone: "${cmd.payload.title}" (${cmd.payload.year})`;
+    
+    case "update_journey_item":
+      const journeyFields = Object.keys(cmd.payload.patch).join(", ");
+      return `Update ${cmd.payload.timeline} milestone "${cmd.payload.itemId}": ${journeyFields}`;
+    
+    case "remove_journey_item":
+      return `Remove ${cmd.payload.timeline} milestone: "${cmd.payload.itemId}"`;
+    
+    case "reorder_journey":
+      return `Reorder ${cmd.payload.timeline} timeline: ${cmd.payload.strategy}`;
+    
     // Audit operations
     case "undo_command":
       return `Undo command: ${cmd.payload.auditLogId}${cmd.payload.reason ? ` - ${cmd.payload.reason}` : ""}`;
@@ -405,6 +475,12 @@ export function getCommandCategory(cmd: Command): string {
     case "remove_goal":
       return "Goals";
     
+    case "add_journey_item":
+    case "update_journey_item":
+    case "remove_journey_item":
+    case "reorder_journey":
+      return "Journey";
+    
     case "undo_command":
     case "view_audit_logs":
     case "clear_audit_logs":
@@ -424,6 +500,7 @@ export function isDestructiveCommand(cmd: Command): boolean {
     "remove_skill", 
     "remove_role",
     "remove_goal",
+    "remove_journey_item",
     "clear_audit_logs"
   ].includes(cmd.type);
 }
@@ -451,6 +528,12 @@ export function getFileTargetForCommand(cmd: Command): string {
     case "update_goals":
     case "remove_goal":
       return "goals.json";
+    
+    case "add_journey_item":
+    case "update_journey_item":
+    case "remove_journey_item":
+    case "reorder_journey":
+      return "journey.json";
     
     case "undo_command":
     case "view_audit_logs":
@@ -667,6 +750,77 @@ export function generateUndoCommand(auditLogEntry: AuditLogEntry): Command | nul
             strategy: "custom_order",
             customOrder: before.map((p: any) => p.title),
             description: `Undo ${originalCommand.type}`
+          }
+        };
+      }
+      break;
+
+    case "add_journey_item":
+      return {
+        type: "remove_journey_item",
+        payload: {
+          timeline: originalCommand.payload.timeline,
+          itemId: after && after[originalCommand.payload.timeline] ? 
+            after[originalCommand.payload.timeline].find((item: any) => 
+              item.title === originalCommand.payload.title
+            )?.id : null
+        }
+      };
+
+    case "remove_journey_item":
+      if (before && before[originalCommand.payload.timeline]) {
+        const removedItem = before[originalCommand.payload.timeline].find((item: any) => 
+          item.id === originalCommand.payload.itemId
+        );
+        if (removedItem) {
+          return {
+            type: "add_journey_item",
+            payload: {
+              timeline: originalCommand.payload.timeline,
+              year: removedItem.year,
+              title: removedItem.title,
+              desc: removedItem.desc,
+              icon: removedItem.icon,
+              iconColor: removedItem.iconColor
+            }
+          };
+        }
+      }
+      break;
+
+    case "update_journey_item":
+      if (before && before[originalCommand.payload.timeline]) {
+        const originalItem = before[originalCommand.payload.timeline].find((item: any) => 
+          item.id === originalCommand.payload.itemId
+        );
+        if (originalItem) {
+          const revertPatch: Record<string, any> = {};
+          Object.keys(originalCommand.payload.patch).forEach(key => {
+            if (key in originalItem) {
+              revertPatch[key] = originalItem[key];
+            }
+          });
+          
+          return {
+            type: "update_journey_item",
+            payload: {
+              timeline: originalCommand.payload.timeline,
+              itemId: originalCommand.payload.itemId,
+              patch: revertPatch
+            }
+          };
+        }
+      }
+      break;
+
+    case "reorder_journey":
+      if (before && before[originalCommand.payload.timeline]) {
+        return {
+          type: "reorder_journey",
+          payload: {
+            timeline: originalCommand.payload.timeline,
+            strategy: "custom_order",
+            customOrder: before[originalCommand.payload.timeline].map((item: any) => item.id)
           }
         };
       }

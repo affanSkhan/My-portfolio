@@ -42,6 +42,7 @@ Available command types:
 - add_skill, update_skill, remove_skill  
 - update_about, add_role, remove_role
 - add_goal, update_goals, remove_goal
+- add_journey_item, update_journey_item, remove_journey_item, reorder_journey
 - undo_command, view_audit_logs, clear_audit_logs
 - noop (when no action needed)
 
@@ -130,11 +131,12 @@ export async function POST(req: Request) {
     // Get current portfolio context for better responses
     let portfolioContext = "";
     try {
-      const [about, projects, skills, goals] = await Promise.all([
+      const [about, projects, skills, goals, journey] = await Promise.all([
         readJson("about.json"),
         readJson("projects.json"), 
         readJson("skills.json"),
-        readJson("goals.json")
+        readJson("goals.json"),
+        readJson("journey.json")
       ]);
 
       // Get recent audit logs for undo operations context
@@ -165,6 +167,7 @@ About: ${JSON.stringify(about, null, 2)}
 All Projects: ${JSON.stringify(projects, null, 2)}
 Skills Summary: ${JSON.stringify(Array.isArray(skills) ? skills.slice(0, 10) : skills, null, 2)}
 Goals: ${JSON.stringify(goals, null, 2)}
+Journey: ${JSON.stringify(journey, null, 2)}
 ${auditContext}`;
     } catch (error) {
       console.error("Failed to load portfolio context:", error);
@@ -291,6 +294,64 @@ Remove goal:
   "type": "remove_goal",
   "payload": {
     "matchGoal": "Part of goal text to match"
+  }
+}
+
+Add journey item:
+{
+  "type": "add_journey_item",
+  "payload": {
+    "timeline": "student",
+    "year": "2024",
+    "title": "Achievement Title",
+    "desc": "Brief description",
+    "icon": "Award",
+    "iconColor": "text-indigo-600"
+  }
+}
+
+VALID JOURNEY TIMELINES: "student", "entrepreneur"
+VALID JOURNEY ICONS: "Award", "GraduationCap", "Lightbulb", "Rocket", "Trophy", "Star", "Book", "Code", "Users", "Target"
+
+Update journey item (use actual item ID from journey data):
+{
+  "type": "update_journey_item",
+  "payload": {
+    "timeline": "student",
+    "itemId": "student-1762373583634",
+    "patch": {"title": "New Title", "desc": "New description"}
+  }
+}
+
+IMPORTANT FOR JOURNEY OPERATIONS:
+STEP 1: Look in the Journey section of CURRENT PORTFOLIO CONTEXT above
+STEP 2: Find the item by matching the title exactly  
+STEP 3: Use the "id" field from that item (NOT the title)
+
+CONCRETE EXAMPLE:
+User says: "remove Won Hackathon from student view"
+1. Look in journey data for item with title "Won Hackathon"
+2. Found: {"id": "student-1762373583634", "title": "Won Hackathon", ...}
+3. Use itemId: "student-1762373583634" (NOT "Won Hackathon")
+
+WRONG: "itemId": "student-1" or "itemId": "Won Hackathon"  
+RIGHT: "itemId": "student-1762373583634"
+
+Remove journey item (EXAMPLE using real ID):
+{
+  "type": "remove_journey_item",
+  "payload": {
+    "timeline": "student", 
+    "itemId": "student-1762373583634"
+  }
+}
+
+Reorder journey:
+{
+  "type": "reorder_journey",
+  "payload": {
+    "timeline": "student",
+    "strategy": "by_year_asc"
   }
 }
 
@@ -881,6 +942,104 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         skills.splice(index, 1);
         await writeJson('skills.json', skills);
         return { success: true, message: `✅ Removed skill "${removedName}"` };
+      });
+    }
+
+    // Handle journey operations
+    if (command.type === "add_journey_item") {
+      return await executeAndLog(async () => {
+        const journey = await readJson('journey.json') as { student: any[], entrepreneur: any[] };
+        const timeline = journey[command.payload.timeline];
+        
+        if (!Array.isArray(timeline)) {
+          return { success: false, message: `❌ Timeline "${command.payload.timeline}" is not an array` };
+        }
+        
+        // Generate unique ID
+        const newId = `${command.payload.timeline}-${Date.now()}`;
+        const newItem = {
+          id: newId,
+          year: command.payload.year,
+          title: command.payload.title,
+          desc: command.payload.desc,
+          icon: command.payload.icon,
+          iconColor: command.payload.iconColor
+        };
+        
+        timeline.push(newItem);
+        await writeJson('journey.json', journey);
+        return { success: true, message: `✅ Added "${command.payload.title}" to ${command.payload.timeline} timeline` };
+      });
+    }
+
+    if (command.type === "update_journey_item") {
+      return await executeAndLog(async () => {
+        const journey = await readJson('journey.json') as { student: any[], entrepreneur: any[] };
+        const timeline = journey[command.payload.timeline];
+        
+        if (!Array.isArray(timeline)) {
+          return { success: false, message: `❌ Timeline "${command.payload.timeline}" is not an array` };
+        }
+        
+        const index = timeline.findIndex(item => item.id === command.payload.itemId);
+        if (index === -1) {
+          return { success: false, message: `❌ Journey item with ID "${command.payload.itemId}" not found` };
+        }
+        
+        timeline[index] = { ...timeline[index], ...command.payload.patch };
+        await writeJson('journey.json', journey);
+        return { success: true, message: `✅ Updated journey item "${timeline[index].title}"` };
+      });
+    }
+
+    if (command.type === "remove_journey_item") {
+      return await executeAndLog(async () => {
+        const journey = await readJson('journey.json') as { student: any[], entrepreneur: any[] };
+        const timeline = journey[command.payload.timeline];
+        
+        if (!Array.isArray(timeline)) {
+          return { success: false, message: `❌ Timeline "${command.payload.timeline}" is not an array` };
+        }
+        
+        const index = timeline.findIndex(item => item.id === command.payload.itemId);
+        if (index === -1) {
+          return { success: false, message: `❌ Journey item with ID "${command.payload.itemId}" not found` };
+        }
+        
+        const removedTitle = timeline[index].title;
+        timeline.splice(index, 1);
+        await writeJson('journey.json', journey);
+        return { success: true, message: `✅ Removed "${removedTitle}" from ${command.payload.timeline} timeline` };
+      });
+    }
+
+    if (command.type === "reorder_journey") {
+      return await executeAndLog(async () => {
+        const journey = await readJson('journey.json') as { student: any[], entrepreneur: any[] };
+        const timeline = journey[command.payload.timeline];
+        
+        if (!Array.isArray(timeline)) {
+          return { success: false, message: `❌ Timeline "${command.payload.timeline}" is not an array` };
+        }
+        
+        if (command.payload.strategy === "custom_order" && command.payload.customOrder) {
+          // Custom reordering
+          const reordered = command.payload.customOrder
+            .map(id => timeline.find(item => item.id === id))
+            .filter(Boolean);
+          journey[command.payload.timeline] = reordered;
+        } else {
+          // Sort by year
+          const ascending = command.payload.strategy === "by_year_asc";
+          timeline.sort((a, b) => {
+            const yearA = parseInt(a.year);
+            const yearB = parseInt(b.year);
+            return ascending ? yearA - yearB : yearB - yearA;
+          });
+        }
+        
+        await writeJson('journey.json', journey);
+        return { success: true, message: `✅ Reordered ${command.payload.timeline} timeline` };
       });
     }
 

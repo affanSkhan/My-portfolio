@@ -1,1 +1,3180 @@
-[]
+[
+  {
+    "id": "588a3e30-4740-46d2-a5d1-0f661efd8538",
+    "timestamp": "2025-11-05T20:43:40.953Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-1762373583634"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed \"Won Hackathon\" from student timeline",
+      "executionTimeMs": 3
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374558420",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374558420",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Journey",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "e0c61ecd-0371-4c9d-807c-a09a4575d86b",
+    "timestamp": "2025-11-05T20:38:30.049Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-1"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": false,
+      "message": "❌ Journey item with ID \"student-1\" not found",
+      "executionTimeMs": 3
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374558420",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374558420",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Journey",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "d9101854-473a-4c57-ae9f-059086d3c801",
+    "timestamp": "2025-11-05T20:29:18.439Z",
+    "command": {
+      "type": "add_journey_item",
+      "payload": {
+        "timeline": "student",
+        "year": "2025",
+        "title": "CIE Exam App",
+        "desc": "Real-world project",
+        "icon": "Lightbulb",
+        "iconColor": "text-indigo-600"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Added \"CIE Exam App\" to student timeline",
+      "executionTimeMs": 2
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374558420",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "26403c7f-4c6b-4a17-a9f9-292f530c5a68",
+    "timestamp": "2025-11-05T20:28:46.413Z",
+    "command": {
+      "type": "add_journey_item",
+      "payload": {
+        "timeline": "student",
+        "year": "2023",
+        "title": "Topped in Taluqa",
+        "desc": "98.94%ile in MHT-CET",
+        "icon": "Award",
+        "iconColor": "text-indigo-600"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Added \"Topped in Taluqa\" to student timeline",
+      "executionTimeMs": 3
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374526389",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "f87eb7a6-b0e7-4591-94f9-a7f1ec2ed857",
+    "timestamp": "2025-11-05T20:28:09.042Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-2"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed \"Topped in Taluqa\" from student timeline",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "bee76bfa-0b87-4a3a-9417-3583bdc2446c",
+    "timestamp": "2025-11-05T20:27:21.808Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-4"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed \"CIE Exam App\" from student timeline",
+      "executionTimeMs": 3
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "b7b8c3b9-bc49-48b4-a57c-d01c7d5b8cd6",
+    "timestamp": "2025-11-05T20:26:45.751Z",
+    "command": {
+      "type": "reorder_journey",
+      "payload": {
+        "timeline": "student",
+        "strategy": "by_year_asc"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Reordered student timeline",
+      "executionTimeMs": 2
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "cf7cac23-4f40-4435-b6b8-b4a1322e4c63",
+    "timestamp": "2025-11-05T20:26:20.477Z",
+    "command": {
+      "type": "reorder_journey",
+      "payload": {
+        "timeline": "student",
+        "strategy": "by_year_desc"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Reordered student timeline",
+      "executionTimeMs": 2
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "993913d6-4b76-4dde-a998-ce0cf682e7e5",
+    "timestamp": "2025-11-05T20:25:24.805Z",
+    "command": {
+      "type": "add_journey_item",
+      "payload": {
+        "timeline": "student",
+        "year": "2020",
+        "title": "Won Competitions",
+        "desc": "Chess & Drawing awards",
+        "icon": "Award",
+        "iconColor": "text-indigo-600"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Added \"Won Competitions\" to student timeline",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762374324779",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "c8e5ef84-9300-490e-954c-7d4e15ff04f9",
+    "timestamp": "2025-11-05T20:23:30.643Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-1"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed \"Won Competitions\" from student timeline",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "b5c5be64-3e9d-466d-bb5e-3edabbe147ae",
+    "timestamp": "2025-11-05T20:18:10.643Z",
+    "command": {
+      "type": "remove_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "CIE Exam Management System"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": false,
+      "message": "❌ Journey item with ID \"CIE Exam Management System\" not found",
+      "executionTimeMs": 11
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "CIE Exam Management System",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "CIE Exam Management System",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "ebfece52-018e-4c72-b521-8dbc3c184969",
+    "timestamp": "2025-11-05T20:14:07.944Z",
+    "command": {
+      "type": "remove_skill",
+      "payload": {
+        "matchName": "Go"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": false,
+      "message": "❌ Skill \"Go\" not found",
+      "executionTimeMs": 1
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "c3e6f316-5cce-4668-a12d-38766ec75c58",
+    "timestamp": "2025-11-05T20:13:03.657Z",
+    "command": {
+      "type": "add_journey_item",
+      "payload": {
+        "timeline": "student",
+        "year": "2024",
+        "title": "Won Hackathon",
+        "desc": "First place in college coding competition",
+        "icon": "Award",
+        "iconColor": "text-indigo-600"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Added \"Won Hackathon\" to student timeline",
+      "executionTimeMs": 3
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "CIE Exam Management System",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "CIE Exam Management System",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-1762373583634",
+            "year": "2024",
+            "title": "Won Hackathon",
+            "desc": "First place in college coding competition",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "d0f66c93-1af4-430b-9a3d-dd7deb57cdf1",
+    "timestamp": "2025-11-05T20:10:53.710Z",
+    "command": {
+      "type": "update_journey_item",
+      "payload": {
+        "timeline": "student",
+        "itemId": "student-1",
+        "patch": {
+          "title": "CIE Exam Management System"
+        }
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Updated journey item \"CIE Exam Management System\"",
+      "executionTimeMs": 5
+    },
+    "dataSnapshot": {
+      "before": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "Won Competitions",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "after": {
+        "student": [
+          {
+            "id": "student-1",
+            "year": "2020",
+            "title": "CIE Exam Management System",
+            "desc": "Chess & Drawing awards",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-2",
+            "year": "2023",
+            "title": "Topped in Taluqa",
+            "desc": "98.94%ile in MHT-CET",
+            "icon": "Award",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-3",
+            "year": "2023",
+            "title": "Joined VIIT Pune",
+            "desc": "B.Tech Computer Engg.",
+            "icon": "GraduationCap",
+            "iconColor": "text-indigo-600"
+          },
+          {
+            "id": "student-4",
+            "year": "2025",
+            "title": "CIE Exam App",
+            "desc": "Real-world project",
+            "icon": "Lightbulb",
+            "iconColor": "text-indigo-600"
+          }
+        ],
+        "entrepreneur": [
+          {
+            "id": "entrepreneur-1",
+            "year": "2024",
+            "title": "One Area One App",
+            "desc": "Local commerce platform",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-2",
+            "year": "2025",
+            "title": "AI Prompts Lab",
+            "desc": "Solo AI startup",
+            "icon": "Lightbulb",
+            "iconColor": "text-green-500"
+          },
+          {
+            "id": "entrepreneur-3",
+            "year": "2025",
+            "title": "Muslim.AI Vision",
+            "desc": "Faith + AI model",
+            "icon": "Rocket",
+            "iconColor": "text-green-500"
+          }
+        ]
+      },
+      "affectedFile": "journey.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Unknown",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "8a005af5-1b8f-4e3b-b80f-9a89fd105dea",
+    "timestamp": "2025-11-05T19:35:52.272Z",
+    "command": {
+      "type": "remove_skill",
+      "payload": {
+        "matchName": "Go"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed skill \"Go\"",
+      "executionTimeMs": 2
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Go",
+          "iconName": "go-lang",
+          "colorClass": "text-sky-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "9a31cbf3-ce59-469b-8f51-cc72bc47c7c0",
+    "timestamp": "2025-11-05T19:25:51.959Z",
+    "command": {
+      "type": "add_skill",
+      "payload": {
+        "name": "Go",
+        "iconName": "go-lang",
+        "colorClass": "text-sky-600",
+        "category": "Frontend",
+        "level": 90
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Added skill \"Go\"",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Go",
+          "iconName": "go-lang",
+          "colorClass": "text-sky-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  }
+]

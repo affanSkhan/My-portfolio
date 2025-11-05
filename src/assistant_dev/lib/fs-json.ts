@@ -29,6 +29,6 @@ export async function writeJson(name: string, data: unknown): Promise<void> {
  * @returns True if the file is allowed
  */
 export function isAllowedFile(filename: string): boolean {
-  const allowed = ["about.json", "skills.json", "projects.json", "goals.json"];
+  const allowed = ["about.json", "skills.json", "projects.json", "goals.json", "journey.json"];
   return allowed.includes(filename);
 }

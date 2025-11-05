@@ -1,0 +1,62 @@
+{
+  "student": [
+    {
+      "id": "student-1762374324779",
+      "year": "2020",
+      "title": "Won Competitions",
+      "desc": "Chess & Drawing awards",
+      "icon": "Award",
+      "iconColor": "text-indigo-600"
+    },
+    {
+      "id": "student-3",
+      "year": "2023",
+      "title": "Joined VIIT Pune",
+      "desc": "B.Tech Computer Engg.",
+      "icon": "GraduationCap",
+      "iconColor": "text-indigo-600"
+    },
+    {
+      "id": "student-1762374526389",
+      "year": "2023",
+      "title": "Topped in Taluqa",
+      "desc": "98.94%ile in MHT-CET",
+      "icon": "Award",
+      "iconColor": "text-indigo-600"
+    },
+    {
+      "id": "student-1762374558420",
+      "year": "2025",
+      "title": "CIE Exam App",
+      "desc": "Real-world project",
+      "icon": "Lightbulb",
+      "iconColor": "text-indigo-600"
+    }
+  ],
+  "entrepreneur": [
+    {
+      "id": "entrepreneur-1",
+      "year": "2024",
+      "title": "One Area One App",
+      "desc": "Local commerce platform",
+      "icon": "Rocket",
+      "iconColor": "text-green-500"
+    },
+    {
+      "id": "entrepreneur-2",
+      "year": "2025",
+      "title": "AI Prompts Lab",
+      "desc": "Solo AI startup",
+      "icon": "Lightbulb",
+      "iconColor": "text-green-500"
+    },
+    {
+      "id": "entrepreneur-3",
+      "year": "2025",
+      "title": "Muslim.AI Vision",
+      "desc": "Faith + AI model",
+      "icon": "Rocket",
+      "iconColor": "text-green-500"
+    }
+  ]
+}
