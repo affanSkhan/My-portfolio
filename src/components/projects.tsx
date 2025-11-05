@@ -26,13 +26,19 @@ import {
   SiGit,
   SiDocker,
   SiVercel,
-  SiNetlify
+  SiNetlify,
+  SiGooglecloud,
+  SiApacheairflow,
+  SiLooker
 } from "react-icons/si";
 import { 
   TbMathSymbols,
   TbChartLine,
   TbBrain,
-  TbDatabase 
+  TbDatabase,
+  TbCloudComputing,
+  TbAnalyze,
+  TbSql
 } from "react-icons/tb";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
@@ -70,12 +76,22 @@ const techIcons: Record<string, React.ReactElement> = {
   "Python": <SiPython key="python" />,
   "C++": <SiCplusplus key="cplusplus" />,
   "PHP": <SiPhp key="php" />,
+  "SQL": <TbSql key="sql" className="text-blue-700" />,
   
   // Databases
   "MongoDB": <SiMongodb key="mongodb" />,
   "MySQL": <SiMysql key="mysql" />,
   "PostgreSQL": <SiPostgresql key="postgresql" />,
   "Firebase": <SiFirebase key="firebase" />,
+  "BigQuery": <SiGooglecloud key="bigquery" className="text-blue-600" />,
+  
+  // Cloud & GCP Services
+  "Google Cloud Storage": <SiGooglecloud key="gcs" className="text-blue-500" />,
+  "Cloud Composer (Airflow)": <SiApacheairflow key="airflow" className="text-red-500" />,
+  "Looker Studio": <SiLooker key="looker" className="text-purple-600" />,
+  "GCP": <SiGooglecloud key="gcp" className="text-blue-600" />,
+  "Google Cloud": <SiGooglecloud key="googlecloud" className="text-blue-600" />,
+  "Airflow": <SiApacheairflow key="airflow-alt" className="text-red-500" />,
   
   // Mobile
   "Flutter": <SiFlutter key="flutter" />,
@@ -88,12 +104,49 @@ const techIcons: Record<string, React.ReactElement> = {
   "Scikit-Learn": <TbChartLine key="sklearn" className="text-orange-600" />,
   "TensorFlow": <TbBrain key="tensorflow" className="text-orange-500" />,
   
+  // Data & Analytics
+  "Data Pipeline": <TbAnalyze key="datapipeline" className="text-purple-600" />,
+  "ETL": <TbCloudComputing key="etl" className="text-green-600" />,
+  "Data Warehouse": <TbDatabase key="datawarehouse" className="text-blue-600" />,
+  
   // Tools & Others
   "Git": <SiGit key="git" />,
   "Docker": <SiDocker key="docker" />,
   "Vercel": <SiVercel key="vercel" />,
   "Netlify": <SiNetlify key="netlify" />,
 };
+
+// Function to render tech stack item with fallback to text
+function renderTechItem(tech: string, index: number) {
+  const icon = techIcons[tech];
+  
+  if (icon) {
+    return (
+      <div
+        key={index}
+        className="group relative flex items-center gap-1 px-2 py-1 bg-white/5 backdrop-blur-sm rounded-md border border-white/10 hover:border-white/20 transition-all duration-300"
+        title={tech}
+      >
+        <span className="text-sm opacity-80 group-hover:opacity-100 transition-opacity">
+          {icon}
+        </span>
+      </div>
+    );
+  } else {
+    // Fallback: show tech name as text
+    return (
+      <div
+        key={index}
+        className="group relative flex items-center gap-1 px-2 py-1 bg-white/5 backdrop-blur-sm rounded-md border border-white/10 hover:border-white/20 transition-all duration-300"
+        title={tech}
+      >
+        <span className="text-xs font-medium opacity-80 group-hover:opacity-100 transition-opacity">
+          {tech}
+        </span>
+      </div>
+    );
+  }
+}
 
 // FloatingParticles component to avoid hydration mismatch
 function FloatingParticles({ count = 12 }) {
@@ -252,12 +305,8 @@ export default function Projects() {
                     <div className="absolute w-full h-full backface-hidden bg-white/80 dark:bg-zinc-900/80 border border-white/30 dark:border-zinc-700/60 rounded-xl p-6 shadow-xl flex flex-col justify-between backdrop-blur-lg">
                       <div>
                         <h3 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">{project.title}</h3>
-                        <div className="flex space-x-2 text-xl text-blue-500">
-                          {project.stack.map((tech, i) => (
-                            <span key={i} className="transition-transform group-hover:scale-125 group-hover:animate-pulse dark:drop-shadow-[0_0_12px_#6366f1cc]" title={tech}>
-                              {techIcons[tech] || <span className="text-xs bg-zinc-200 dark:bg-zinc-700 px-2 py-1 rounded">{tech}</span>}
-                            </span>
-                          ))}
+                        <div className="flex flex-wrap gap-2 text-sm">
+                          {project.stack.map((tech, i) => renderTechItem(tech, i))}
                         </div>
                       </div>
                       <p className="text-sm text-zinc-500 mt-4">Tap or hover to flip</p>

@@ -147,6 +147,11 @@
     "title": "Sales Analytics Data Pipeline (GCP)",
     "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
     "stack": [
+      "Google Cloud Storage",
+      "BigQuery", 
+      "Cloud Composer (Airflow)",
+      "Looker Studio",
+      "SQL",
       "Python"
     ],
     "year": 2024,
