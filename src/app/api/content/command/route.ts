@@ -1,18 +1,44 @@
 import { NextResponse } from "next/server";
 import { readJson, writeJson } from "@/lib/fs-json";
-import { Command } from "@/assistant_dev/lib/commands";
+import { Command, getFileTargetForCommand } from "@/assistant_dev/lib/commands";
+import AuditLogger from "@/assistant_dev/lib/audit-logger";
 
 export async function POST(req: Request) {
+  let beforeSnapshot: unknown = null;
+  let startTime = Date.now();
+  let command: Command;
+  let executionResult = { success: false, message: "", executionTimeMs: 0 };
+
   try {
-    const { filename, command, pin } = await req.json();
+    const { filename, command: parsedCommand, pin } = await req.json();
+    command = parsedCommand;
     
     // Verify authentication
     const expectedPin = process.env.ASSISTANT_ADMIN_PIN || '1234';
     if (pin !== expectedPin) {
+      executionResult = {
+        success: false,
+        message: "Unauthorized - Invalid PIN",
+        executionTimeMs: Date.now() - startTime
+      };
+      
+      await AuditLogger.logCommand(command, executionResult);
+      
       return NextResponse.json(
         { error: "Unauthorized - Invalid PIN" }, 
         { status: 401 }
       );
+    }
+
+    // Capture before snapshot for audit logging
+    const affectedFile = getFileTargetForCommand(command);
+    if (affectedFile && !["view_audit_logs", "noop"].includes(command.type)) {
+      try {
+        beforeSnapshot = await readJson(affectedFile);
+      } catch (error) {
+        // File might not exist yet, that's okay
+        beforeSnapshot = null;
+      }
     }
 
     // Execute command based on type
@@ -53,17 +79,55 @@ export async function POST(req: Request) {
       case "update_goals":
         await handleUpdateGoals(command);
         break;
+      case "remove_role":
+        await handleRemoveRole(command);
+        break;
+      case "remove_goal":
+        await handleRemoveGoal(command);
+        break;
+      case "undo_command":
+        return await handleUndoCommand(command);
+      case "view_audit_logs":
+        return await handleViewAuditLogs(command);
+      case "clear_audit_logs":
+        return await handleClearAuditLogs(command);
       case "noop":
+        executionResult = {
+          success: true,
+          message: "No operation performed",
+          executionTimeMs: Date.now() - startTime
+        };
+        
+        await AuditLogger.logCommand(command, executionResult);
+        
         return NextResponse.json({ 
           success: true, 
           message: "No operation performed"
         });
       default:
+        executionResult = {
+          success: false,
+          message: `Unknown command type: ${(command as any).type}`,
+          executionTimeMs: Date.now() - startTime
+        };
+        
+        await AuditLogger.logCommand(command, executionResult);
+        
         return NextResponse.json(
           { error: `Unknown command type: ${(command as any).type}` },
           { status: 400 }
         );
     }
+
+    // Capture after snapshot and log the successful operation
+    executionResult = {
+      success: true,
+      message: "Command executed successfully",
+      executionTimeMs: Date.now() - startTime
+    };
+
+    const afterSnapshot = affectedFile ? await readJson(affectedFile) : null;
+    await AuditLogger.logCommand(command, executionResult, beforeSnapshot, afterSnapshot);
 
     return NextResponse.json({ 
       success: true, 
@@ -72,6 +136,18 @@ export async function POST(req: Request) {
     
   } catch (error) {
     console.error("Command execution error:", error);
+    
+    executionResult = {
+      success: false,
+      message: `Failed to execute command: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      executionTimeMs: Date.now() - startTime
+    };
+
+    // Log the failed operation
+    if (command!) {
+      await AuditLogger.logCommand(command, executionResult, beforeSnapshot);
+    }
+    
     return NextResponse.json(
       { error: `Failed to execute command: ${error instanceof Error ? error.message : 'Unknown error'}` }, 
       { status: 500 }
@@ -421,4 +497,135 @@ async function handleUpdateGoals(command: Extract<Command, { type: "update_goals
   goals[command.payload.field] = command.payload.value;
   const commitMessage = `Update goals ${command.payload.field}: "${command.payload.value}" via AI Assistant`;
   await writeJson("goals.json", goals, commitMessage);
+}
+
+async function handleRemoveRole(command: Extract<Command, { type: "remove_role" }>) {
+  const about = await readJson<any>("about.json");
+  
+  if (!about.roles || !Array.isArray(about.roles)) {
+    throw new Error("No roles found");
+  }
+  
+  const roleIndex = about.roles.findIndex((role: string) => role === command.payload.role);
+  if (roleIndex === -1) {
+    throw new Error(`Role "${command.payload.role}" not found`);
+  }
+  
+  about.roles.splice(roleIndex, 1);
+  const commitMessage = `Remove role: "${command.payload.role}" via AI Assistant`;
+  await writeJson("about.json", about, commitMessage);
+}
+
+async function handleRemoveGoal(command: Extract<Command, { type: "remove_goal" }>) {
+  const goals = await readJson<any>("goals.json");
+  
+  // Search in both shortTerm and longTerm arrays
+  let found = false;
+  
+  if (goals.shortTerm && Array.isArray(goals.shortTerm)) {
+    const index = goals.shortTerm.findIndex((goal: string) => 
+      goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase())
+    );
+    if (index !== -1) {
+      goals.shortTerm.splice(index, 1);
+      found = true;
+    }
+  }
+  
+  if (!found && goals.longTerm && Array.isArray(goals.longTerm)) {
+    const index = goals.longTerm.findIndex((goal: string) => 
+      goal.toLowerCase().includes(command.payload.matchGoal.toLowerCase())
+    );
+    if (index !== -1) {
+      goals.longTerm.splice(index, 1);
+      found = true;
+    }
+  }
+  
+  if (!found) {
+    throw new Error(`Goal containing "${command.payload.matchGoal}" not found`);
+  }
+  
+  const commitMessage = `Remove goal: "${command.payload.matchGoal}" via AI Assistant`;
+  await writeJson("goals.json", goals, commitMessage);
+}
+
+// === Audit Command Handlers ===
+
+async function handleUndoCommand(command: Extract<Command, { type: "undo_command" }>) {
+  const result = await AuditLogger.undoCommand(command.payload.auditLogId, command.payload.reason);
+  
+  if (!result.success) {
+    return NextResponse.json(
+      { error: result.message },
+      { status: 400 }
+    );
+  }
+  
+  if (result.undoCommand) {
+    // Execute the undo command by calling this same API recursively
+    const response = await fetch(new URL('/api/content/command', new URL(process.env.VERCEL_URL || 'http://localhost:3000')), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        command: result.undoCommand,
+        pin: process.env.ASSISTANT_ADMIN_PIN || '1234'
+      }),
+    });
+    
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: 'Failed to execute undo command' },
+        { status: 500 }
+      );
+    }
+  }
+  
+  return NextResponse.json({
+    success: true,
+    message: result.message,
+    undoCommand: result.undoCommand
+  });
+}
+
+async function handleViewAuditLogs(command: Extract<Command, { type: "view_audit_logs" }>) {
+  const { limit, offset, filterBy } = command.payload;
+  
+  const auditLogs = await AuditLogger.getAuditLogs(limit, offset, filterBy);
+  const stats = await AuditLogger.getAuditStats();
+  
+  return NextResponse.json({
+    success: true,
+    data: {
+      logs: auditLogs,
+      stats,
+      pagination: {
+        limit,
+        offset,
+        total: stats.totalEntries
+      }
+    }
+  });
+}
+
+async function handleClearAuditLogs(command: Extract<Command, { type: "clear_audit_logs" }>) {
+  const result = await AuditLogger.clearAuditLogs(
+    command.payload.olderThan,
+    command.payload.confirmationCode
+  );
+  
+  if (!result.success) {
+    return NextResponse.json(
+      { error: result.message },
+      { status: 400 }
+    );
+  }
+  
+  return NextResponse.json({
+    success: true,
+    message: result.message,
+    deletedCount: result.deletedCount
+  });
 }

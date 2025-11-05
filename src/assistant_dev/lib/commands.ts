@@ -1,5 +1,71 @@
 import { z } from "zod";
 
+// === Audit Log Schema ===
+
+export const AuditLogEntrySchema = z.object({
+  id: z.string().uuid(), // Unique identifier for the log entry
+  timestamp: z.string().datetime(), // ISO 8601 timestamp
+  command: z.any(), // The command that was executed (using CommandSchema)
+  userId: z.string().default("assistant"), // Who executed the command
+  sessionId: z.string().optional(), // Session identifier for batching related operations
+  executionResult: z.object({
+    success: z.boolean(),
+    message: z.string(),
+    executionTimeMs: z.number().optional()
+  }),
+  dataSnapshot: z.object({
+    before: z.any().optional(), // Data state before the command
+    after: z.any().optional(), // Data state after the command
+    affectedFile: z.string() // Which file was modified
+  }),
+  metadata: z.object({
+    userAgent: z.string().optional(),
+    ipAddress: z.string().optional(),
+    environment: z.enum(["development", "production"]).default("development"),
+    commandCategory: z.string(),
+    isDestructive: z.boolean(),
+    isUndoable: z.boolean()
+  })
+});
+
+export type AuditLogEntry = z.infer<typeof AuditLogEntrySchema>;
+
+// === Undo Operations ===
+
+export const UndoCommandSchema = z.object({
+  type: z.literal("undo_command"),
+  payload: z.object({
+    auditLogId: z.string().uuid(), // ID of the audit log entry to undo
+    reason: z.string().optional() // Optional reason for the undo
+  })
+});
+
+export const ViewAuditLogsSchema = z.object({
+  type: z.literal("view_audit_logs"),
+  payload: z.object({
+    limit: z.number().int().min(1).max(100).default(20), // Number of entries to return
+    offset: z.number().int().min(0).default(0), // Pagination offset
+    filterBy: z.object({
+      commandType: z.string().optional(), // Filter by specific command type
+      category: z.string().optional(), // Filter by command category
+      dateRange: z.object({
+        start: z.string().datetime().optional(),
+        end: z.string().datetime().optional()
+      }).optional(),
+      successOnly: z.boolean().optional(), // Only show successful operations
+      destructiveOnly: z.boolean().optional() // Only show destructive operations
+    }).optional()
+  })
+});
+
+export const ClearAuditLogsSchema = z.object({
+  type: z.literal("clear_audit_logs"),
+  payload: z.object({
+    olderThan: z.string().datetime().optional(), // Clear logs older than this date
+    confirmationCode: z.string().min(1, "Confirmation code required for clearing logs")
+  })
+});
+
 // === Project Operations ===
 
 export const AddProjectSchema = z.object({
@@ -187,6 +253,10 @@ export const CommandSchema = z.discriminatedUnion("type", [
   AddGoalSchema,
   UpdateGoalsSchema,
   RemoveGoalSchema,
+  // Audit operations
+  UndoCommandSchema,
+  ViewAuditLogsSchema,
+  ClearAuditLogsSchema,
   // No operation
   NoopSchema
 ]);
@@ -214,13 +284,21 @@ export const AboutCommands = z.union([
 
 export const GoalCommands = z.union([
   AddGoalSchema,
-  UpdateGoalsSchema
+  UpdateGoalsSchema,
+  RemoveGoalSchema
+]);
+
+export const AuditCommands = z.union([
+  UndoCommandSchema,
+  ViewAuditLogsSchema,
+  ClearAuditLogsSchema
 ]);
 
 export type ProjectCommand = z.infer<typeof ProjectCommands>;
 export type SkillCommand = z.infer<typeof SkillCommands>;
 export type AboutCommand = z.infer<typeof AboutCommands>;
 export type GoalCommand = z.infer<typeof GoalCommands>;
+export type AuditCommand = z.infer<typeof AuditCommands>;
 
 // === User-Facing Summary Functions ===
 
@@ -274,6 +352,26 @@ export function toUserFacingSummary(cmd: Command): string {
     case "remove_goal":
       return `Remove goal: "${cmd.payload.matchGoal}"`;
     
+    // Audit operations
+    case "undo_command":
+      return `Undo command: ${cmd.payload.auditLogId}${cmd.payload.reason ? ` - ${cmd.payload.reason}` : ""}`;
+    
+    case "view_audit_logs":
+      const filters = cmd.payload.filterBy;
+      let filterDesc = "";
+      if (filters) {
+        const parts = [];
+        if (filters.commandType) parts.push(`type: ${filters.commandType}`);
+        if (filters.category) parts.push(`category: ${filters.category}`);
+        if (filters.successOnly) parts.push("successful only");
+        if (filters.destructiveOnly) parts.push("destructive only");
+        if (parts.length > 0) filterDesc = ` (${parts.join(", ")})`;
+      }
+      return `View audit logs: ${cmd.payload.limit} entries${filterDesc}`;
+    
+    case "clear_audit_logs":
+      return `Clear audit logs${cmd.payload.olderThan ? ` older than ${cmd.payload.olderThan}` : " (all)"}`;
+    
     // No operation
     case "noop":
       return cmd.payload?.reason || "No action needed";
@@ -288,6 +386,8 @@ export function getCommandCategory(cmd: Command): string {
     case "add_project":
     case "update_project":
     case "remove_project":
+    case "reorder_projects":
+    case "adaptive_sort_projects":
       return "Projects";
     
     case "add_skill":
@@ -297,11 +397,18 @@ export function getCommandCategory(cmd: Command): string {
     
     case "update_about":
     case "add_role":
+    case "remove_role":
       return "About";
     
     case "add_goal":
     case "update_goals":
+    case "remove_goal":
       return "Goals";
+    
+    case "undo_command":
+    case "view_audit_logs":
+    case "clear_audit_logs":
+      return "Audit";
     
     case "noop":
       return "System";
@@ -312,7 +419,13 @@ export function getCommandCategory(cmd: Command): string {
 }
 
 export function isDestructiveCommand(cmd: Command): boolean {
-  return cmd.type === "remove_project";
+  return [
+    "remove_project",
+    "remove_skill", 
+    "remove_role",
+    "remove_goal",
+    "clear_audit_logs"
+  ].includes(cmd.type);
 }
 
 export function getFileTargetForCommand(cmd: Command): string {
@@ -338,6 +451,11 @@ export function getFileTargetForCommand(cmd: Command): string {
     case "update_goals":
     case "remove_goal":
       return "goals.json";
+    
+    case "undo_command":
+    case "view_audit_logs":
+    case "clear_audit_logs":
+      return "audit_logs.json";
     
     case "noop":
       return "";
@@ -399,4 +517,225 @@ export async function executeCommand(command: Command): Promise<{ success: boole
       message: `Execution failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
     };
   }
+}
+
+// === Audit Log Helper Functions ===
+
+/**
+ * Creates a new audit log entry for a command execution
+ */
+export function createAuditLogEntry(
+  command: Command,
+  executionResult: { success: boolean; message: string; executionTimeMs?: number },
+  dataSnapshot: { before?: any; after?: any; affectedFile: string },
+  metadata?: Partial<AuditLogEntry['metadata']>
+): AuditLogEntry {
+  return {
+    id: crypto.randomUUID(),
+    timestamp: new Date().toISOString(),
+    command,
+    userId: "assistant",
+    sessionId: undefined,
+    executionResult,
+    dataSnapshot,
+    metadata: {
+      environment: "development",
+      commandCategory: getCommandCategory(command),
+      isDestructive: isDestructiveCommand(command),
+      isUndoable: isUndoableCommand(command),
+      ...metadata
+    }
+  };
+}
+
+/**
+ * Determines if a command can be undone
+ */
+export function isUndoableCommand(cmd: Command): boolean {
+  // Most operations are undoable except for view operations and some system commands
+  const nonUndoableCommands = [
+    "view_audit_logs",
+    "noop"
+  ];
+  
+  return !nonUndoableCommands.includes(cmd.type);
+}
+
+/**
+ * Generates the inverse command for undoing an operation
+ */
+export function generateUndoCommand(auditLogEntry: AuditLogEntry): Command | null {
+  const originalCommand = auditLogEntry.command;
+  const { before, after, affectedFile } = auditLogEntry.dataSnapshot;
+
+  switch (originalCommand.type) {
+    case "add_project":
+      // Undo add by removing the project
+      return {
+        type: "remove_project",
+        payload: {
+          matchTitle: originalCommand.payload.title
+        }
+      };
+
+    case "remove_project":
+      // Undo remove by adding the project back
+      if (before && Array.isArray(before)) {
+        const removedProject = before.find((p: any) => p.title === originalCommand.payload.matchTitle);
+        if (removedProject) {
+          return {
+            type: "add_project",
+            payload: removedProject
+          };
+        }
+      }
+      break;
+
+    case "update_project":
+      // Undo update by reverting to previous values
+      if (before && Array.isArray(before)) {
+        const originalProject = before.find((p: any) => p.title === originalCommand.payload.matchTitle);
+        if (originalProject) {
+          // Create a patch with the original values for the fields that were changed
+          const revertPatch: Record<string, any> = {};
+          Object.keys(originalCommand.payload.patch).forEach(key => {
+            if (key in originalProject) {
+              revertPatch[key] = originalProject[key];
+            }
+          });
+          
+          return {
+            type: "update_project",
+            payload: {
+              matchTitle: originalCommand.payload.matchTitle,
+              patch: revertPatch
+            }
+          };
+        }
+      }
+      break;
+
+    case "add_skill":
+      return {
+        type: "remove_skill",
+        payload: {
+          matchName: originalCommand.payload.name
+        }
+      };
+
+    case "remove_skill":
+      if (before && Array.isArray(before)) {
+        const removedSkill = before.find((s: any) => s.name === originalCommand.payload.matchName);
+        if (removedSkill) {
+          return {
+            type: "add_skill",
+            payload: removedSkill
+          };
+        }
+      }
+      break;
+
+    case "update_skill":
+      if (before && Array.isArray(before)) {
+        const originalSkill = before.find((s: any) => s.name === originalCommand.payload.matchName);
+        if (originalSkill) {
+          const revertPatch: Record<string, any> = {};
+          Object.keys(originalCommand.payload.patch).forEach(key => {
+            if (key in originalSkill) {
+              revertPatch[key] = originalSkill[key];
+            }
+          });
+          
+          return {
+            type: "update_skill",
+            payload: {
+              matchName: originalCommand.payload.matchName,
+              patch: revertPatch
+            }
+          };
+        }
+      }
+      break;
+
+    case "reorder_projects":
+    case "adaptive_sort_projects":
+      // For reordering, we can restore the exact previous order
+      if (before && Array.isArray(before)) {
+        return {
+          type: "reorder_projects",
+          payload: {
+            strategy: "custom_order",
+            customOrder: before.map((p: any) => p.title),
+            description: `Undo ${originalCommand.type}`
+          }
+        };
+      }
+      break;
+
+    // Add more undo logic for other command types as needed...
+    
+    default:
+      return null; // Cannot undo this command type
+  }
+
+  return null;
+}
+
+/**
+ * Formats audit log entries for display
+ */
+export function formatAuditLogForDisplay(entry: AuditLogEntry): string {
+  const timestamp = new Date(entry.timestamp).toLocaleString();
+  const status = entry.executionResult.success ? "✅" : "❌";
+  const category = entry.metadata.commandCategory;
+  const summary = toUserFacingSummary(entry.command);
+  
+  return `${status} [${timestamp}] ${category}: ${summary}`;
+}
+
+/**
+ * Filters audit logs based on criteria
+ */
+export function filterAuditLogs(
+  logs: AuditLogEntry[], 
+  filters: NonNullable<z.infer<typeof ViewAuditLogsSchema>['payload']['filterBy']>
+): AuditLogEntry[] {
+  return logs.filter(log => {
+    // Filter by command type
+    if (filters.commandType && log.command.type !== filters.commandType) {
+      return false;
+    }
+
+    // Filter by category
+    if (filters.category && log.metadata.commandCategory !== filters.category) {
+      return false;
+    }
+
+    // Filter by success status
+    if (filters.successOnly && !log.executionResult.success) {
+      return false;
+    }
+
+    // Filter by destructive operations
+    if (filters.destructiveOnly && !log.metadata.isDestructive) {
+      return false;
+    }
+
+    // Filter by date range
+    if (filters.dateRange) {
+      const logTime = new Date(log.timestamp).getTime();
+      
+      if (filters.dateRange.start) {
+        const startTime = new Date(filters.dateRange.start).getTime();
+        if (logTime < startTime) return false;
+      }
+      
+      if (filters.dateRange.end) {
+        const endTime = new Date(filters.dateRange.end).getTime();
+        if (logTime > endTime) return false;
+      }
+    }
+
+    return true;
+  });
 }
