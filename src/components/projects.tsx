@@ -8,7 +8,25 @@ import {
   SiTailwindcss,
   SiNextdotjs,
   SiTypescript,
-  SiFlutter
+  SiFlutter,
+  SiJavascript,
+  SiHtml5,
+  SiCss3,
+  SiVuedotjs,
+  SiAngular,
+  SiNodedotjs,
+  SiExpress,
+  SiPython,
+  SiCplusplus,
+  SiPhp,
+  SiMongodb,
+  SiMysql,
+  SiPostgresql,
+  SiDart,
+  SiGit,
+  SiDocker,
+  SiVercel,
+  SiNetlify
 } from "react-icons/si";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
@@ -29,12 +47,40 @@ type Project = {
 
 // Icon mapping for tech stack
 const techIcons: Record<string, React.ReactElement> = {
+  // Frontend
   "Next.js": <SiNextdotjs key="nextjs" />,
-  "TypeScript": <SiTypescript key="typescript" />,
-  "Tailwind CSS": <SiTailwindcss key="tailwind" />,
-  "Firebase": <SiFirebase key="firebase" />,
   "React": <SiReact key="react" />,
+  "TypeScript": <SiTypescript key="typescript" />,
+  "JavaScript": <SiJavascript key="javascript" />,
+  "HTML": <SiHtml5 key="html5" />,
+  "CSS": <SiCss3 key="css3" />,
+  "Tailwind CSS": <SiTailwindcss key="tailwind" />,
+  "Vue.js": <SiVuedotjs key="vuejs" />,
+  "Angular": <SiAngular key="angular" />,
+  
+  // Backend
+  "Node.js": <SiNodedotjs key="nodejs" />,
+  "Express": <SiExpress key="express" />,
+  "Python": <SiPython key="python" />,
+  "C++": <SiCplusplus key="cplusplus" />,
+  "PHP": <SiPhp key="php" />,
+  
+  // Databases
+  "MongoDB": <SiMongodb key="mongodb" />,
+  "MySQL": <SiMysql key="mysql" />,
+  "PostgreSQL": <SiPostgresql key="postgresql" />,
+  "Firebase": <SiFirebase key="firebase" />,
+  
+  // Mobile
   "Flutter": <SiFlutter key="flutter" />,
+  "React Native": <SiReact key="reactnative" />,
+  "Dart": <SiDart key="dart" />,
+  
+  // Tools & Others
+  "Git": <SiGit key="git" />,
+  "Docker": <SiDocker key="docker" />,
+  "Vercel": <SiVercel key="vercel" />,
+  "Netlify": <SiNetlify key="netlify" />,
 };
 
 // FloatingParticles component to avoid hydration mismatch

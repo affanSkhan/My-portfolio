@@ -113,6 +113,7 @@ Add project:
 }
 
 VALID PROJECT STATUS: "planning", "in-progress", "completed"
+VALID TECHNOLOGIES (for stack array): "Next.js", "React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Vue.js", "Angular", "Node.js", "Express", "Python", "C++", "PHP", "MongoDB", "MySQL", "PostgreSQL", "Firebase", "Flutter", "React Native", "Dart", "Git", "Docker", "Vercel", "Netlify"
 
 Update project:
 {
@@ -223,6 +224,7 @@ IMPORTANT:
 CRITICAL ENUM VALUES:
 - Project status MUST be: "planning", "in-progress", or "completed" (NOT "planned")
 - Skill category MUST be: "Frontend", "Backend", "Mobile", "AI/ML", "Databases", or "Tools" (NOT "Programming Languages")
+- Technology stack SHOULD use standard names: "React", "Next.js", "TypeScript", "Firebase", "Flutter", etc. (for proper icon display)
 
 User says: ${latestMessage}
 
