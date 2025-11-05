@@ -95,21 +95,6 @@ export default function ChatWidget() {
     setMessages(m => [...m, { role:"assistant", content: data.reply }]);
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === "Enter") {
-      if (e.shiftKey) {
-        // Shift+Enter: Allow default behavior (new line)
-        // Don't prevent default - let the textarea handle it naturally
-        return;
-      } else {
-        // Regular Enter: Send message
-        e.preventDefault();
-        send();
-      }
-    }
-    // For all other keys (including space), let them work normally
-  }
-
   async function tryLogin() {
     const pin = prompt("Enter 4-digit PIN");
     if (!pin) return;
@@ -183,8 +168,13 @@ export default function ChatWidget() {
                 <textarea
                   value={input} 
                   onChange={e=>setInput(e.target.value)} 
-                  onKeyDown={handleKeyDown}
-                  placeholder="Type your message..."
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      send();
+                    }
+                  }}
+                  placeholder="Type your message... (Enter to send, Shift+Enter for new line)"
                   className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none resize-none min-h-[40px] max-h-[120px]"
                   rows={Math.min(6, Math.max(1, input.split('\n').length))}
                 />
