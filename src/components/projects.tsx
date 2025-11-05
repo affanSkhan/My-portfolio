@@ -57,93 +57,164 @@ type Project = {
   lessons: string[];
 };
 
-// Icon mapping for tech stack
+// Icon mapping for tech stack with colorful styling
 const techIcons: Record<string, React.ReactElement> = {
-  // Frontend
-  "Next.js": <SiNextdotjs key="nextjs" />,
-  "React": <SiReact key="react" />,
-  "TypeScript": <SiTypescript key="typescript" />,
-  "JavaScript": <SiJavascript key="javascript" />,
-  "HTML": <SiHtml5 key="html5" />,
-  "CSS": <SiCss3 key="css3" />,
-  "Tailwind CSS": <SiTailwindcss key="tailwind" />,
-  "Vue.js": <SiVuedotjs key="vuejs" />,
-  "Angular": <SiAngular key="angular" />,
+  // Frontend Frameworks & Libraries
+  "Next.js": <SiNextdotjs key="nextjs" className="text-white" />,
+  "React": <SiReact key="react" className="text-cyan-400" />,
+  "TypeScript": <SiTypescript key="typescript" className="text-blue-500" />,
+  "JavaScript": <SiJavascript key="javascript" className="text-yellow-400" />,
+  "HTML": <SiHtml5 key="html5" className="text-orange-500" />,
+  "CSS": <SiCss3 key="css3" className="text-blue-400" />,
+  "Tailwind CSS": <SiTailwindcss key="tailwind" className="text-teal-400" />,
+  "Vue.js": <SiVuedotjs key="vuejs" className="text-green-500" />,
+  "Angular": <SiAngular key="angular" className="text-red-500" />,
+  "Svelte": <SiNextdotjs key="svelte" className="text-orange-400" />,
+  "Bootstrap": <SiReact key="bootstrap" className="text-purple-500" />,
   
-  // Backend
-  "Node.js": <SiNodedotjs key="nodejs" />,
-  "Express": <SiExpress key="express" />,
-  "Python": <SiPython key="python" />,
-  "C++": <SiCplusplus key="cplusplus" />,
-  "PHP": <SiPhp key="php" />,
-  "SQL": <TbSql key="sql" className="text-blue-700" />,
+  // Backend Technologies
+  "Node.js": <SiNodedotjs key="nodejs" className="text-green-500" />,
+  "Express": <SiExpress key="express" className="text-gray-400" />,
+  "Python": <SiPython key="python" className="text-yellow-400" />,
+  "Java": <SiJavascript key="java" className="text-red-500" />,
+  "C++": <SiCplusplus key="cplusplus" className="text-blue-600" />,
+  "C#": <SiCplusplus key="csharp" className="text-purple-600" />,
+  "Go": <SiNodedotjs key="golang" className="text-cyan-400" />,
+  "Rust": <SiCplusplus key="rust" className="text-orange-600" />,
+  "PHP": <SiPhp key="php" className="text-indigo-400" />,
+  "Ruby": <SiCplusplus key="ruby" className="text-red-400" />,
+  "SQL": <TbSql key="sql" className="text-blue-500" />,
   
-  // Databases
-  "MongoDB": <SiMongodb key="mongodb" />,
-  "MySQL": <SiMysql key="mysql" />,
-  "PostgreSQL": <SiPostgresql key="postgresql" />,
-  "Firebase": <SiFirebase key="firebase" />,
-  "BigQuery": <SiGooglecloud key="bigquery" className="text-blue-600" />,
+  // Databases & Storage
+  "MongoDB": <SiMongodb key="mongodb" className="text-green-500" />,
+  "MySQL": <SiMysql key="mysql" className="text-blue-600" />,
+  "PostgreSQL": <SiPostgresql key="postgresql" className="text-blue-500" />,
+  "Firebase": <SiFirebase key="firebase" className="text-orange-400" />,
+  "Redis": <SiMongodb key="redis" className="text-red-500" />,
+  "SQLite": <SiMysql key="sqlite" className="text-blue-400" />,
+  "Supabase": <SiFirebase key="supabase" className="text-green-400" />,
+  "BigQuery": <SiGooglecloud key="bigquery" className="text-blue-500" />,
   
-  // Cloud & GCP Services
-  "Google Cloud Storage": <SiGooglecloud key="gcs" className="text-blue-500" />,
+  // Cloud & DevOps
+  "AWS": <SiGooglecloud key="aws" className="text-orange-400" />,
+  "Azure": <SiGooglecloud key="azure" className="text-blue-500" />,
+  "Google Cloud": <SiGooglecloud key="googlecloud" className="text-blue-500" />,
+  "GCP": <SiGooglecloud key="gcp" className="text-blue-500" />,
+  "Google Cloud Storage": <SiGooglecloud key="gcs" className="text-blue-400" />,
   "Cloud Composer (Airflow)": <SiApacheairflow key="airflow" className="text-red-500" />,
-  "Looker Studio": <SiLooker key="looker" className="text-purple-600" />,
-  "GCP": <SiGooglecloud key="gcp" className="text-blue-600" />,
-  "Google Cloud": <SiGooglecloud key="googlecloud" className="text-blue-600" />,
+  "Looker Studio": <SiLooker key="looker" className="text-purple-500" />,
   "Airflow": <SiApacheairflow key="airflow-alt" className="text-red-500" />,
+  "Docker": <SiDocker key="docker" className="text-blue-400" />,
+  "Kubernetes": <SiDocker key="k8s" className="text-blue-600" />,
+  "Terraform": <SiDocker key="terraform" className="text-purple-500" />,
+  "Jenkins": <SiDocker key="jenkins" className="text-orange-500" />,
   
-  // Mobile
-  "Flutter": <SiFlutter key="flutter" />,
-  "React Native": <SiReact key="reactnative" />,
-  "Dart": <SiDart key="dart" />,
+  // Mobile Development
+  "Flutter": <SiFlutter key="flutter" className="text-blue-400" />,
+  "React Native": <SiReact key="reactnative" className="text-cyan-400" />,
+  "Dart": <SiDart key="dart" className="text-blue-500" />,
+  "Swift": <SiDart key="swift" className="text-orange-500" />,
+  "Kotlin": <SiDart key="kotlin" className="text-purple-500" />,
+  "Ionic": <SiReact key="ionic" className="text-blue-400" />,
   
-  // AI/ML Libraries
-  "NumPy": <TbMathSymbols key="numpy" className="text-blue-600" />,
-  "Pandas": <TbDatabase key="pandas" className="text-green-600" />,
-  "Scikit-Learn": <TbChartLine key="sklearn" className="text-orange-600" />,
+  // AI/ML & Data Science
   "TensorFlow": <TbBrain key="tensorflow" className="text-orange-500" />,
+  "PyTorch": <TbBrain key="pytorch" className="text-red-500" />,
+  "Keras": <TbBrain key="keras" className="text-red-400" />,
+  "Scikit-Learn": <TbChartLine key="sklearn" className="text-orange-500" />,
+  "NumPy": <TbMathSymbols key="numpy" className="text-blue-500" />,
+  "Pandas": <TbDatabase key="pandas" className="text-purple-500" />,
+  "Matplotlib": <TbChartLine key="matplotlib" className="text-blue-400" />,
+  "Seaborn": <TbChartLine key="seaborn" className="text-teal-400" />,
+  "OpenCV": <TbBrain key="opencv" className="text-green-500" />,
+  "Jupyter": <TbMathSymbols key="jupyter" className="text-orange-400" />,
   
   // Data & Analytics
-  "Data Pipeline": <TbAnalyze key="datapipeline" className="text-purple-600" />,
-  "ETL": <TbCloudComputing key="etl" className="text-green-600" />,
-  "Data Warehouse": <TbDatabase key="datawarehouse" className="text-blue-600" />,
+  "Data Pipeline": <TbAnalyze key="datapipeline" className="text-purple-500" />,
+  "ETL": <TbCloudComputing key="etl" className="text-green-500" />,
+  "Data Warehouse": <TbDatabase key="datawarehouse" className="text-blue-500" />,
+  "Apache Spark": <TbAnalyze key="spark" className="text-orange-500" />,
+  "Kafka": <TbAnalyze key="kafka" className="text-gray-400" />,
+  "Elasticsearch": <TbDatabase key="elasticsearch" className="text-yellow-400" />,
   
-  // Tools & Others
-  "Git": <SiGit key="git" />,
-  "Docker": <SiDocker key="docker" />,
-  "Vercel": <SiVercel key="vercel" />,
-  "Netlify": <SiNetlify key="netlify" />,
+  // Development Tools
+  "Git": <SiGit key="git" className="text-orange-500" />,
+  "GitHub": <SiGit key="github" className="text-gray-400" />,
+  "GitLab": <SiGit key="gitlab" className="text-orange-600" />,
+  "VS Code": <SiTypescript key="vscode" className="text-blue-500" />,
+  "IntelliJ": <SiJavascript key="intellij" className="text-blue-600" />,
+  "Postman": <SiExpress key="postman" className="text-orange-500" />,
+  "Figma": <SiReact key="figma" className="text-pink-400" />,
+  "Adobe XD": <SiReact key="adobexd" className="text-purple-500" />,
+  
+  // Deployment & Hosting
+  "Vercel": <SiVercel key="vercel" className="text-white" />,
+  "Netlify": <SiNetlify key="netlify" className="text-teal-400" />,
+  "Heroku": <SiNetlify key="heroku" className="text-purple-500" />,
+  "Railway": <SiVercel key="railway" className="text-purple-400" />,
+  "DigitalOcean": <SiGooglecloud key="digitalocean" className="text-blue-500" />,
+  
+  // Testing & Quality
+  "Jest": <SiJavascript key="jest" className="text-red-500" />,
+  "Cypress": <SiJavascript key="cypress" className="text-green-500" />,
+  "Playwright": <SiTypescript key="playwright" className="text-green-400" />,
+  "ESLint": <SiJavascript key="eslint" className="text-purple-500" />,
+  "Prettier": <SiJavascript key="prettier" className="text-pink-400" />,
+  
+  // Other Popular Technologies
+  "GraphQL": <SiReact key="graphql" className="text-pink-500" />,
+  "REST API": <SiExpress key="restapi" className="text-green-500" />,
+  "WebSocket": <SiNodedotjs key="websocket" className="text-blue-400" />,
+  "PWA": <SiReact key="pwa" className="text-purple-500" />,
+  "Electron": <SiJavascript key="electron" className="text-cyan-400" />,
+  "Three.js": <SiJavascript key="threejs" className="text-white" />,
+  "D3.js": <SiJavascript key="d3js" className="text-orange-500" />,
+  "Chart.js": <TbChartLine key="chartjs" className="text-pink-400" />,
 };
 
-// Function to render tech stack item with fallback to text
+// Function to render tech stack item with colorful styling and hover effects
 function renderTechItem(tech: string, index: number) {
   const icon = techIcons[tech];
   
   if (icon) {
     return (
-      <div
+      <motion.div
         key={index}
-        className="group relative flex items-center gap-1 px-2 py-1 bg-white/5 backdrop-blur-sm rounded-md border border-white/10 hover:border-white/20 transition-all duration-300"
+        className="group relative flex items-center gap-1 px-3 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20"
         title={tech}
+        whileHover={{ 
+          scale: 1.1,
+          boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
+        }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <span className="text-sm opacity-80 group-hover:opacity-100 transition-opacity">
+        <span className="text-lg opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-lg">
           {icon}
         </span>
-      </div>
-    );
-  } else {
-    // Fallback: show tech name as text
-    return (
-      <div
-        key={index}
-        className="group relative flex items-center gap-1 px-2 py-1 bg-white/5 backdrop-blur-sm rounded-md border border-white/10 hover:border-white/20 transition-all duration-300"
-        title={tech}
-      >
-        <span className="text-xs font-medium opacity-80 group-hover:opacity-100 transition-opacity">
+        <span className="text-xs font-medium text-zinc-700 dark:text-white/80 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300 hidden sm:block">
           {tech}
         </span>
-      </div>
+      </motion.div>
+    );
+  } else {
+    // Fallback: show tech name as text with colorful styling
+    return (
+      <motion.div
+        key={index}
+        className="group relative flex items-center gap-1 px-3 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-lg border border-purple-300/30 hover:border-purple-300/60 transition-all duration-300"
+        title={tech}
+        whileHover={{ 
+          scale: 1.05,
+          boxShadow: "0 0 15px rgba(168, 85, 247, 0.4)",
+        }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      >
+        <span className="text-xs font-bold text-purple-700 dark:text-purple-200 group-hover:text-purple-900 dark:group-hover:text-white transition-colors duration-300">
+          {tech}
+        </span>
+      </motion.div>
     );
   }
 }
@@ -197,7 +268,9 @@ export default function Projects() {
           throw new Error(`Failed to fetch projects: ${res.status}`);
         }
         const data = await res.json();
-        setProjects(data);
+        // Handle both array format and object format
+        const projectsArray = Array.isArray(data) ? data : data.projects || [];
+        setProjects(projectsArray);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load projects");
         console.error("Error fetching projects:", err);
@@ -304,9 +377,12 @@ export default function Projects() {
                     {/* FRONT SIDE */}
                     <div className="absolute w-full h-full backface-hidden bg-white/80 dark:bg-zinc-900/80 border border-white/30 dark:border-zinc-700/60 rounded-xl p-6 shadow-xl flex flex-col justify-between backdrop-blur-lg">
                       <div>
-                        <h3 className="text-xl font-bold text-zinc-800 dark:text-white mb-2">{project.title}</h3>
-                        <div className="flex flex-wrap gap-2 text-sm">
+                        <h3 className="text-xl font-bold text-zinc-800 dark:text-white mb-3">{project.title}</h3>
+                        <div className="flex flex-wrap gap-2 mb-3">
                           {project.stack.map((tech, i) => renderTechItem(tech, i))}
+                        </div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400 bg-zinc-100/50 dark:bg-zinc-800/50 px-2 py-1 rounded-md">
+                          {project.year} • {project.status}
                         </div>
                       </div>
                       <p className="text-sm text-zinc-500 mt-4">Tap or hover to flip</p>
