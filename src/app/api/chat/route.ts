@@ -511,7 +511,40 @@ User: ${latestMessage}
 
 // Execute validated commands
 async function executeCommand(command: Command): Promise<{ success: boolean; message: string }> {
+  const startTime = Date.now();
+  let beforeSnapshot: unknown = null;
+  let executionResult = { success: false, message: "", executionTimeMs: 0 };
+
   try {
+    // Import audit logger for this operation
+    const { default: AuditLogger } = await import('@/assistant_dev/lib/audit-logger');
+    const { getFileTargetForCommand } = await import('@/assistant_dev/lib/commands');
+    
+    // Helper function to execute and log commands
+    const executeAndLog = async (operation: () => Promise<{ success: boolean; message: string }>) => {
+      const result = await operation();
+      executionResult = {
+        ...result,
+        executionTimeMs: Date.now() - startTime
+      };
+
+      // Capture after snapshot and log the operation
+      const afterSnapshot = affectedFile ? await readJson(affectedFile).catch(() => null) : null;
+      await AuditLogger.logCommand(command, executionResult, beforeSnapshot, afterSnapshot);
+      
+      return result;
+    };
+    
+    // Capture before snapshot for audit logging
+    const affectedFile = getFileTargetForCommand(command);
+    if (affectedFile && !["view_audit_logs", "noop"].includes(command.type)) {
+      try {
+        beforeSnapshot = await readJson(affectedFile);
+      } catch (error) {
+        // File might not exist yet, that's okay
+        beforeSnapshot = null;
+      }
+    }
     
     if (command.type === "noop") {
       return { 
@@ -758,7 +791,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
 
     // Handle skill operations
     if (command.type === "add_skill") {
-      try {
+      return await executeAndLog(async () => {
         const skills = await readJson('skills.json');
         if (!Array.isArray(skills)) {
           return { success: false, message: "❌ Skills data is not an array" };
@@ -767,9 +800,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         skills.push(command.payload);
         await writeJson('skills.json', skills);
         return { success: true, message: `✅ Added skill "${command.payload.name}"` };
-      } catch (error) {
-        return { success: false, message: `Failed to add skill: ${error instanceof Error ? error.message : 'Unknown error'}` };
-      }
+      });
     }
 
     if (command.type === "update_skill") {
@@ -793,7 +824,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
     }
 
     if (command.type === "remove_skill") {
-      try {
+      return await executeAndLog(async () => {
         const skills = await readJson('skills.json');
         if (!Array.isArray(skills)) {
           return { success: false, message: "❌ Skills data is not an array" };
@@ -808,9 +839,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         skills.splice(index, 1);
         await writeJson('skills.json', skills);
         return { success: true, message: `✅ Removed skill "${removedName}"` };
-      } catch (error) {
-        return { success: false, message: `Failed to remove skill: ${error instanceof Error ? error.message : 'Unknown error'}` };
-      }
+      });
     }
 
     // Handle about operations
@@ -1003,16 +1032,41 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
       }
     }
     
-    return { 
-      success: false, 
-      message: `❌ Command type not yet implemented` 
+    
+    // This should never be reached if all command types are handled
+    executionResult = {
+      success: false,
+      message: `❌ Command type not yet implemented`,
+      executionTimeMs: Date.now() - startTime
     };
+
+    // Log the unimplemented command
+    try {
+      const { default: AuditLogger } = await import('@/assistant_dev/lib/audit-logger');
+      await AuditLogger.logCommand(command, executionResult, beforeSnapshot);
+    } catch (auditError) {
+      console.error("Failed to log audit entry:", auditError);
+    }
+
+    return executionResult;
 
   } catch (error) {
     console.error("Command execution error:", error);
-    return { 
-      success: false, 
-      message: `❌ Failed to execute command: ${error instanceof Error ? error.message : "Unknown error"}` 
+    
+    // Log the failed execution
+    executionResult = {
+      success: false,
+      message: `❌ Failed to execute command: ${error instanceof Error ? error.message : "Unknown error"}`,
+      executionTimeMs: Date.now() - startTime
     };
+
+    try {
+      const { default: AuditLogger } = await import('@/assistant_dev/lib/audit-logger');
+      await AuditLogger.logCommand(command, executionResult, beforeSnapshot);
+    } catch (auditError) {
+      console.error("Failed to log audit entry:", auditError);
+    }
+    
+    return executionResult;
   }
 }
