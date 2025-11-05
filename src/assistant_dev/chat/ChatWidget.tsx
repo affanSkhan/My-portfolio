@@ -5,6 +5,67 @@ import { Send, X, MessageCircle, Lock, Globe } from "lucide-react";
 
 type Mode = "public" | "private";
 
+// Simple markdown-to-JSX converter for basic formatting
+function formatMessage(content: string) {
+  // Split by lines to preserve line breaks
+  const lines = content.split('\n');
+  
+  return lines.map((line, lineIndex) => {
+    // Handle list items
+    if (line.trim().startsWith('•') || line.trim().startsWith('-')) {
+      return (
+        <div key={lineIndex} className="ml-4">
+          {formatInlineMarkdown(line)}
+        </div>
+      );
+    }
+    
+    // Handle headers
+    if (line.trim().startsWith('#')) {
+      const level = line.match(/^#+/)?.[0].length || 1;
+      const text = line.replace(/^#+\s*/, '');
+      const headerClass = level === 1 ? "text-lg font-bold" : 
+                         level === 2 ? "text-base font-semibold" : "text-sm font-medium";
+      return (
+        <div key={lineIndex} className={`${headerClass} mt-2 mb-1`}>
+          {formatInlineMarkdown(text)}
+        </div>
+      );
+    }
+    
+    return (
+      <span key={lineIndex}>
+        {formatInlineMarkdown(line)}
+        {lineIndex < lines.length - 1 && <br />}
+      </span>
+    );
+  });
+}
+
+function formatInlineMarkdown(text: string) {
+  // Convert markdown formatting to JSX
+  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`|~~.*?~~)/);
+  
+  return parts.map((part, partIndex) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      // Bold text
+      return <strong key={partIndex}>{part.slice(2, -2)}</strong>;
+    } else if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+      // Italic text
+      return <em key={partIndex}>{part.slice(1, -1)}</em>;
+    } else if (part.startsWith('`') && part.endsWith('`')) {
+      // Code text
+      return <code key={partIndex} className="bg-zinc-200 dark:bg-zinc-700 px-1 rounded text-xs">{part.slice(1, -1)}</code>;
+    } else if (part.startsWith('~~') && part.endsWith('~~')) {
+      // Strikethrough text
+      return <del key={partIndex}>{part.slice(2, -2)}</del>;
+    } else {
+      // Regular text
+      return part;
+    }
+  });
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("public");
@@ -32,6 +93,28 @@ export default function ChatWidget() {
     });
     const data = await res.json();
     setMessages(m => [...m, { role:"assistant", content: data.reply }]);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter") {
+      if (e.ctrlKey) {
+        // Ctrl+Enter: Add new line
+        const textarea = e.currentTarget;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const newValue = input.substring(0, start) + '\n' + input.substring(end);
+        setInput(newValue);
+        
+        // Set cursor position after the new line
+        setTimeout(() => {
+          textarea.selectionStart = textarea.selectionEnd = start + 1;
+        }, 0);
+      } else {
+        // Regular Enter: Send message
+        e.preventDefault();
+        send();
+      }
+    }
   }
 
   async function tryLogin() {
@@ -94,26 +177,36 @@ export default function ChatWidget() {
             <div ref={listRef} className="max-h-[60vh] overflow-y-auto p-3 space-y-3">
               {messages.map((m, i) => (
                 <div key={i} className={`text-sm ${m.role==="assistant"?"bg-zinc-100 dark:bg-zinc-800":"bg-indigo-50 dark:bg-indigo-900/30"} p-3 rounded-lg`}>
-                  {m.content}
+                  <div className="whitespace-pre-wrap">
+                    {m.role === "assistant" ? formatMessage(m.content) : m.content}
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Input */}
-            <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 flex gap-2">
-              <input
-                value={input} onChange={e=>setInput(e.target.value)} placeholder="Type your message..."
-                className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none"
-                onKeyDown={e => e.key === "Enter" && send()}
-              />
-              <button 
-                onClick={send} 
-                className="px-3 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700"
-                title="Send message"
-                aria-label="Send message"
-              >
-                <Send className="w-4 h-4" />
-              </button>
+            <div className="p-3 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="flex gap-2 items-end">
+                <textarea
+                  value={input} 
+                  onChange={e=>setInput(e.target.value)} 
+                  onKeyDown={handleKeyDown}
+                  placeholder="Type your message... (Enter to send, Ctrl+Enter for new line)"
+                  className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none resize-none min-h-[40px] max-h-[120px]"
+                  rows={Math.min(6, Math.max(1, input.split('\n').length))}
+                />
+                <button 
+                  onClick={send} 
+                  className="px-3 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 shrink-0"
+                  title="Send message (Enter)"
+                  aria-label="Send message"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="text-xs text-zinc-500 mt-1">
+                Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send, <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Ctrl+Enter</kbd> for new line
+              </div>
             </div>
           </motion.div>
         )}
