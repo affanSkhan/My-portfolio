@@ -138,5 +138,18 @@
     "featured": false,
     "status": "planning",
     "lessons": []
+  },
+  {
+    "title": "New Project Title",
+    "description": "A description of this new project.",
+    "stack": [],
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": false,
+    "status": "planning",
+    "lessons": []
   }
 ]
