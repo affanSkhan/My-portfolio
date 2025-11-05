@@ -98,23 +98,16 @@ export default function ChatWidget() {
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter") {
       if (e.shiftKey) {
-        // Shift+Enter: Add new line
-        const textarea = e.currentTarget;
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const newValue = input.substring(0, start) + '\n' + input.substring(end);
-        setInput(newValue);
-        
-        // Set cursor position after the new line
-        setTimeout(() => {
-          textarea.selectionStart = textarea.selectionEnd = start + 1;
-        }, 0);
+        // Shift+Enter: Allow default behavior (new line)
+        // Don't prevent default - let the textarea handle it naturally
+        return;
       } else {
         // Regular Enter: Send message
         e.preventDefault();
         send();
       }
     }
+    // For all other keys (including space), let them work normally
   }
 
   async function tryLogin() {
@@ -191,7 +184,7 @@ export default function ChatWidget() {
                   value={input} 
                   onChange={e=>setInput(e.target.value)} 
                   onKeyDown={handleKeyDown}
-                  placeholder="Type your message... (Enter to send, Shift+Enter for new line)"
+                  placeholder="Type your message..."
                   className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none resize-none min-h-[40px] max-h-[120px]"
                   rows={Math.min(6, Math.max(1, input.split('\n').length))}
                 />
