@@ -136,6 +136,28 @@ export async function POST(req: Request) {
         readJson("skills.json"),
         readJson("goals.json")
       ]);
+
+      // Get recent audit logs for undo operations context
+      let auditContext = "";
+      if (mode === "private" && pinOk) {
+        try {
+          const { default: AuditLogger } = await import('@/assistant_dev/lib/audit-logger');
+          const recentLogs = await AuditLogger.getAuditLogs(5, 0); // Get last 5 operations
+          if (recentLogs.length > 0) {
+            auditContext = `
+RECENT OPERATIONS (for undo commands):
+${recentLogs.map((log, index) => {
+  const timestamp = new Date(log.timestamp).toLocaleString();
+  const status = log.executionResult.success ? "✅" : "❌";
+  const summary = toUserFacingSummary(log.command);
+  return `${index + 1}. ${status} [${timestamp}] ${summary}\n   ID: ${log.id}`;
+}).join('\n')}
+`;
+          }
+        } catch (error) {
+          console.error("Failed to load audit context:", error);
+        }
+      }
       
       portfolioContext = `
 CURRENT PORTFOLIO CONTEXT:
@@ -143,7 +165,7 @@ About: ${JSON.stringify(about, null, 2)}
 All Projects: ${JSON.stringify(projects, null, 2)}
 Skills Summary: ${JSON.stringify(Array.isArray(skills) ? skills.slice(0, 10) : skills, null, 2)}
 Goals: ${JSON.stringify(goals, null, 2)}
-`;
+${auditContext}`;
     } catch (error) {
       console.error("Failed to load portfolio context:", error);
     }
@@ -290,8 +312,28 @@ Undo command:
 {
   "type": "undo_command", 
   "payload": {
-    "auditLogId": "uuid-from-audit-log",
-    "reason": "Accidental change"
+    "auditLogId": "9a31cbf3-ce59-469b-8f51-cc72bc47c7c0",
+    "reason": "User requested undo"
+  }
+}
+
+IMPORTANT FOR UNDO COMMANDS:
+- Use the EXACT audit log ID from RECENT OPERATIONS above
+- For "undo that [operation]", find the matching operation in recent logs
+- For "undo", use the most recent operation's ID
+- Example: If user says "undo that Go skill addition", find the "Add skill: Go" entry and use its ID
+
+UNDO EXAMPLE WALKTHROUGH:
+If RECENT OPERATIONS shows:
+1. ✅ [timestamp] Add skill: Go (Frontend, level 90%)
+   ID: 9a31cbf3-ce59-469b-8f51-cc72bc47c7c0
+
+And user says "undo that go skill addition", generate:
+{
+  "type": "undo_command",
+  "payload": {
+    "auditLogId": "9a31cbf3-ce59-469b-8f51-cc72bc47c7c0",
+    "reason": "User requested undo of Go skill"
   }
 }
 
