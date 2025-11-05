@@ -97,8 +97,8 @@ export default function ChatWidget() {
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter") {
-      if (e.ctrlKey) {
-        // Ctrl+Enter: Add new line
+      if (e.shiftKey) {
+        // Shift+Enter: Add new line
         const textarea = e.currentTarget;
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
@@ -191,7 +191,7 @@ export default function ChatWidget() {
                   value={input} 
                   onChange={e=>setInput(e.target.value)} 
                   onKeyDown={handleKeyDown}
-                  placeholder="Type your message... (Enter to send, Ctrl+Enter for new line)"
+                  placeholder="Type your message... (Enter to send, Shift+Enter for new line)"
                   className="flex-1 px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 outline-none resize-none min-h-[40px] max-h-[120px]"
                   rows={Math.min(6, Math.max(1, input.split('\n').length))}
                 />
@@ -205,7 +205,7 @@ export default function ChatWidget() {
                 </button>
               </div>
               <div className="text-xs text-zinc-500 mt-1">
-                Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send, <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Ctrl+Enter</kbd> for new line
+                Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send, <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Shift+Enter</kbd> for new line
               </div>
             </div>
           </motion.div>
