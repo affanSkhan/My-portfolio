@@ -173,5 +173,12 @@
     "colorClass": "text-gray-500",
     "category": "Frontend",
     "level": 75
+  },
+  {
+    "name": "New Skill Name",
+    "iconName": "icon-name",
+    "colorClass": "text-gray-500",
+    "category": "Frontend",
+    "level": 75
   }
 ]
