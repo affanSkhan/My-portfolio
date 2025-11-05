@@ -6,7 +6,12 @@ import { Send, X, MessageCircle, Lock, Globe } from "lucide-react";
 type Mode = "public" | "private";
 
 // Simple markdown-to-JSX converter for basic formatting
-function formatMessage(content: string) {
+function formatMessage(content: string | undefined | null) {
+  // Handle undefined or null content
+  if (!content) {
+    return "Loading...";
+  }
+  
   // Split by lines to preserve line breaks
   const lines = content.split('\n');
   
@@ -42,7 +47,12 @@ function formatMessage(content: string) {
   });
 }
 
-function formatInlineMarkdown(text: string) {
+function formatInlineMarkdown(text: string | undefined | null) {
+  // Handle undefined or null text
+  if (!text) {
+    return "";
+  }
+  
   // Convert markdown formatting to JSX
   const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`|~~.*?~~)/);
   
@@ -86,13 +96,21 @@ export default function ChatWidget() {
     setInput("");
     setMessages(m => [...m, { role:"user", content: text }]);
 
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ mode, pinOk, messages: [...messages, { role:"user", content:text }] })
-    });
-    const data = await res.json();
-    setMessages(m => [...m, { role:"assistant", content: data.reply }]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify({ mode, pinOk, messages: [...messages, { role:"user", content:text }] })
+      });
+      const data = await res.json();
+      
+      // Handle API errors or missing reply
+      const replyContent = data.reply || data.error || "Sorry, something went wrong. Please try again.";
+      setMessages(m => [...m, { role:"assistant", content: replyContent }]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setMessages(m => [...m, { role:"assistant", content: "Sorry, I'm having trouble connecting. Please check your internet connection and try again." }]);
+    }
   }
 
   async function tryLogin() {
@@ -156,7 +174,7 @@ export default function ChatWidget() {
               {messages.map((m, i) => (
                 <div key={i} className={`text-sm ${m.role==="assistant"?"bg-zinc-100 dark:bg-zinc-800":"bg-indigo-50 dark:bg-indigo-900/30"} p-3 rounded-lg`}>
                   <div className="whitespace-pre-wrap">
-                    {m.role === "assistant" ? formatMessage(m.content) : m.content}
+                    {m.role === "assistant" ? formatMessage(m.content) : (m.content || "Loading...")}
                   </div>
                 </div>
               ))}
