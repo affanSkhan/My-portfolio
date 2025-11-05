@@ -113,7 +113,7 @@ Add project:
 }
 
 VALID PROJECT STATUS: "planning", "in-progress", "completed"
-VALID TECHNOLOGIES (for stack array): "Next.js", "React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Vue.js", "Angular", "Node.js", "Express", "Python", "C++", "PHP", "MongoDB", "MySQL", "PostgreSQL", "Firebase", "Flutter", "React Native", "Dart", "Git", "Docker", "Vercel", "Netlify"
+VALID TECHNOLOGIES (for stack array): "Next.js", "React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Vue.js", "Angular", "Node.js", "Express", "Python", "C++", "PHP", "MongoDB", "MySQL", "PostgreSQL", "Firebase", "Flutter", "React Native", "Dart", "Git", "Docker", "Vercel", "Netlify", "NumPy", "Pandas", "Scikit-Learn", "TensorFlow"
 
 Update project:
 {

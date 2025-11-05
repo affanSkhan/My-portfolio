@@ -28,6 +28,12 @@ import {
   SiVercel,
   SiNetlify
 } from "react-icons/si";
+import { 
+  TbMathSymbols,
+  TbChartLine,
+  TbBrain,
+  TbDatabase 
+} from "react-icons/tb";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 // Type for project data
@@ -75,6 +81,12 @@ const techIcons: Record<string, React.ReactElement> = {
   "Flutter": <SiFlutter key="flutter" />,
   "React Native": <SiReact key="reactnative" />,
   "Dart": <SiDart key="dart" />,
+  
+  // AI/ML Libraries
+  "NumPy": <TbMathSymbols key="numpy" className="text-blue-600" />,
+  "Pandas": <TbDatabase key="pandas" className="text-green-600" />,
+  "Scikit-Learn": <TbChartLine key="sklearn" className="text-orange-600" />,
+  "TensorFlow": <TbBrain key="tensorflow" className="text-orange-500" />,
   
   // Tools & Others
   "Git": <SiGit key="git" />,
