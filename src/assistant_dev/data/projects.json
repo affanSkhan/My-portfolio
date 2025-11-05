@@ -166,5 +166,23 @@
       "CRUD with Firebase",
       "Component modularity"
     ]
+  },
+  {
+    "title": "New Project Title",
+    "description": "A brief description of the new project.",
+    "stack": [
+      "React",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/yourusername/new-project",
+      "live": ""
+    },
+    "featured": false,
+    "status": "planning",
+    "lessons": []
   }
 ]
