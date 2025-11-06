@@ -68,25 +68,6 @@
     ]
   },
   {
-    "title": "AI Job Recommender",
-    "description": "AI-powered job suggestion system based on user skills with keyword mapping and minimal UI.",
-    "stack": [
-      "Flutter"
-    ],
-    "year": 2025,
-    "links": {
-      "github": "https://github.com/affanSkhan/ai-job-role-recommender",
-      "live": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "AI UX design",
-      "Keyword clustering",
-      "Career logic modeling"
-    ]
-  },
-  {
     "title": "Developer Portfolio Website",
     "description": "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
     "stack": [
