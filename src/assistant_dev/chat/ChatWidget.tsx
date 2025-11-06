@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, X, MessageCircle, Lock, Globe } from "lucide-react";
+import { Send, X, MessageCircle, Lock, Globe, Eye, EyeOff } from "lucide-react";
 
 type Mode = "public" | "private";
 
@@ -80,6 +80,9 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("public");
   const [pinOk, setPinOk] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pinInput, setPinInput] = useState("");
+  const [showPin, setShowPin] = useState(false);
   const [messages, setMessages] = useState<{role:"user"|"assistant";content:string}[]>([
     { role: "assistant", content: "Hello 👋 I'm Affonix, the intelligence behind Affan's digital portfolio. I can tell you about his projects, skills, and journey." }
   ]);
@@ -114,20 +117,26 @@ export default function ChatWidget() {
   }
 
   async function tryLogin() {
-    const pin = prompt("Enter 4-digit PIN");
-    if (!pin) return;
+    setShowPinModal(true);
+  }
+
+  async function submitPin() {
+    if (!pinInput) return;
     const res = await fetch("/api/auth/pin", {
       method: "POST",
       headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ pin })
+      body: JSON.stringify({ pin: pinInput })
     });
     const data = await res.json();
     if (data.ok) {
       setPinOk(true);
       setMode("private");
+      setShowPinModal(false);
+      setPinInput("");
       setMessages(m => [...m, { role:"assistant", content: "🧠 Developer Mode Activated — Affonix is ready to edit, update, or deploy your portfolio." }]);
     } else {
       alert("Wrong PIN");
+      setPinInput("");
     }
   }
 
@@ -267,6 +276,75 @@ export default function ChatWidget() {
                 Press <kbd className="px-1 py-0.5 bg-zinc-200 dark:bg-zinc-700 rounded text-xs">Enter</kbd> to send
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* PIN Modal */}
+      <AnimatePresence>
+        {showPinModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setShowPinModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-sm shadow-2xl border border-zinc-200 dark:border-zinc-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-center mb-6">
+                <div className="text-2xl mb-2">🔐</div>
+                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">Admin Access</h3>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Enter your 4-digit PIN</p>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="relative">
+                  <input
+                    type={showPin ? "text" : "password"}
+                    value={pinInput}
+                    onChange={(e) => setPinInput(e.target.value)}
+                    placeholder="Enter PIN"
+                    maxLength={4}
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-center text-lg tracking-widest focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    onKeyDown={(e) => e.key === "Enter" && submitPin()}
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPin(!showPin)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                  >
+                    {showPin ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+                
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      setShowPinModal(false);
+                      setPinInput("");
+                      setShowPin(false);
+                    }}
+                    className="flex-1 px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={submitPin}
+                    disabled={pinInput.length !== 4}
+                    className="flex-1 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Access
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

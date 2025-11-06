@@ -137,7 +137,7 @@ export default function Hero() {
 
       {/* Foreground content */}
       <motion.div
-        className="z-50 text-center px-4 sm:px-6 max-w-3xl mx-auto mt-24"
+        className="z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto mt-24"
         style={{
           transform: `translate3d(${textParallax.x}px, ${textParallax.y}px, 0)`,
           transition: "transform 0.2s",

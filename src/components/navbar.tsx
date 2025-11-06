@@ -146,7 +146,7 @@ export default function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -30, opacity: 0 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden bg-white dark:bg-zinc-900 px-6 py-4 shadow-md border-t dark:border-zinc-700"
+            className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-zinc-900 px-6 py-4 shadow-md border-t dark:border-zinc-700 z-[60]"
           >
             {navLinks.map((link) => (
               <a
