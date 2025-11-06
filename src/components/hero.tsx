@@ -101,7 +101,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className={`relative w-full h-screen flex items-center justify-center overflow-hidden scroll-snap-start ${isMobile ? 'bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900' : 'bg-gradient-to-br from-zinc-900 via-black to-zinc-800'}`}
+      className={`relative w-full h-screen flex justify-center overflow-hidden scroll-snap-start pt-32 ${isMobile ? 'bg-gradient-to-br from-indigo-50 via-fuchsia-50 to-emerald-50 dark:from-zinc-900 dark:via-zinc-950 dark:to-zinc-900' : 'bg-gradient-to-br from-zinc-900 via-black to-zinc-800'}`}
       onMouseMove={handleMouseMove}
       style={{ WebkitOverflowScrolling: "touch", paddingTop: 0, marginTop: 0 }}
     >
@@ -137,7 +137,7 @@ export default function Hero() {
 
       {/* Foreground content */}
       <motion.div
-        className="z-20 text-center px-4 sm:px-6 max-w-3xl mx-auto"
+        className="z-50 text-center px-4 sm:px-6 max-w-3xl mx-auto mt-24"
         style={{
           transform: `translate3d(${textParallax.x}px, ${textParallax.y}px, 0)`,
           transition: "transform 0.2s",
@@ -173,7 +173,7 @@ export default function Hero() {
           className="mt-8 flex justify-center"
         >
           <button
-            className="relative group bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 focus:outline-none overflow-hidden dark:bg-indigo-700 dark:hover:bg-indigo-600 dark:shadow-[0_0_24px_#6366f1cc] dark:ring-2 dark:ring-indigo-400/40 dark:ring-offset-2 dark:ring-offset-zinc-900"
+            className="relative group bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-6 rounded-full shadow-lg transition-transform hover:scale-105 focus:outline-none overflow-hidden dark:bg-indigo-700 dark:hover:bg-indigo-600 dark:shadow-[0_0_24px_#6366f1cc] dark:ring-2 dark:ring-indigo-400/40 dark:ring-offset-2 dark:ring-offset-zinc-900"
             onClick={() => window.open('/Affan_Regular_cv.pdf', '_blank')}
             tabIndex={0}
             aria-label="Download my CV"
@@ -210,6 +210,29 @@ export default function Hero() {
           </motion.div>
           <p className="text-white text-lg font-medium">Computer Engineering Student</p>
           <p className="text-zinc-300 text-sm">VIIT Pune | Rooted in Dharni</p>
+          
+          {/* Enhanced Affonix Branding */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-3 flex items-center justify-center gap-2 text-xs text-zinc-400 hover:text-zinc-300 transition-colors group cursor-default"
+          >
+            <span className="font-medium">Empowered by</span>
+            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400 tracking-wide text-sm group-hover:from-indigo-300 group-hover:to-sky-300 transition-all duration-300">
+              AFFONIX
+            </span>
+            {/* Animated thinking dots */}
+            <div className="flex gap-0.5 ml-1">
+              <div className="w-1 h-1 bg-indigo-400 rounded-full animate-pulse"></div>
+              <div className="w-1 h-1 bg-sky-400 rounded-full animate-pulse-delayed-1"></div>
+              <div className="w-1 h-1 bg-indigo-400 rounded-full animate-pulse-delayed-2"></div>
+            </div>
+            {/* Geometric brain icon (optional) */}
+
+          </motion.div>
+
+          
         </motion.div>
       </motion.div>
 
@@ -243,6 +266,14 @@ export default function Hero() {
         @keyframes gradientMove {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
+        }
+        .animate-pulse-delayed-1 {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation-delay: 0.2s;
+        }
+        .animate-pulse-delayed-2 {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation-delay: 0.4s;
         }
       `}</style>
     </section>
