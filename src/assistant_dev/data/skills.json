@@ -159,5 +159,12 @@
     "colorClass": "text-green-600",
     "category": "AI/ML",
     "level": 80
+  },
+  {
+    "name": "TypeScript",
+    "iconName": "typescript",
+    "colorClass": "text-blue-600",
+    "category": "Frontend",
+    "level": 85
   }
 ]
