@@ -127,24 +127,5 @@
       "CRUD with Firebase",
       "Component modularity"
     ]
-  },
-  {
-    "title": "AI Job Recommender",
-    "description": "An AI-powered job recommendation system built with Flutter and Firebase.",
-    "stack": [
-      "Flutter",
-      "Firebase",
-      "Dart",
-      "Python",
-      "TensorFlow"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "",
-      "live": ""
-    },
-    "featured": false,
-    "status": "planning",
-    "lessons": []
   }
 ]
