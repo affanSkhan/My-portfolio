@@ -129,26 +129,6 @@
     ]
   },
   {
-    "title": "OneApp",
-    "description": "Commission-based platform for rural business discovery, bookings, and payment automation.",
-    "stack": [
-      "Flutter",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/affanSkhan/one-area-one-app",
-      "live": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Multi-role UX",
-      "Rural-friendly UI",
-      "Payment system structure"
-    ]
-  },
-  {
     "title": "Fashion E-Com App with Admin",
     "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
     "stack": [
