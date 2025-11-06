@@ -23,36 +23,75 @@ import {
   SiPandas,
   SiScikitlearn,
   SiTensorflow,
+  SiNodedotjs,
+  SiExpress,
+  SiVuedotjs,
+  SiAngular,
+  SiBootstrap,
+  SiSass,
+  SiPostgresql,
+  SiRedis,
+  SiAmazon,
+  SiVercel,
+  SiHeroku,
+  SiPostman,
+  SiFigma,
 } from 'react-icons/si';
 
 import { FaJava, FaCode } from 'react-icons/fa';
 import { ReactElement } from 'react';
 
 const iconMap: Record<string, ReactElement> = {
+  // Frontend
   html: <SiHtml5 />,
   css: <SiCss3 />,
   javascript: <SiJavascript />,
   typescript: <SiTypescript />,
   react: <SiReact />,
   nextjs: <SiNextdotjs />,
+  vue: <SiVuedotjs />,
+  angular: <SiAngular />,
   tailwind: <SiTailwindcss />,
-  firebase: <SiFirebase />,
+  bootstrap: <SiBootstrap />,
+  sass: <SiSass />,
+  
+  // Backend
+  nodejs: <SiNodedotjs />,
+  express: <SiExpress />,
   python: <SiPython />,
+  java: <FaJava />,
   cplusplus: <SiCplusplus />,
-  mysql: <SiMysql />,
-  mongodb: <SiMongodb />,
-  git: <SiGit />,
-  docker: <SiDocker />,
-  netlify: <SiNetlify />,
-  linux: <SiLinux />,
-  vscode: <FaCode />,
+  firebase: <SiFirebase />,
+  
+  // Mobile
   flutter: <SiFlutter />,
   dart: <SiDart />,
+  
+  // AI/ML
   numpy: <SiNumpy />,
   pandas: <SiPandas />,
   scikitlearn: <SiScikitlearn />,
   tensorflow: <SiTensorflow />,
-  java: <FaJava />,
+  
+  // Databases
+  mysql: <SiMysql />,
+  mongodb: <SiMongodb />,
+  postgresql: <SiPostgresql />,
+  redis: <SiRedis />,
+  
+  // Tools & Services
+  git: <SiGit />,
+  docker: <SiDocker />,
+  linux: <SiLinux />,
+  vscode: <FaCode />,
+  postman: <SiPostman />,
+  figma: <SiFigma />,
+  
+  // Cloud & Deployment
+  aws: <SiAmazon />,
+  vercel: <SiVercel />,
+  netlify: <SiNetlify />,
+  heroku: <SiHeroku />,
 };
 
 export default iconMap;

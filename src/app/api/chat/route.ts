@@ -9,10 +9,10 @@ const ai = new GoogleGenAI({
 });
 
 const SYSTEM_PROMPT = `
-You are Affonix, the intelligence behind Affan's digital portfolio, helping visitors learn about Affan Khan, a Computer Engineering student from VIIT Pune.
+You are Affonix, Affan's AI Assistant, helping visitors learn about Affan Khan, a Computer Engineering student from VIIT Pune.
 
 MODES:
-- Public Mode: Answer questions about Affan's projects, skills, goals, and journey. Be conversational, helpful, and professional. Present yourself as the portfolio's intelligent narrator. Use the context provided about his work.
+- Public Mode: Answer questions about Affan's projects, skills, goals, and journey. Be conversational, helpful, and professional. Use the context provided about his work.
 - Private Mode: When in private mode, you MUST return ONLY valid JSON commands for portfolio edits. No explanatory text, just the JSON command.
 
 CRITICAL INSTRUCTIONS FOR PRIVATE MODE:
@@ -220,7 +220,7 @@ Add skill:
   "type": "add_skill",
   "payload": {
     "name": "Skill Name",
-    "iconName": "icon-name",
+    "iconName": "react",
     "colorClass": "text-blue-600",
     "category": "Frontend",
     "level": 90
@@ -228,6 +228,17 @@ Add skill:
 }
 
 VALID SKILL CATEGORIES: "Frontend", "Backend", "Mobile", "AI/ML", "Databases", "Tools"
+
+AVAILABLE ICON NAMES (use exactly as shown):
+Frontend: html, css, javascript, typescript, react, nextjs, vue, angular, tailwind, bootstrap, sass
+Backend: nodejs, express, python, java, cplusplus, firebase
+Mobile: flutter, dart
+AI/ML: numpy, pandas, scikitlearn, tensorflow
+Databases: mysql, mongodb, postgresql, redis
+Tools: git, docker, linux, vscode, postman, figma
+Cloud: aws, vercel, netlify, heroku
+
+CRITICAL: Always use these exact icon names. If a technology isn't listed, use the closest match or "vscode" as fallback.
 
 Update skill:
 {
@@ -579,7 +590,7 @@ User: ${latestMessage}
 
     // Public mode: return conversational response
     return NextResponse.json({ 
-      reply: text || "Hello! I'm Affonix, the intelligence behind Affan's digital portfolio. Ask me about his projects, skills, or journey!"
+      reply: text || "Hello! I'm Affonix, your AI assistant. Ask me about Affan's projects, skills, or goals!"
     });
 
     } catch (error) {
@@ -895,14 +906,28 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
     // Handle skill operations
     if (command.type === "add_skill") {
       return await executeAndLog(async () => {
+        const validIcons = [
+          "html", "css", "javascript", "typescript", "react", "nextjs", "vue", "angular", "tailwind", "bootstrap", "sass",
+          "nodejs", "express", "python", "java", "cplusplus", "firebase",
+          "flutter", "dart",
+          "numpy", "pandas", "scikitlearn", "tensorflow",
+          "mysql", "mongodb", "postgresql", "redis",
+          "git", "docker", "linux", "vscode", "postman", "figma",
+          "aws", "vercel", "netlify", "heroku"
+        ];
+        
+        if (!validIcons.includes(command.payload.iconName)) {
+          return { success: false, message: `✗ Invalid icon "${command.payload.iconName}". Use one of: ${validIcons.join(", ")}` };
+        }
+        
         const skills = await readJson('skills.json');
         if (!Array.isArray(skills)) {
-          return { success: false, message: "❌ Skills data is not an array" };
+          return { success: false, message: "✗ Skills data is not an array" };
         }
         
         skills.push(command.payload);
         await writeJson('skills.json', skills);
-        return { success: true, message: `✓ Added skill "${command.payload.name}"` };
+        return { success: true, message: `✓ Added skill "${command.payload.name}" with ${command.payload.iconName} icon` };
       });
     }
 

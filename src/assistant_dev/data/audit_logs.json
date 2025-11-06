@@ -1,5 +1,1511 @@
 [
   {
+    "id": "dd053360-b52c-430a-b09a-c6997659a3c5",
+    "timestamp": "2025-11-06T20:18:39.598Z",
+    "command": {
+      "type": "remove_skill",
+      "payload": {
+        "matchName": "Heroku"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✅ Removed skill \"Heroku\"",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "96ce55f8-a445-419b-b32c-c8873f018830",
+    "timestamp": "2025-11-06T20:17:54.107Z",
+    "command": {
+      "type": "remove_skill",
+      "payload": {
+        "matchName": "Go"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": false,
+      "message": "❌ Skill \"Go\" not found",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "c196a9fd-1894-4026-b13f-000b7c2be21f",
+    "timestamp": "2025-11-06T20:17:11.932Z",
+    "command": {
+      "type": "remove_skill",
+      "payload": {
+        "matchName": "Go"
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": false,
+      "message": "❌ Skill \"Go\" not found",
+      "executionTimeMs": 4
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": true,
+      "isUndoable": true
+    }
+  },
+  {
+    "id": "8e818379-8c4c-44f7-8160-2f2d7b89ae9b",
+    "timestamp": "2025-11-06T20:16:30.713Z",
+    "command": {
+      "type": "add_skill",
+      "payload": {
+        "name": "Heroku",
+        "iconName": "heroku",
+        "colorClass": "text-purple-600",
+        "category": "Tools",
+        "level": 80
+      }
+    },
+    "userId": "assistant",
+    "executionResult": {
+      "success": true,
+      "message": "✓ Added skill \"Heroku\" with heroku icon",
+      "executionTimeMs": 15
+    },
+    "dataSnapshot": {
+      "before": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        }
+      ],
+      "after": [
+        {
+          "name": "HTML",
+          "iconName": "html",
+          "colorClass": "text-orange-500",
+          "category": "Frontend",
+          "level": 95
+        },
+        {
+          "name": "CSS",
+          "iconName": "css",
+          "colorClass": "text-blue-500",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "JavaScript",
+          "iconName": "javascript",
+          "colorClass": "text-yellow-400",
+          "category": "Frontend",
+          "level": 80
+        },
+        {
+          "name": "React",
+          "iconName": "react",
+          "colorClass": "text-cyan-500",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Next.js",
+          "iconName": "nextjs",
+          "colorClass": "text-black dark:text-white",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Tailwind CSS",
+          "iconName": "tailwind",
+          "colorClass": "text-sky-400",
+          "category": "Frontend",
+          "level": 70
+        },
+        {
+          "name": "Java",
+          "iconName": "java",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "C++",
+          "iconName": "cplusplus",
+          "colorClass": "text-blue-600",
+          "category": "Backend",
+          "level": 60
+        },
+        {
+          "name": "Firebase",
+          "iconName": "firebase",
+          "colorClass": "text-yellow-500",
+          "category": "Backend",
+          "level": 95
+        },
+        {
+          "name": "Flutter",
+          "iconName": "flutter",
+          "colorClass": "text-sky-400",
+          "category": "Mobile",
+          "level": 75
+        },
+        {
+          "name": "Dart",
+          "iconName": "dart",
+          "colorClass": "text-blue-400",
+          "category": "Mobile",
+          "level": 70
+        },
+        {
+          "name": "Python",
+          "iconName": "python",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 80
+        },
+        {
+          "name": "NumPy",
+          "iconName": "numpy",
+          "colorClass": "text-blue-400",
+          "category": "AI/ML",
+          "level": 75
+        },
+        {
+          "name": "Pandas",
+          "iconName": "pandas",
+          "colorClass": "text-black",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "Scikit-Learn",
+          "iconName": "scikitlearn",
+          "colorClass": "text-blue-600",
+          "category": "AI/ML",
+          "level": 70
+        },
+        {
+          "name": "TensorFlow",
+          "iconName": "tensorflow",
+          "colorClass": "text-orange-600",
+          "category": "AI/ML",
+          "level": 60
+        },
+        {
+          "name": "MySQL",
+          "iconName": "mysql",
+          "colorClass": "text-blue-500",
+          "category": "Databases",
+          "level": 80
+        },
+        {
+          "name": "MongoDB",
+          "iconName": "mongodb",
+          "colorClass": "text-green-500",
+          "category": "Databases",
+          "level": 75
+        },
+        {
+          "name": "Git & GitHub",
+          "iconName": "git",
+          "colorClass": "text-orange-500",
+          "category": "Tools",
+          "level": 90
+        },
+        {
+          "name": "Docker",
+          "iconName": "docker",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 50
+        },
+        {
+          "name": "Netlify",
+          "iconName": "netlify",
+          "colorClass": "text-black",
+          "category": "Tools",
+          "level": 80
+        },
+        {
+          "name": "Linux",
+          "iconName": "linux",
+          "colorClass": "text-gray-600",
+          "category": "Tools",
+          "level": 65
+        },
+        {
+          "name": "VS Code",
+          "iconName": "vscode",
+          "colorClass": "text-blue-500",
+          "category": "Tools",
+          "level": 95
+        },
+        {
+          "name": "TypeScript",
+          "iconName": "typescript",
+          "colorClass": "text-blue-600",
+          "category": "Frontend",
+          "level": 90
+        },
+        {
+          "name": "Heroku",
+          "iconName": "heroku",
+          "colorClass": "text-purple-600",
+          "category": "Tools",
+          "level": 80
+        }
+      ],
+      "affectedFile": "skills.json"
+    },
+    "metadata": {
+      "environment": "development",
+      "commandCategory": "Skills",
+      "isDestructive": false,
+      "isUndoable": true
+    }
+  },
+  {
     "id": "588a3e30-4740-46d2-a5d1-0f661efd8538",
     "timestamp": "2025-11-05T20:43:40.953Z",
     "command": {
