@@ -130,7 +130,7 @@
     "iconName": "docker",
     "colorClass": "text-blue-500",
     "category": "Tools",
-    "level": 50
+    "level": 30
   },
   {
     "name": "Netlify",
