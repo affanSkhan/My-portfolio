@@ -9,10 +9,10 @@ const ai = new GoogleGenAI({
 });
 
 const SYSTEM_PROMPT = `
-You are Affan's AI Assistant, helping visitors learn about Affan Khan, a Computer Engineering student from VIIT Pune.
+You are Affonix, the intelligence behind Affan's digital portfolio, helping visitors learn about Affan Khan, a Computer Engineering student from VIIT Pune.
 
 MODES:
-- Public Mode: Answer questions about Affan's projects, skills, goals, and journey. Be conversational, helpful, and professional. Use the context provided about his work.
+- Public Mode: Answer questions about Affan's projects, skills, goals, and journey. Be conversational, helpful, and professional. Present yourself as the portfolio's intelligent narrator. Use the context provided about his work.
 - Private Mode: When in private mode, you MUST return ONLY valid JSON commands for portfolio edits. No explanatory text, just the JSON command.
 
 CRITICAL INSTRUCTIONS FOR PRIVATE MODE:
@@ -150,7 +150,7 @@ export async function POST(req: Request) {
 RECENT OPERATIONS (for undo commands):
 ${recentLogs.map((log, index) => {
   const timestamp = new Date(log.timestamp).toLocaleString();
-  const status = log.executionResult.success ? "✅" : "❌";
+  const status = log.executionResult.success ? "✓" : "✗";
   const summary = toUserFacingSummary(log.command);
   return `${index + 1}. ${status} [${timestamp}] ${summary}\n   ID: ${log.id}`;
 }).join('\n')}
@@ -561,8 +561,8 @@ User: ${latestMessage}
           
           return NextResponse.json({ 
             reply: result.success 
-              ? `✅ ${result.message}` 
-              : `❌ ${result.message}`,
+              ? `✓ ${result.message}` 
+              : `✗ ${result.message}`,
             command: toUserFacingSummary(parsed),
             success: result.success
           });
@@ -572,14 +572,14 @@ User: ${latestMessage}
         
         // If JSON parsing fails, return the raw response
         return NextResponse.json({
-          reply: text || "I'm ready for edit commands. Try: 'Add project: Smart Home App, stack: Flutter, Firebase, description: IoT home automation'"
+          reply: text || "Affonix is ready for edit commands. Try: 'Add project: Smart Home App, stack: Flutter, Firebase, description: IoT home automation'"
         });
       }
     }
 
     // Public mode: return conversational response
     return NextResponse.json({ 
-      reply: text || "Hello! I'm Affan's AI assistant. Ask me about his projects, skills, or goals!"
+      reply: text || "Hello! I'm Affonix, the intelligence behind Affan's digital portfolio. Ask me about his projects, skills, or journey!"
     });
 
     } catch (error) {
@@ -819,9 +819,9 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         }
         
         await writeJson("projects.json", sortedProjects);
-        return { success: true, message: `✅ Projects reordered using ${command.payload.intent} strategy - ${reasoning}` };
+        return { success: true, message: `✓ Projects reordered using ${command.payload.intent} strategy - ${reasoning}` };
       } catch (error) {
-        return { success: false, message: `❌ Failed to sort projects: ${error instanceof Error ? error.message : 'Unknown error'}` };
+        return { success: false, message: `✗ Failed to sort projects: ${error instanceof Error ? error.message : 'Unknown error'}` };
       }
     }
 
@@ -902,7 +902,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
         
         skills.push(command.payload);
         await writeJson('skills.json', skills);
-        return { success: true, message: `✅ Added skill "${command.payload.name}"` };
+        return { success: true, message: `✓ Added skill "${command.payload.name}"` };
       });
     }
 
@@ -1200,7 +1200,7 @@ async function executeCommand(command: Command): Promise<{ success: boolean; mes
           message += `**Recent entries (${offset + 1}-${offset + auditLogs.length}):**\n`;
           auditLogs.forEach((log, index) => {
             const timestamp = new Date(log.timestamp).toLocaleString();
-            const status = log.executionResult.success ? "✅" : "❌";
+            const status = log.executionResult.success ? "✓" : "✗";
             const summary = toUserFacingSummary(log.command);
             message += `${index + 1}. ${status} [${timestamp}] ${summary}\n`;
             message += `   ID: \`${log.id}\`\n`;

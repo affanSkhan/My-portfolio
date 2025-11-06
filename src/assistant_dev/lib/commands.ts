@@ -840,7 +840,7 @@ export function generateUndoCommand(auditLogEntry: AuditLogEntry): Command | nul
  */
 export function formatAuditLogForDisplay(entry: AuditLogEntry): string {
   const timestamp = new Date(entry.timestamp).toLocaleString();
-  const status = entry.executionResult.success ? "✅" : "❌";
+  const status = entry.executionResult.success ? "✓" : "✗";
   const category = entry.metadata.commandCategory;
   const summary = toUserFacingSummary(entry.command);
   

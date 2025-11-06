@@ -5,8 +5,8 @@ import ClientRoot from "@/components/ClientRoot";
 import ChatWidget from "@/assistant_dev/chat/ChatWidget";
 
 export const metadata: Metadata = {
-  title: "My Portfolio - Affan",
-  description: "This website shows my skills showcase.",
+  title: "Affan Khan - Portfolio | Powered by Affonix",
+  description: "Explore Affan's AI-powered portfolio featuring projects, skills, and journey. Enhanced with Affonix - an autonomous portfolio intelligence system.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
