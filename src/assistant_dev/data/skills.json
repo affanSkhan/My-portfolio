@@ -152,5 +152,12 @@
     "colorClass": "text-blue-500",
     "category": "Tools",
     "level": 95
+  },
+  {
+    "name": "NumPy",
+    "iconName": "numpy",
+    "colorClass": "text-green-600",
+    "category": "AI/ML",
+    "level": 80
   }
 ]
