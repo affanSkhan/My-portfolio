@@ -1,5 +1,60 @@
 [
   {
+    "title": "CIE Exam Reminder App",
+    "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
+    "stack": [
+      "Flutter",
+      "Firebase"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "https://github.com/affanSkhan/cie-app",
+      "live": "https://cie-exam-app.netlify.app/"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Notification APIs",
+      "User input validation",
+      "Timely UX design"
+    ]
+  },
+  {
+    "title": "Fashion E-Com App with Admin",
+    "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
+    "stack": [
+      "Flutter",
+      "Firebase"
+    ],
+    "year": 2024,
+    "links": {
+      "live": ""
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": [
+      "State management",
+      "CRUD with Firebase",
+      "Component modularity"
+    ]
+  },
+  {
+    "title": "AI Job Recommender",
+    "description": "An AI-powered job recommendation system.",
+    "stack": [
+      "Flutter",
+      "Firebase"
+    ],
+    "year": 2024,
+    "links": {
+      "github": "",
+      "live": ""
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": []
+  },
+  {
     "title": "Smart Health Monitor for Industrial Machines",
     "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
     "stack": [
@@ -88,60 +143,5 @@
       "Framer Motion animations",
       "Reusable component architecture"
     ]
-  },
-  {
-    "title": "CIE Exam Reminder App",
-    "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
-    "stack": [
-      "Flutter",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "https://github.com/affanSkhan/cie-app",
-      "live": "https://cie-exam-app.netlify.app/"
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Notification APIs",
-      "User input validation",
-      "Timely UX design"
-    ]
-  },
-  {
-    "title": "Fashion E-Com App with Admin",
-    "description": "An elegant fashion store with shopping cart, Firebase-based admin panel, and clean responsive design.",
-    "stack": [
-      "Flutter",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "live": ""
-    },
-    "featured": false,
-    "status": "completed",
-    "lessons": [
-      "State management",
-      "CRUD with Firebase",
-      "Component modularity"
-    ]
-  },
-  {
-    "title": "AI Job Recommender",
-    "description": "An AI-powered job recommendation system.",
-    "stack": [
-      "Flutter",
-      "Firebase"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "",
-      "live": ""
-    },
-    "featured": false,
-    "status": "completed",
-    "lessons": []
   }
 ]
