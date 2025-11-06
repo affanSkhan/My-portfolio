@@ -84,13 +84,6 @@
     "level": 80
   },
   {
-    "name": "NumPy",
-    "iconName": "numpy",
-    "colorClass": "text-blue-400",
-    "category": "AI/ML",
-    "level": 75
-  },
-  {
     "name": "Pandas",
     "iconName": "pandas",
     "colorClass": "text-black",
