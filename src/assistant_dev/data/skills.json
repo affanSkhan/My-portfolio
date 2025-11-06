@@ -154,13 +154,6 @@
     "level": 95
   },
   {
-    "name": "TypeScript",
-    "iconName": "TypeScript",
-    "colorClass": "text-blue-500",
-    "category": "Frontend",
-    "level": 80
-  },
-  {
     "name": "NumPy",
     "iconName": "NumPy",
     "colorClass": "text-blue-500",
