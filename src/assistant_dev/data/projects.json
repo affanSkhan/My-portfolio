@@ -127,22 +127,5 @@
       "CRUD with Firebase",
       "Component modularity"
     ]
-  },
-  {
-    "title": "AI Job Recommender",
-    "description": "An AI-powered job recommender application.",
-    "stack": [
-      "Flutter",
-      "Firebase",
-      "Dart"
-    ],
-    "year": 2024,
-    "links": {
-      "github": "",
-      "live": ""
-    },
-    "featured": false,
-    "status": "planning",
-    "lessons": []
   }
 ]
