@@ -166,12 +166,5 @@
     "colorClass": "text-blue-600",
     "category": "Frontend",
     "level": 90
-  },
-  {
-    "name": "LLM",
-    "iconName": "Brain",
-    "colorClass": "text-indigo-600",
-    "category": "AI/ML",
-    "level": 80
   }
 ]
