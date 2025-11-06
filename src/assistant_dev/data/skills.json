@@ -166,12 +166,5 @@
     "colorClass": "text-blue-600",
     "category": "Frontend",
     "level": 85
-  },
-  {
-    "name": "Heroku",
-    "iconName": "heroku",
-    "colorClass": "text-purple-600",
-    "category": "Tools",
-    "level": 80
   }
 ]
