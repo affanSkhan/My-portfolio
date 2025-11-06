@@ -168,13 +168,6 @@
     "level": 80
   },
   {
-    "name": "Go",
-    "iconName": "Go",
-    "colorClass": "text-sky-500",
-    "category": "Backend",
-    "level": 80
-  },
-  {
     "name": "NumPy",
     "iconName": "NumPy",
     "colorClass": "text-blue-500",
