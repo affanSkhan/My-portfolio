@@ -166,5 +166,12 @@
     "colorClass": "text-blue-500",
     "category": "Frontend",
     "level": 80
+  },
+  {
+    "name": "Go",
+    "iconName": "Go",
+    "colorClass": "text-sky-500",
+    "category": "Backend",
+    "level": 80
   }
 ]
