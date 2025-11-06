@@ -173,5 +173,12 @@
     "colorClass": "text-sky-500",
     "category": "Backend",
     "level": 80
+  },
+  {
+    "name": "NumPy",
+    "iconName": "NumPy",
+    "colorClass": "text-blue-500",
+    "category": "AI/ML",
+    "level": 80
   }
 ]
