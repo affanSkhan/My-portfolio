@@ -169,13 +169,6 @@
   },
   {
     "name": "GCP",
-    "iconName": "aws",
-    "colorClass": "text-blue-600",
-    "category": "Backend",
-    "level": 80
-  },
-  {
-    "name": "GCP",
     "iconName": "vscode",
     "colorClass": "text-blue-500",
     "category": "Tools",
