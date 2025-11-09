@@ -126,13 +126,6 @@
     "level": 90
   },
   {
-    "name": "Docker",
-    "iconName": "docker",
-    "colorClass": "text-blue-500",
-    "category": "Tools",
-    "level": 30
-  },
-  {
     "name": "Netlify",
     "iconName": "netlify",
     "colorClass": "text-black",
