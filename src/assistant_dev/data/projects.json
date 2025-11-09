@@ -1,5 +1,94 @@
 [
   {
+    "title": "Sales Analytics Data Pipeline (GCP)",
+    "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
+    "stack": [
+      "Google Cloud Storage",
+      "BigQuery",
+      "Cloud Composer (Airflow)",
+      "Looker Studio",
+      "SQL",
+      "Python"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/gm_sales_analytics_pipeline",
+      "live": ""
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Built end-to-end ETL automation using Airflow and BigQuery",
+      "Designed star schema for efficient analytical querying",
+      "Improved understanding of data quality, orchestration, and cost optimization in GCP"
+    ]
+  },
+  {
+    "title": "Smart Health Monitor for Industrial Machines",
+    "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
+    "stack": [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Scikit-Learn",
+      "TensorFlow"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/predictive-maintenance-system"
+    },
+    "featured": false,
+    "status": "completed",
+    "lessons": [
+      "RUL Prediction",
+      "Anomaly Detection",
+      "Professional Dashboard",
+      "Intelligent Alerting"
+    ]
+  },
+  {
+    "title": "AI Prompts Lab",
+    "description": "Updated description for testing",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Firebase"
+    ],
+    "year": 2025,
+    "links": {
+      "github": "https://github.com/affanSkhan/ai-promopts-lab"
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Prompt engineering",
+      "Image generation APIs",
+      "Dynamic UI state management"
+    ]
+  },
+  {
+    "title": "Developer Portfolio Website",
+    "description": "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
+    "stack": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "year": 2025,
+    "links": {
+      "github": ""
+    },
+    "featured": true,
+    "status": "completed",
+    "lessons": [
+      "Responsive design",
+      "Framer Motion animations",
+      "Reusable component architecture"
+    ]
+  },
+  {
     "title": "CIE Exam Reminder App",
     "description": "A smart reminder app for internal exams with class-wise scheduling, notifications & alarm triggers.",
     "stack": [
@@ -53,94 +142,5 @@
     "featured": false,
     "status": "completed",
     "lessons": []
-  },
-  {
-    "title": "Smart Health Monitor for Industrial Machines",
-    "description": "A comprehensive predictive maintenance system that combines Remaining Useful Life (RUL) prediction and real-time anomaly detection for industrial machinery. This system demonstrates the transition from reactive to proactive maintenance through machine learning-powered insights.",
-    "stack": [
-      "Python",
-      "NumPy",
-      "Pandas",
-      "Scikit-Learn",
-      "TensorFlow"
-    ],
-    "year": 2025,
-    "links": {
-      "github": "https://github.com/affanSkhan/predictive-maintenance-system"
-    },
-    "featured": false,
-    "status": "completed",
-    "lessons": [
-      "RUL Prediction",
-      "Anomaly Detection",
-      "Professional Dashboard",
-      "Intelligent Alerting"
-    ]
-  },
-  {
-    "title": "Sales Analytics Data Pipeline (GCP)",
-    "description": "Designed and implemented an automated cloud-based Sales Analytics Data Warehouse on GCP using an ELT pipeline, transforming raw sales data into interactive dashboards for business insights.",
-    "stack": [
-      "Google Cloud Storage",
-      "BigQuery",
-      "Cloud Composer (Airflow)",
-      "Looker Studio",
-      "SQL",
-      "Python"
-    ],
-    "year": 2025,
-    "links": {
-      "github": "https://github.com/affanSkhan/gm_sales_analytics_pipeline",
-      "live": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Built end-to-end ETL automation using Airflow and BigQuery",
-      "Designed star schema for efficient analytical querying",
-      "Improved understanding of data quality, orchestration, and cost optimization in GCP"
-    ]
-  },
-  {
-    "title": "AI Prompts Lab",
-    "description": "Updated description for testing",
-    "stack": [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Firebase"
-    ],
-    "year": 2025,
-    "links": {
-      "github": "https://github.com/affanSkhan/ai-promopts-lab"
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Prompt engineering",
-      "Image generation APIs",
-      "Dynamic UI state management"
-    ]
-  },
-  {
-    "title": "Developer Portfolio Website",
-    "description": "Interactive personal portfolio showcasing projects, skills, experience, and a modern responsive design with dark mode support.",
-    "stack": [
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "TypeScript"
-    ],
-    "year": 2025,
-    "links": {
-      "github": ""
-    },
-    "featured": true,
-    "status": "completed",
-    "lessons": [
-      "Responsive design",
-      "Framer Motion animations",
-      "Reusable component architecture"
-    ]
   }
 ]
