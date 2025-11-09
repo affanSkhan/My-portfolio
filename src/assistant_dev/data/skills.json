@@ -173,5 +173,12 @@
     "colorClass": "text-blue-500",
     "category": "Tools",
     "level": 75
+  },
+  {
+    "name": "GCP",
+    "iconName": "aws",
+    "colorClass": "text-blue-600",
+    "category": "Backend",
+    "level": 80
   }
 ]
